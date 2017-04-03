@@ -1,0 +1,436 @@
+<?xml version="1.0"?>
+<!-- This template is for creating an Internet Draft using xml2rfc,
+     which is available here: http://xml.resource.org. -->
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<!-- used by XSLT processors -->
+<!-- For a complete list and description of processing instructions (PIs),
+     please see http://xml.resource.org/authoring/README.html. -->
+<!-- Below are generally applicable Processing Instructions (PIs) that most I-Ds might want to use.
+     (Here they are set differently than their defaults in xml2rfc v1.32) -->
+<?rfc strict="yes" ?>
+<!-- give errors regarding ID-nits and DTD validation -->
+<!-- control the table of contents (ToC) -->
+<?rfc toc="yes"?>
+<?rfc tocappendix="yes"?>
+<!-- generate a ToC -->
+<?rfc tocdepth="3"?>
+<!-- the number of levels of subsections in ToC. default: 3 -->
+<!-- control references -->
+<?rfc symrefs="yes"?>
+<!-- use symbolic references tags, i.e, [RFC2119] instead of [1] -->
+<?rfc sortrefs="yes" ?>
+<!-- sort the reference entries alphabetically -->
+<!-- control vertical white space
+     (using these PIs as follows is recommended by the RFC Editor) -->
+<?rfc compact="yes" ?>
+<!-- do not start each main section on a new page -->
+<?rfc subcompact="no" ?>
+<!-- keep one blank line between list items -->
+<!-- end of list of popular I-D processing instructions -->
+<?rfc comments="no" ?>
+<?rfc inline="yes" ?>
+<rfc category="exp" docName="draft-muks-dnsop-dnssec-sha3-00" ipr="trust200902">
+
+  <front>
+
+    <title>Use of SHA-3 (Keccak) Algorithms with RSA in
+    DNSKEY&nbsp;and&nbsp;RRSIG&nbsp;Resource&nbsp;Records&nbsp;for&nbsp;DNSSEC</title>
+
+    <author fullname="Jelte Jansen" initials="J." surname="Jansen">
+      <organization>SIDN</organization>
+      <address>
+        <postal>
+          <street>Meander 501</street>
+          <city>Arnhem 6825 MD</city>
+          <country>The Netherlands</country>
+        </postal>
+        <email>jelte.jansen@sidn.nl</email>
+        <uri>https://www.sidn.nl/</uri>
+      </address>
+    </author>
+
+    <author fullname="Mukund Sivaraman" initials="M." surname="Sivaraman">
+      <organization>Internet Systems Consortium</organization>
+      <address>
+        <postal>
+          <street>950 Charter Street</street>
+          <city>Redwood City</city>
+          <code>94063</code>
+          <region>CA</region>
+          <country>US</country>
+        </postal>
+        <email>muks@mukund.org</email>
+        <uri>https://www.isc.org/</uri>
+      </address>
+    </author>
+
+    <date/>
+
+    <!-- Meta-data Declarations -->
+
+    <area>Operations and Management Area</area>
+    <workgroup>Internet Engineering Task Force</workgroup>
+
+    <!-- <keyword>dns</keyword> -->
+
+    <abstract>
+      <t>This document describes how to produce RSA/SHA3-256,
+      RSA/SHA3-384, and RSA/SHA3-512 DNSKEY and RRSIG resource records
+      for use in the Domain Name System Security Extensions (<xref
+      target="RFC4033" />, <xref target="RFC4034" />, and <xref
+      target="RFC4035" />).</t>
+    </abstract>
+
+  </front>
+
+  <middle>
+
+    <section title="Introduction">
+      <t>The Domain Name System (DNS) is the global, hierarchical
+      distributed database for Internet Naming. The DNS has been
+      extended to use cryptographic keys and digital signatures for the
+      verification of the authenticity and integrity of its data. <xref
+      target="RFC4033" />, <xref target="RFC4034" />, and <xref
+      target="RFC4035" /> describe these DNS Security Extensions, called
+      DNSSEC.</t>
+
+      <t><xref target="RFC4033" /> describes how to store DNSKEY and
+      RRSIG resource records, and specified a list of cryptographic
+      algorithms to use. It was further updated by <xref
+      target="RFC5702" /> to add the SHA-2 family of hash
+      algorithms. This document extends that list with the SHA-3
+      algorithms RSA/SHA3-256, RSA/SHA3-384, and RSA/SHA3-512, and
+      specifies how to store DNSKEY data and how to produce RRSIG
+      resource records with these hash algorithms.</t>
+
+      <t>Familiarity with DNSSEC, RSA, and the SHA-3 <xref
+      target="FIPS.202.2015" /> family of algorithms is assumed in this
+      document.</t>
+
+      <t>To refer to SHA3-256, SHA3-384, and SHA3-512, this document
+      will use the name SHA-3. This is done to improve readability. When
+      a part of text is specific for a particular SHA-3 hash function,
+      their specific names are used. The same goes for RSA/SHA3-256,
+      RSA/SHA3-384, and RSA/SHA3-512, which will be grouped using the
+      name RSA/SHA-3.</t>
+
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+      NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL"
+      in this document are to be interpreted as described in <xref
+      target="RFC2119" />.</t>
+    </section>
+
+    <section title="DNSKEY Resource Records" anchor="rrs">
+      <t>The format of the DNSKEY RR can be found in <xref
+      target="RFC4034" />. <xref target="RFC3110" /> and <xref
+      target="RFC5702" /> describe the use of RSA/SHA-1 and RSA/SHA-2
+      for DNSSEC signatures respectively.</t>
+
+      <section title="RSA/SHA3-256 DNSKEY Resource Records">
+        <t>RSA public keys for use with RSA/SHA3-256 are stored in
+        DNSKEY resource records (RRs) with the algorithm number
+        [TBD].</t>
+
+        <t>The key size of RSA/SHA3-256 keys MUST NOT be less than 1024
+        bits and MUST NOT be more than 4096 bits.</t>
+      </section>
+
+      <section title="RSA/SHA3-384 DNSKEY Resource Records">
+        <t>RSA public keys for use with RSA/SHA3-384 are stored in
+        DNSKEY resource records (RRs) with the algorithm number
+        [TBD].</t>
+
+        <t>The key size of RSA/SHA3-384 keys MUST NOT be less than 1024
+        bits and MUST NOT be more than 4096 bits.</t>
+      </section>
+
+      <section title="RSA/SHA3-512 DNSKEY Resource Records">
+        <t>RSA public keys for use with RSA/SHA3-512 are stored in
+        DNSKEY resource records (RRs) with the algorithm number
+        [TBD].</t>
+
+        <t>The key size of RSA/SHA3-512 keys MUST NOT be less than 1024
+        bits and MUST NOT be more than 4096 bits.</t>
+      </section>
+    </section>
+
+    <section title="RRSIG Resource Records">
+      <t>The value of the signature field in the RRSIG RR follows the
+      RSASSA-PKCS1-v1_5 signature scheme and is calculated as follows.
+      The values for the RDATA fields that precede the signature data
+      are specified in <xref target="RFC4034" />.</t>
+
+      <figure>
+        <artwork>
+      hash = SHA3-XXX(data)
+        </artwork>
+      </figure>
+
+      <t>Here XXX is either 256, 384, or 512, depending on the algorithm
+      used, as specified in <xref target="FIPS.202.2015" />; "data" is
+      the wire format data of the resource record set that is signed, as
+      specified in <xref target="RFC4034" />.</t>
+
+      <figure>
+        <artwork>
+      signature = ( 00 | 01 | FF* | 00 | prefix | hash ) ** e (mod n)
+        </artwork>
+      </figure>
+
+      <t>Here "|" is concatenation; "00", "01", "FF", and "00" are fixed
+      octets of corresponding hexadecimal value; "e" is the private
+      exponent of the signing RSA key; and "n" is the public modulus of
+      the signing key.  The FF octet MUST be repeated the exact number
+      of times so that the total length of the concatenated term in
+      parentheses equals the length of the modulus of the signer's
+      public key ("n").</t>
+
+      <t>The "prefix" is intended to make the use of standard
+      cryptographic libraries easier.  These specifications are taken
+      directly from the specifications of RSASSA-PKCS1-v1_5 in PKCS #1
+      v2.1 (Section 8.2 of <xref target="RFC3447" />), and
+      EMSA-PKCS1-v1_5 encoding in PKCS #1 v2.1 (Section 9.2 of <xref
+      target="RFC3447" />).  The prefixes for the different algorithms
+      are specified below.</t>
+
+      <section title="RSA/SHA3-256 RRSIG Resource Records">
+        <t>RSA/SHA3-256 signatures are stored in the DNS using RRSIG
+        resource records (RRs) with algorithm number [TBD].</t>
+
+        <t>The "prefix" is the ASN.1 DER SHA3-256 algorithm designator
+        prefix:</t>
+
+      <figure>
+        <artwork>
+      hex 30 31 30 0d 06 09 60 86 48 01 65 03 04 02 08 05 00 04 20
+        </artwork>
+      </figure>
+      </section>
+
+      <section title="RSA/SHA3-384 RRSIG Resource Records">
+        <t>RSA/SHA3-384 signatures are stored in the DNS using RRSIG
+        resource records (RRs) with algorithm number [TBD].</t>
+
+        <t>The "prefix" is the ASN.1 DER SHA3-384 algorithm designator
+        prefix:</t>
+
+      <figure>
+        <artwork>
+      hex 30 41 30 0d 06 09 60 86 48 01 65 03 04 02 09 05 00 04 30
+        </artwork>
+      </figure>
+      </section>
+
+      <section title="RSA/SHA3-512 RRSIG Resource Records">
+        <t>RSA/SHA3-512 signatures are stored in the DNS using RRSIG
+        resource records (RRs) with algorithm number [TBD].</t>
+
+        <t>The "prefix" is the ASN.1 DER SHA3-512 algorithm designator
+        prefix:</t>
+
+      <figure>
+        <artwork>
+      hex 30 51 30 0d 06 09 60 86 48 01 65 03 04 02 0a 05 00 04 40
+        </artwork>
+      </figure>
+      </section>
+
+    </section>
+
+    <section title="Deployment Considerations">
+      <section title="Key Sizes">
+        <t>Apart from the restrictions in <xref target="rrs" />, this
+        document will not specify what size of keys to use. That is an
+        operational issue and depends largely on the environment and
+        intended use. A good starting point for more information would
+        be <xref target="NIST800-57" />.</t>
+      </section>
+
+      <section title="Signature Sizes">
+        <t>In this family of signing algorithms, the size of signatures
+        is related to the size of the key and not to the hashing
+        algorithm used in the signing process. Therefore, RRSIG resource
+        records produced with RSA/SHA3-256, RSA/SHA3-384, or
+        RSA/SHA3-512 will have the same size as those produced with
+        RSA/SHA-1 and RSA/SHA-2 hash algorithms, if the keys have the
+        same length.</t>
+      </section>
+    </section>
+
+    <section title="Implementation Considerations">
+      <section title="Support for SHA-3 Signatures">
+        <t>DNSSEC-aware implementations SHOULD be able to support RRSIG
+        and DNSKEY resource records created with the RSA/SHA-3
+        algorithms as defined in this document.</t>
+      </section>
+
+      <section title="Support for NSEC3 Denial of Existence">
+        <t><xref target="RFC5155" /> defines new algorithm identifiers
+        for existing signing algorithms, to indicate that zones signed
+        with these algorithm identifiers can use NSEC3 as well as NSEC
+        records to provide denial of existence. That mechanism was
+        chosen to protect implementations predating <xref
+        target="RFC5155" /> from encountering resource records about
+        which they could not know. This document does not define such
+        algorithm aliases.</t>
+
+        <t>A DNSSEC validator that implements RSA/SHA-3 MUST be able to
+        validate negative answers in the form of both NSEC and NSEC3
+        with hash algorithm 1, as defined in <xref target="RFC5155" />.
+        An authoritative server that does not implement NSEC3 MAY still
+        serve zones that use RSA/SHA-3 with NSEC denial of
+        existence.</t>
+      </section>
+    </section>
+
+    <section title="Examples">
+      <section title="RSA/SHA3-256 Key and Signature">
+        <t>[TBD]</t>
+      </section>
+
+      <section title="RSA/SHA3-384 Key and Signature">
+        <t>[TBD]</t>
+      </section>
+
+      <section title="RSA/SHA3-512 Key and Signature">
+        <t>[TBD]</t>
+      </section>
+    </section>
+
+    <section title="Security considerations">
+      <section title="SHA-1/SHA-2 versus SHA-3 Considerations for RRSIG Resource Records">
+	<t>DNSSEC implementations are encouraged to implement SHA-3 as
+	soon as possible now that SHA-1's security is known to be
+	degraded and the SHA-2 hash algorithms are currently the last
+	line of defence for use with RSA.</t>
+	
+	<t>Users of DNS software are encouraged to deploy SHA-3 with
+	DNSSEC when software implementations allow for it. Users are
+	encouraged to run DNSSEC validator implementations that support
+	SHA-3.</t>
+
+	<t>SHA-3 is considered sufficiently strong for the immediate
+	future, but predictions about future development in cryptography
+	and cryptanalysis are beyond the scope of this document.</t>
+
+	<t>The signature scheme RSASSA-PKCS1-v1_5 is chosen to match the
+	one used for RSA/SHA-1 signatures. This should ease
+	implementation of the new hashing algorithms in DNSSEC
+	software.</t>
+      </section>
+
+      <section title="Signature Type Downgrade Attacks">
+	<t>Since each RRSet MUST be signed with each algorithm present
+	in the DNSKEY RRSet at the zone apex (see Section 2.2 of <xref
+	target="RFC4035" />), a malicious party cannot filter out the
+	RSA/SHA-3 RRSIG and force the validator to use a RSA/SHA-1
+	signature if both are present in the zone. This should provide
+	resilience against algorithm downgrade attacks, if the validator
+	supports RSA/SHA-3.</t>
+      </section>
+    </section>
+
+    <section title="IANA considerations">
+      <t>This document updates the IANA registry "DNS SECURITY ALGORITHM
+      NUMBERS -- per <xref target="RFC4035" />"
+      (http://www.iana.org/protocols). The following entries are added
+      to the registry:</t>
+
+      <texttable>
+
+        <ttcol>Value</ttcol>
+        <ttcol>Description</ttcol>
+        <ttcol>Mnemonic</ttcol>
+        <ttcol>Zone Signing</ttcol>
+        <ttcol>Trans. Sec.</ttcol>
+        <ttcol>References</ttcol>
+
+        <c>TBD</c>
+        <c>RSA/SHA3-256</c>
+        <c>RSASHA3256</c>
+        <c>Y</c>
+        <c>*</c>
+        <c>[draft-muks-dnsop-dnssec-sha3]</c>
+
+        <c>TBD</c>
+        <c>RSA/SHA3-384</c>
+        <c>RSASHA3384</c>
+        <c>Y</c>
+        <c>*</c>
+        <c>[draft-muks-dnsop-dnssec-sha3]</c>
+
+        <c>TBD</c>
+        <c>RSA/SHA3-512</c>
+        <c>RSASHA3512</c>
+        <c>Y</c>
+        <c>*</c>
+        <c>[draft-muks-dnsop-dnssec-sha3]</c>
+
+      </texttable>
+    </section>
+
+    <section title="Acknowledgements">
+      <t>TBD.</t>
+    </section>
+
+  </middle>
+
+  <back>
+
+    <references title="Normative references">
+      <?rfc include="reference.RFC.2119.xml"?>
+      <?rfc include="reference.RFC.3110.xml"?>
+      <?rfc include="reference.RFC.3447.xml"?>
+      <?rfc include="reference.RFC.4033.xml"?>
+      <?rfc include="reference.RFC.4034.xml"?>
+      <?rfc include="reference.RFC.4035.xml"?>
+      <?rfc include="reference.RFC.5155.xml"?>
+      <?rfc include="reference.RFC.5702.xml"?>
+
+      <reference anchor="FIPS.202.2015" target="http://dx.doi.org/10.6028/NIST.FIPS.202">
+        <front>
+          <title>SHA-3 Standard: Permutation-Based Hash and Extendable-Output Functions</title>
+          <author>
+            <organization>National Institute of Standards and Technology</organization>
+          </author>
+          <date month="August" year="2015" />
+        </front>
+        <seriesInfo name="FIPS" value="PUB 202" />
+      </reference>
+
+    </references>
+
+    <references title="Informative references">
+
+      <reference anchor="NIST800-57">
+        <front>
+          <title>Recommendation for Key Management</title>
+          <author fullname="Elaine Barker" initials="E." surname="Barker" />
+          <author fullname="William Barker" initials="W." surname="Barker" />
+          <author fullname="William Burr" initials="W." surname="Burr" />
+          <author fullname="William Polk" initials="W." surname="Polk" />
+          <author fullname="Miles Smid" initials="M." surname="Smid" />
+          <date month="March" year="2007" />
+        </front>
+        <seriesInfo name="NIST" value="SP 800-57" />
+      </reference>
+
+    </references>
+
+    <section title="Change history (to be removed before publication)">
+      <t>
+        <list style="symbols">
+
+          <t>
+          draft-muks-dnsop-dnssec-sha3-00
+          <vspace/>
+          Initial draft.
+          </t>
+
+        </list>
+      </t>
+    </section>
+
+  </back>
+</rfc>
