@@ -297,15 +297,159 @@
 
     <section title="Examples">
       <section title="RSA/SHA3-256 Key and Signature">
-        <t>[TBD]</t>
+        <t>Given a private key with the following values (in Base64):</t>
+
+        <figure>
+          <artwork>
+      Private-key-format: v1.2
+      Algorithm: [TBD] (RSASHA3256)
+      Modulus: v/oS+J8ADp6D+aMAGuwCAgCvCn8SCoj2squtB0q3PMSdmHlr1yyWoCAPYfb8EwPlnNYjV1ztHkE8ske7saP7DlL9DDxTPn46Pg3RiM4ewlpKlfZm5eZrSODbxTMH9H4xXuwzHNv7W49Zi6rmtO3lVGM3U62cL8Snnh5v/iW/weU=
+      PublicExponent: AQAB
+      PrivateExponent: lJsVEmWqWqa0DIrz6uMkTr6OwPZKVeNd7ELeZtWccCrWv4/GPcNjOcJ3heL1kBalKDnPE7J4TsI7JNpIXaNNE5lFoCUPhtVqJBUl+M2EeLuKR9CGOOCSI94/F3AUXlcf3961EA8kphmuAarmzR+pbIn0xnOQuM+nEWYfGogEsMU=
+      Prime1: 9yGjgfQdbEuHP1zOyORVnO/Fn1l73TxFA19yBN8D/loauJElfcti6bzJykPNcoxgFsdhlnDK7aLIJB2U+PSwHw==
+      Prime2: xt29BEUpbpOEJqictutmTkCAQzNLT3o7XdyeWmGGk575zqxXrdqFt66suq5rabu/jbQc8PqTKEYX5paxa9B9ew==
+      Exponent1: ogunqEXGqUUZKP4VBXtbe+1o+yT06EtlwWFrZTBK8RRqIw3htIuRj0xgUMWGyI6tTyJrpfbNyWaMr8nJ7jib5w==
+      Exponent2: d1l0qy9m4joeQaVICG/WgngrgikytYxCPN6/GrcVMVtjySmdpXVUcxyeBZvQUzCekcja5bU8xBrtFTKzYGVMKQ==
+      Coefficient: B7Kj5lCvBk4i0HvhoaWdEF0Z9PO8RVHVRqQIJPIpXtN8lNEOUuAQg0a9pKUFD3w2oTh2dk4xie3GxyJDMGguPA==
+          </artwork>
+        </figure>
+
+        <t>The DNSKEY record for this key would be:</t>
+
+        <figure>
+          <artwork>
+      example.org. IN DNSKEY 256 3 [TBD] AwEAAb/6EvifAA6eg/mjABrsAgIArwp/EgqI9rKrrQdKtzzEnZh5a9cs lqAgD2H2/BMD5ZzWI1dc7R5BPLJHu7Gj+w5S/Qw8Uz5+Oj4N0YjOHsJa SpX2ZuXma0jg28UzB/R+MV7sMxzb+1uPWYuq5rTt5VRjN1OtnC/Ep54e b/4lv8Hl
+          </artwork>
+        </figure>
+
+        <t>With this key, sign the following RRSet, consisting of 1 A record:</t>
+
+        <figure>
+          <artwork>
+      example.org. 3600  IN  A  192.0.2.91
+          </artwork>
+        </figure>
+
+        <t>If the inception date is set at 00:00 hours on January 1st,
+        2000, and the expiration date at 00:00 hours on January 1st,
+        2030, the following signature should be created:</t>
+
+        <figure>
+          <artwork>
+      example.org.                      3600  IN  RRSIG   A [TBD] 2 3600 (
+                                        20300101000000 20000101000000 53767 example.org.
+                                        EiYve+lvKloKpzFXR9pGpqkPD6ZLgpOiZ8Ua
+                                        m4LJkuNSD2pS95nlFESQT3SCp0RsK0JVEFIg
+                                        c2KRJsVFkdTGf6y/i74h4UBDaSGEOoUNvRXd
+                                        4j+P/ishkiC46c1KSu4MqxzFjz4DVqaOGt9d
+                                        Nlm8fHKcq8WfAAByORwilDpAH14= )
+          </artwork>
+        </figure>
+
       </section>
 
       <section title="RSA/SHA3-384 Key and Signature">
-        <t>[TBD]</t>
+        <t>Given a private key with the following values (in Base64):</t>
+
+        <figure>
+          <artwork>
+      Private-key-format: v1.2
+      Algorithm: [TBD] (RSASHA3384)
+      Modulus: 1mTG6tg39IXsvEqqKtTenJdnawiQSNIQIgRy/BbZQP7Qu+j3l6DmFgpw5DfHApRox9fYjJR6shpDsmfGC11gMqJzaSaXRpgd4ER1pSMl3qX7FJ749WySSxC6iOmAQ3zjYSND3HxCVgJBojvm64yQGOaS0d/qMhmamMPY1KMT03E=
+      PublicExponent: AQAB
+      PrivateExponent: XDI0VJOs5GufVY2qRgcKwD5fy+h/28DyDR7qr7vHq6qo6tYRe1RG/d15lLrjyxk1QhNxXWsQpHyk9hioUwTRs8sLiaSGZLlrSTR8X2a0+Ux7SMPE4F13fewYjbUaW+lYspx5gbzLUvztmaIB7YV7RdtgTTM8Yzw9wRnMU4QVhME=
+      Prime1: 8ii1QhM8POBWqrrLdeg5l5Oqb7WPXMOpmaKyf3feSYZUb2xy6qTFQzo7YcIOB+Nd2HqEwN5nxiADgtaNAB6laQ==
+      Prime2: 4qXNygKERta5ko7JjYSRjxfzPrMK6jY+GHdQ3zDoVSOyZJPt4E4h3JvGheO5CQXmdYucZafgcqBQD1rLq6HUyQ==
+      Exponent1: ZXX+9A9hJtSMG36mbuF89/Br8eAtkB1++xs7FMNhhIbe68yRnZSp/g/w/3WyMUXndSNoafMFofKZ5gEFFO7COQ==
+      Exponent2: ruhlt8/ZZRGwhHnM8XmtG1DQV0K02aqioR7zOkr0AUBbG2NN4Bxr5WQSAKGM2nnDMFNdjtXPUKaHIlJfe0SYgQ==
+      Coefficient: JCIHcbynHteOdmwqYAPEN0taYxb1tNvJKb9sYu9u8v3GQAia0DxGm+XIZxxExpwUDqqB3L12QYli65bsLIrkPg==
+          </artwork>
+        </figure>
+
+        <t>The DNSKEY record for this key would be:</t>
+
+        <figure>
+          <artwork>
+      example.org. IN DNSKEY 256 3 [TBD] AwEAAdZkxurYN/SF7LxKqirU3pyXZ2sIkEjSECIEcvwW2UD+0Lvo95eg 5hYKcOQ3xwKUaMfX2IyUerIaQ7JnxgtdYDKic2kml0aYHeBEdaUjJd6l +xSe+PVskksQuojpgEN842EjQ9x8QlYCQaI75uuMkBjmktHf6jIZmpjD 2NSjE9Nx
+          </artwork>
+        </figure>
+
+        <t>With this key, sign the following RRSet, consisting of 1 A record:</t>
+
+        <figure>
+          <artwork>
+      example.org. 3600  IN  A  192.0.2.91
+          </artwork>
+        </figure>
+
+        <t>If the inception date is set at 00:00 hours on January 1st,
+        2000, and the expiration date at 00:00 hours on January 1st,
+        2030, the following signature should be created:</t>
+
+        <figure>
+          <artwork>
+      example.org.                      3600  IN  RRSIG   A [TBD] 2 3600 (
+                                        20300101000000 20000101000000 58391 example.org.
+                                        O6/yCttmjt0KMyPMNIuM4Hl76Eq0fAfBVhpx
+                                        GLU/ozJBlLbuvBmnExOMyIKpx8zOwNe8GSnm
+                                        8wF0chAFHCkdAA2KiJSwFlAstw6HGC5X+/Ou
+                                        eqhw6GVXMdP+9CdS3HfnjBR0N7zE/5mWgQp2
+                                        SxmjcNe1Z+Tfx14cZDV7Fm3tpEU= )
+          </artwork>
+        </figure>
+
       </section>
 
       <section title="RSA/SHA3-512 Key and Signature">
-        <t>[TBD]</t>
+        <t>Given a private key with the following values (in Base64):</t>
+
+        <figure>
+          <artwork>
+      Private-key-format: v1.2
+      Algorithm: [TBD] (RSASHA3512)
+      Modulus: 1xcZnBvTsdnF3QW2VlGZOMw5Lo/Av8cv4ogyFmngVsSZkqT3TwJNZ3bSCG70Aer5tQkyf+cx8INu4ZGC/CpTuaaxnEFpH0G2fPSadRwELcqf7LQKjLU9kjrdS8bFTElw0ugukXF/TJ1/KOywFsOHfFQ14Gqk5RB7EL8lXf1ZESs=
+      PublicExponent: AQAB
+      PrivateExponent: I4b8Qu3RvLm01fogkQdvYJNTCp7R/ptfDHLkmxEn7g0RNMis1M8Ti/hzXtM82KhAUKfRQJEmjYyYHwgS86XmKCGPslN1rZR9K1vXadHH2PKu4CL1ZLArWLz7Y9lpuVRVvlqrMM3IAVm7pTpd8Bx2jtD7Xt/9yXKW4TjIp/ctN4E=
+      Prime1: 80uohrGN+E1OWMwxLRK0Jl32BwfJ7XnP3HiAdhhGnwi/zPbp/Ngpj985avjmabVNN8JzRIOnqjAjIMP0u6RG6w==
+      Prime2: 4lJlpIjD6kz48ukFNjSY6qowVf5k54AyRJDnS+irwDuZKZtSxPghqgPyrOUIbAPRC+RmnP9dOOECS7rzuaxOwQ==
+      Exponent1: KNm/Rj5x1AtG6GoAp8zIKtkEAlIweYtGd4JUL4AL+5AAhG3BBA9Xiyyz+14ncgBbIs2nhQ2GDXFftJSydv8yWQ==
+      Exponent2: oUOpHWY+g3M5aIzVo9wyofOG4Z+VcseMCgNebF5sE1vkNRtyDNvp0OVjRAMmzyChEmI7I99qI59hLWkXRdQbgQ==
+      Coefficient: JpZ110OE8oR9yBPGrnoTxRht6SXFPOUmj8wCgvqgqROBc8uN2s87FPJqTSsN3qQTNg987OQii7+EYobCs93Z7g==
+          </artwork>
+        </figure>
+
+        <t>The DNSKEY record for this key would be:</t>
+
+        <figure>
+          <artwork>
+      example.org. IN DNSKEY 256 3 [TBD] AwEAAdcXGZwb07HZxd0FtlZRmTjMOS6PwL/HL+KIMhZp4FbEmZKk908C TWd20ghu9AHq+bUJMn/nMfCDbuGRgvwqU7mmsZxBaR9Btnz0mnUcBC3K n+y0Coy1PZI63UvGxUxJcNLoLpFxf0ydfyjssBbDh3xUNeBqpOUQexC/ JV39WREr
+          </artwork>
+        </figure>
+
+        <t>With this key, sign the following RRSet, consisting of 1 A record:</t>
+
+        <figure>
+          <artwork>
+      example.org. 3600  IN  A  192.0.2.91
+          </artwork>
+        </figure>
+
+        <t>If the inception date is set at 00:00 hours on January 1st,
+        2000, and the expiration date at 00:00 hours on January 1st,
+        2030, the following signature should be created:</t>
+
+        <figure>
+          <artwork>
+      example.org.                      3600  IN  RRSIG   A [TBD] 2 3600 (
+                                        20300101000000 20000101000000 7458 example.org.
+                                        PqdYQGN2Ml9ttU6ZqcL8iNKbhkw5nHuxnUFK
+                                        luR7aMMKNtPaVC7P4SjIGXmbhEA9/EQ4UhAg
+                                        +ekqwANViVuhEwbg//mJ+ffOq18qWRxWUKxX
+                                        HPbtBvJDSuvo04D2BTZIx9qMMjvrMWuowlol
+                                        mrz3bvDRtQkoD5kZQPLAD6+r6Ps= )
+          </artwork>
+        </figure>
+
       </section>
     </section>
 
