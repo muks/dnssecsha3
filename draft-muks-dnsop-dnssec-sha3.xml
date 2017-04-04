@@ -34,8 +34,7 @@
 
   <front>
 
-    <title>Use of SHA-3 (Keccak) Algorithms with RSA in
-    DNSKEY&nbsp;and&nbsp;RRSIG&nbsp;Resource&nbsp;Records&nbsp;for&nbsp;DNSSEC</title>
+    <title>Use of SHA-3 (Keccak) Algorithms in DNSSEC</title>
 
     <author fullname="Jelte Jansen" initials="J." surname="Jansen">
       <organization>SIDN</organization>
