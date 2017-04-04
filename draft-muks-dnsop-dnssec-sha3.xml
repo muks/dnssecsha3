@@ -140,7 +140,7 @@
 
       <section title="RSA/SHA3-256 DNSKEY Resource Records">
         <t>RSA public keys for use with RSA/SHA3-256 are stored in
-        DNSKEY resource records (RRs) with the algorithm number
+        DNSKEY resource records (RRs) with the algorithm number 249
         [TBD].</t>
 
         <t>The key size of RSA/SHA3-256 keys MUST NOT be less than 1024
@@ -149,7 +149,7 @@
 
       <section title="RSA/SHA3-384 DNSKEY Resource Records">
         <t>RSA public keys for use with RSA/SHA3-384 are stored in
-        DNSKEY resource records (RRs) with the algorithm number
+        DNSKEY resource records (RRs) with the algorithm number 250
         [TBD].</t>
 
         <t>The key size of RSA/SHA3-384 keys MUST NOT be less than 1024
@@ -158,7 +158,7 @@
 
       <section title="RSA/SHA3-512 DNSKEY Resource Records">
         <t>RSA public keys for use with RSA/SHA3-512 are stored in
-        DNSKEY resource records (RRs) with the algorithm number
+        DNSKEY resource records (RRs) with the algorithm number 251
         [TBD].</t>
 
         <t>The key size of RSA/SHA3-512 keys MUST NOT be less than 1024
@@ -207,7 +207,7 @@
 
       <section title="RSA/SHA3-256 RRSIG Resource Records">
         <t>RSA/SHA3-256 signatures are stored in the DNS using RRSIG
-        resource records (RRs) with algorithm number [TBD].</t>
+        resource records (RRs) with algorithm number 249 [TBD].</t>
 
         <t>The "prefix" is the ASN.1 DER SHA3-256 algorithm designator
         prefix:</t>
@@ -221,7 +221,7 @@
 
       <section title="RSA/SHA3-384 RRSIG Resource Records">
         <t>RSA/SHA3-384 signatures are stored in the DNS using RRSIG
-        resource records (RRs) with algorithm number [TBD].</t>
+        resource records (RRs) with algorithm number 250 [TBD].</t>
 
         <t>The "prefix" is the ASN.1 DER SHA3-384 algorithm designator
         prefix:</t>
@@ -235,7 +235,7 @@
 
       <section title="RSA/SHA3-512 RRSIG Resource Records">
         <t>RSA/SHA3-512 signatures are stored in the DNS using RRSIG
-        resource records (RRs) with algorithm number [TBD].</t>
+        resource records (RRs) with algorithm number 251 [TBD].</t>
 
         <t>The "prefix" is the ASN.1 DER SHA3-512 algorithm designator
         prefix:</t>
@@ -259,14 +259,14 @@
         <t>The implementation of SHA3-256 in DS RRs follows the
         implementation of SHA-256 as specified in <xref target="RFC4509"
         /> except that the underlying algorithm is SHA3-256, the digest
-        value is 32 bytes long, and the digest type code is [TBD].</t>
+        value is 32 bytes long, and the digest type code is 252 [TBD].</t>
       </section>
 
       <section title="SHA3-384 digest type DS Resource Records">
         <t>The implementation of SHA3-384 in DS RRs follows the
         implementation of SHA-256 as specified in <xref target="RFC4509"
         /> except that the underlying algorithm is SHA3-384, the digest
-        value is 48 bytes long, and the digest type code is [TBD].</t>
+        value is 48 bytes long, and the digest type code is 253 [TBD].</t>
       </section>
     </section>
 
@@ -323,7 +323,7 @@
         <figure>
           <artwork>
       Private-key-format: v1.2
-      Algorithm: [TBD] (RSASHA3-256)
+      Algorithm: 249 (RSASHA3-256)
       Modulus: v/oS+J8ADp6D+aMAGuwCAgCvCn8SCoj2squtB0q3PMSdmHlr1yyWoCAPYfb8EwPlnNYjV1ztHkE8ske7saP7DlL9DDxTPn46Pg3RiM4ewlpKlfZm5eZrSODbxTMH9H4xXuwzHNv7W49Zi6rmtO3lVGM3U62cL8Snnh5v/iW/weU=
       PublicExponent: AQAB
       PrivateExponent: lJsVEmWqWqa0DIrz6uMkTr6OwPZKVeNd7ELeZtWccCrWv4/GPcNjOcJ3heL1kBalKDnPE7J4TsI7JNpIXaNNE5lFoCUPhtVqJBUl+M2EeLuKR9CGOOCSI94/F3AUXlcf3961EA8kphmuAarmzR+pbIn0xnOQuM+nEWYfGogEsMU=
@@ -339,7 +339,7 @@
 
         <figure>
           <artwork>
-      example.org. IN DNSKEY 256 3 [TBD] AwEAAb/6EvifAA6eg/mjABrsAgIArwp/EgqI9rKrrQdKtzzEnZh5a9cs lqAgD2H2/BMD5ZzWI1dc7R5BPLJHu7Gj+w5S/Qw8Uz5+Oj4N0YjOHsJa SpX2ZuXma0jg28UzB/R+MV7sMxzb+1uPWYuq5rTt5VRjN1OtnC/Ep54e b/4lv8Hl
+      example.org. IN DNSKEY 256 3 249 AwEAAb/6EvifAA6eg/mjABrsAgIArwp/EgqI9rKrrQdKtzzEnZh5a9cs lqAgD2H2/BMD5ZzWI1dc7R5BPLJHu7Gj+w5S/Qw8Uz5+Oj4N0YjOHsJa SpX2ZuXma0jg28UzB/R+MV7sMxzb+1uPWYuq5rTt5VRjN1OtnC/Ep54e b/4lv8Hl
           </artwork>
         </figure>
 
@@ -357,7 +357,7 @@
 
         <figure>
           <artwork>
-      example.org.                      3600  IN  RRSIG   A [TBD] 2 3600 (
+      example.org.                      3600  IN  RRSIG   A 249 2 3600 (
                                         20300101000000 20000101000000 53767 example.org.
                                         EiYve+lvKloKpzFXR9pGpqkPD6ZLgpOiZ8Ua
                                         m4LJkuNSD2pS95nlFESQT3SCp0RsK0JVEFIg
@@ -375,7 +375,7 @@
         <figure>
           <artwork>
       Private-key-format: v1.2
-      Algorithm: [TBD] (RSASHA3-384)
+      Algorithm: 250 (RSASHA3-384)
       Modulus: 1mTG6tg39IXsvEqqKtTenJdnawiQSNIQIgRy/BbZQP7Qu+j3l6DmFgpw5DfHApRox9fYjJR6shpDsmfGC11gMqJzaSaXRpgd4ER1pSMl3qX7FJ749WySSxC6iOmAQ3zjYSND3HxCVgJBojvm64yQGOaS0d/qMhmamMPY1KMT03E=
       PublicExponent: AQAB
       PrivateExponent: XDI0VJOs5GufVY2qRgcKwD5fy+h/28DyDR7qr7vHq6qo6tYRe1RG/d15lLrjyxk1QhNxXWsQpHyk9hioUwTRs8sLiaSGZLlrSTR8X2a0+Ux7SMPE4F13fewYjbUaW+lYspx5gbzLUvztmaIB7YV7RdtgTTM8Yzw9wRnMU4QVhME=
@@ -391,7 +391,7 @@
 
         <figure>
           <artwork>
-      example.org. IN DNSKEY 256 3 [TBD] AwEAAdZkxurYN/SF7LxKqirU3pyXZ2sIkEjSECIEcvwW2UD+0Lvo95eg 5hYKcOQ3xwKUaMfX2IyUerIaQ7JnxgtdYDKic2kml0aYHeBEdaUjJd6l +xSe+PVskksQuojpgEN842EjQ9x8QlYCQaI75uuMkBjmktHf6jIZmpjD 2NSjE9Nx
+      example.org. IN DNSKEY 256 3 250 AwEAAdZkxurYN/SF7LxKqirU3pyXZ2sIkEjSECIEcvwW2UD+0Lvo95eg 5hYKcOQ3xwKUaMfX2IyUerIaQ7JnxgtdYDKic2kml0aYHeBEdaUjJd6l +xSe+PVskksQuojpgEN842EjQ9x8QlYCQaI75uuMkBjmktHf6jIZmpjD 2NSjE9Nx
           </artwork>
         </figure>
 
@@ -409,7 +409,7 @@
 
         <figure>
           <artwork>
-      example.org.                      3600  IN  RRSIG   A [TBD] 2 3600 (
+      example.org.                      3600  IN  RRSIG   A 250 2 3600 (
                                         20300101000000 20000101000000 58391 example.org.
                                         O6/yCttmjt0KMyPMNIuM4Hl76Eq0fAfBVhpx
                                         GLU/ozJBlLbuvBmnExOMyIKpx8zOwNe8GSnm
@@ -427,7 +427,7 @@
         <figure>
           <artwork>
       Private-key-format: v1.2
-      Algorithm: [TBD] (RSASHA3-512)
+      Algorithm: 251 (RSASHA3-512)
       Modulus: 1xcZnBvTsdnF3QW2VlGZOMw5Lo/Av8cv4ogyFmngVsSZkqT3TwJNZ3bSCG70Aer5tQkyf+cx8INu4ZGC/CpTuaaxnEFpH0G2fPSadRwELcqf7LQKjLU9kjrdS8bFTElw0ugukXF/TJ1/KOywFsOHfFQ14Gqk5RB7EL8lXf1ZESs=
       PublicExponent: AQAB
       PrivateExponent: I4b8Qu3RvLm01fogkQdvYJNTCp7R/ptfDHLkmxEn7g0RNMis1M8Ti/hzXtM82KhAUKfRQJEmjYyYHwgS86XmKCGPslN1rZR9K1vXadHH2PKu4CL1ZLArWLz7Y9lpuVRVvlqrMM3IAVm7pTpd8Bx2jtD7Xt/9yXKW4TjIp/ctN4E=
@@ -443,7 +443,7 @@
 
         <figure>
           <artwork>
-      example.org. IN DNSKEY 256 3 [TBD] AwEAAdcXGZwb07HZxd0FtlZRmTjMOS6PwL/HL+KIMhZp4FbEmZKk908C TWd20ghu9AHq+bUJMn/nMfCDbuGRgvwqU7mmsZxBaR9Btnz0mnUcBC3K n+y0Coy1PZI63UvGxUxJcNLoLpFxf0ydfyjssBbDh3xUNeBqpOUQexC/ JV39WREr
+      example.org. IN DNSKEY 256 3 251 AwEAAdcXGZwb07HZxd0FtlZRmTjMOS6PwL/HL+KIMhZp4FbEmZKk908C TWd20ghu9AHq+bUJMn/nMfCDbuGRgvwqU7mmsZxBaR9Btnz0mnUcBC3K n+y0Coy1PZI63UvGxUxJcNLoLpFxf0ydfyjssBbDh3xUNeBqpOUQexC/ JV39WREr
           </artwork>
         </figure>
 
@@ -461,7 +461,7 @@
 
         <figure>
           <artwork>
-      example.org.                      3600  IN  RRSIG   A [TBD] 2 3600 (
+      example.org.                      3600  IN  RRSIG   A 251 2 3600 (
                                         20300101000000 20000101000000 7458 example.org.
                                         PqdYQGN2Ml9ttU6ZqcL8iNKbhkw5nHuxnUFK
                                         luR7aMMKNtPaVC7P4SjIGXmbhEA9/EQ4UhAg
@@ -522,21 +522,21 @@
         <ttcol>Trans. Sec.</ttcol>
         <ttcol>References</ttcol>
 
-        <c>TBD</c>
+        <c>249 [TBD]</c>
         <c>RSA/SHA3-256</c>
         <c>RSASHA3-256</c>
         <c>Y</c>
         <c>*</c>
         <c>[draft-muks-dnsop-dnssec-sha3]</c>
 
-        <c>TBD</c>
+        <c>250 [TBD]</c>
         <c>RSA/SHA3-384</c>
         <c>RSASHA3-384</c>
         <c>Y</c>
         <c>*</c>
         <c>[draft-muks-dnsop-dnssec-sha3]</c>
 
-        <c>TBD</c>
+        <c>251 [TBD]</c>
         <c>RSA/SHA3-512</c>
         <c>RSASHA3-512</c>
         <c>Y</c>
@@ -557,12 +557,12 @@
         <ttcol>Status</ttcol>
         <ttcol>References</ttcol>
 
-        <c>TBD</c>
+        <c>252 [TBD]</c>
         <c>SHA3-256</c>
         <c>OPTIONAL</c>
         <c>[draft-muks-dnsop-dnssec-sha3]</c>
 
-        <c>TBD</c>
+        <c>253 [TBD]</c>
         <c>SHA3-384</c>
         <c>OPTIONAL</c>
         <c>[draft-muks-dnsop-dnssec-sha3]</c>
