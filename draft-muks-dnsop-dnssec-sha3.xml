@@ -114,6 +114,8 @@
       RSA/SHA3-384, and RSA/SHA3-512, which will be grouped using the
       name RSA/SHA-3.</t>
 
+      <t>The SHA3-224 algorithm is not used.</t>
+
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
       NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL"
       in this document are to be interpreted as described in <xref
