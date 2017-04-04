@@ -311,34 +311,34 @@
 
     <section title="Security considerations">
       <section title="SHA-1/SHA-2 versus SHA-3 Considerations for RRSIG Resource Records">
-	<t>DNSSEC implementations are encouraged to implement SHA-3 as
-	soon as possible now that SHA-1's security is known to be
-	degraded and the SHA-2 hash algorithms are currently the last
-	line of defence for use with RSA in DNSSEC.</t>
-	
-	<t>Users of DNS software are encouraged to deploy SHA-3 with
-	DNSSEC when software implementations allow for it. Users are
-	encouraged to run DNSSEC validator implementations that support
-	SHA-3.</t>
+        <t>DNSSEC implementations are encouraged to implement SHA-3 as
+        soon as possible now that SHA-1's security is known to be
+        degraded and the SHA-2 hash algorithms are currently the last
+        line of defence for use with RSA in DNSSEC.</t>
 
-	<t>SHA-3 is considered sufficiently strong for the immediate
-	future, but predictions about future development in cryptography
-	and cryptanalysis are beyond the scope of this document.</t>
+        <t>Users of DNS software are encouraged to deploy SHA-3 with
+        DNSSEC when software implementations allow for it. Users are
+        encouraged to run DNSSEC validator implementations that support
+        SHA-3.</t>
 
-	<t>The signature scheme RSASSA-PKCS1-v1_5 is chosen to match the
-	one used for RSA/SHA-1 signatures. This should ease
-	implementation of the new hashing algorithms in DNSSEC
-	software.</t>
+        <t>SHA-3 is considered sufficiently strong for the immediate
+        future, but predictions about future development in cryptography
+        and cryptanalysis are beyond the scope of this document.</t>
+
+        <t>The signature scheme RSASSA-PKCS1-v1_5 is chosen to match the
+        one used for RSA/SHA-1 signatures. This should ease
+        implementation of the new hashing algorithms in DNSSEC
+        software.</t>
       </section>
 
       <section title="Signature Type Downgrade Attacks">
-	<t>Since each RRSet MUST be signed with each algorithm present
-	in the DNSKEY RRSet at the zone apex (see Section 2.2 of <xref
-	target="RFC4035" />), a malicious party cannot filter out the
-	RSA/SHA-3 RRSIG and force the validator to use a RSA/SHA-1
-	signature if both are present in the zone. This should provide
-	resilience against algorithm downgrade attacks, if the validator
-	supports RSA/SHA-3.</t>
+        <t>Since each RRSet MUST be signed with each algorithm present
+        in the DNSKEY RRSet at the zone apex (see Section 2.2 of <xref
+        target="RFC4035" />), a malicious party cannot filter out the
+        RSA/SHA-3 RRSIG and force the validator to use a RSA/SHA-1
+        signature if both are present in the zone. This should provide
+        resilience against algorithm downgrade attacks, if the validator
+        supports RSA/SHA-3.</t>
       </section>
     </section>
 
