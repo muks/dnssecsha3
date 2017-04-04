@@ -297,12 +297,27 @@
         RSA/SHA-1 and RSA/SHA-2 hash algorithms, if the keys have the
         same length.</t>
       </section>
+
+      <section title="DS Sigest Sizes">
+        <t>DS RDATA with digest type SHA3-256 has the same size as DS
+        RDATA with digest type SHA-256 (32 bytes). DS RDATA with digest
+        type SHA3-384 has the same size as DS RDATA with digest type
+        SHA-384 (48 bytes). Corresponding to these existing digest
+        types, it should be possible to understand the impact of the
+        size of DS RDATA when using the new SHA-3 digest types.</t>
+      </section>
     </section>
 
     <section title="Implementation Considerations">
       <section title="Support for SHA-3 Signatures">
         <t>DNSSEC-aware implementations SHOULD be able to support RRSIG
         and DNSKEY resource records created with the RSA/SHA-3
+        algorithms as defined in this document.</t>
+      </section>
+
+      <section title="Support for SHA-3 DS Digest Types">
+        <t>DNSSEC-aware implementations SHOULD be able to support DS
+        resource records created with the SHA3-256 and SHA3-384
         algorithms as defined in this document.</t>
       </section>
 
