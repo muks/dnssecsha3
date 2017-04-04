@@ -78,7 +78,8 @@
       RSA/SHA3-384, and RSA/SHA3-512 DNSKEY and RRSIG resource records
       for use in the Domain Name System Security Extensions (<xref
       target="RFC4033" />, <xref target="RFC4034" />, and <xref
-      target="RFC4035" />).</t>
+      target="RFC4035" />). It also describes how to produce SHA3-256
+      and SHA3-384 DS digest types.</t>
     </abstract>
 
   </front>
@@ -103,6 +104,12 @@
       specifies how to store DNSKEY data and how to produce RRSIG
       resource records with these hash algorithms.</t>
 
+      <t><xref target="RFC3658" /> first described the use of DS
+      resource records. It was further updated by <xref target="RFC4509"
+      /> and <xref target="RFC6605" /> to add SHA-256 and SHA-384 digest
+      types respectively. This document extends that list with the SHA-3
+      algorithms SHA3-256 and SHA3-384.</t>
+
       <t>Familiarity with DNSSEC, RSA, and the SHA-3 <xref
       target="FIPS.202.2015" /> family of algorithms is assumed in this
       document.</t>
@@ -114,7 +121,9 @@
       RSA/SHA3-384, and RSA/SHA3-512, which will be grouped using the
       name RSA/SHA-3.</t>
 
-      <t>The SHA3-224 algorithm is not used.</t>
+      <t>The SHA3-224 algorithm is not used in DNSKEYs and RRSIGs.
+      SHA3-224 and SHA3-512 algorithms are not used as DS digest
+      types.</t>
 
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
       NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL"
