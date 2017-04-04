@@ -304,7 +304,7 @@
 	<t>DNSSEC implementations are encouraged to implement SHA-3 as
 	soon as possible now that SHA-1's security is known to be
 	degraded and the SHA-2 hash algorithms are currently the last
-	line of defence for use with RSA.</t>
+	line of defence for use with RSA in DNSSEC.</t>
 	
 	<t>Users of DNS software are encouraged to deploy SHA-3 with
 	DNSSEC when software implementations allow for it. Users are
