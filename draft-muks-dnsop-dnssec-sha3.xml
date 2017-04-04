@@ -302,7 +302,7 @@
         <figure>
           <artwork>
       Private-key-format: v1.2
-      Algorithm: [TBD] (RSASHA3256)
+      Algorithm: [TBD] (RSASHA3-256)
       Modulus: v/oS+J8ADp6D+aMAGuwCAgCvCn8SCoj2squtB0q3PMSdmHlr1yyWoCAPYfb8EwPlnNYjV1ztHkE8ske7saP7DlL9DDxTPn46Pg3RiM4ewlpKlfZm5eZrSODbxTMH9H4xXuwzHNv7W49Zi6rmtO3lVGM3U62cL8Snnh5v/iW/weU=
       PublicExponent: AQAB
       PrivateExponent: lJsVEmWqWqa0DIrz6uMkTr6OwPZKVeNd7ELeZtWccCrWv4/GPcNjOcJ3heL1kBalKDnPE7J4TsI7JNpIXaNNE5lFoCUPhtVqJBUl+M2EeLuKR9CGOOCSI94/F3AUXlcf3961EA8kphmuAarmzR+pbIn0xnOQuM+nEWYfGogEsMU=
@@ -354,7 +354,7 @@
         <figure>
           <artwork>
       Private-key-format: v1.2
-      Algorithm: [TBD] (RSASHA3384)
+      Algorithm: [TBD] (RSASHA3-384)
       Modulus: 1mTG6tg39IXsvEqqKtTenJdnawiQSNIQIgRy/BbZQP7Qu+j3l6DmFgpw5DfHApRox9fYjJR6shpDsmfGC11gMqJzaSaXRpgd4ER1pSMl3qX7FJ749WySSxC6iOmAQ3zjYSND3HxCVgJBojvm64yQGOaS0d/qMhmamMPY1KMT03E=
       PublicExponent: AQAB
       PrivateExponent: XDI0VJOs5GufVY2qRgcKwD5fy+h/28DyDR7qr7vHq6qo6tYRe1RG/d15lLrjyxk1QhNxXWsQpHyk9hioUwTRs8sLiaSGZLlrSTR8X2a0+Ux7SMPE4F13fewYjbUaW+lYspx5gbzLUvztmaIB7YV7RdtgTTM8Yzw9wRnMU4QVhME=
@@ -406,7 +406,7 @@
         <figure>
           <artwork>
       Private-key-format: v1.2
-      Algorithm: [TBD] (RSASHA3512)
+      Algorithm: [TBD] (RSASHA3-512)
       Modulus: 1xcZnBvTsdnF3QW2VlGZOMw5Lo/Av8cv4ogyFmngVsSZkqT3TwJNZ3bSCG70Aer5tQkyf+cx8INu4ZGC/CpTuaaxnEFpH0G2fPSadRwELcqf7LQKjLU9kjrdS8bFTElw0ugukXF/TJ1/KOywFsOHfFQ14Gqk5RB7EL8lXf1ZESs=
       PublicExponent: AQAB
       PrivateExponent: I4b8Qu3RvLm01fogkQdvYJNTCp7R/ptfDHLkmxEn7g0RNMis1M8Ti/hzXtM82KhAUKfRQJEmjYyYHwgS86XmKCGPslN1rZR9K1vXadHH2PKu4CL1ZLArWLz7Y9lpuVRVvlqrMM3IAVm7pTpd8Bx2jtD7Xt/9yXKW4TjIp/ctN4E=
@@ -503,21 +503,21 @@
 
         <c>TBD</c>
         <c>RSA/SHA3-256</c>
-        <c>RSASHA3256</c>
+        <c>RSASHA3-256</c>
         <c>Y</c>
         <c>*</c>
         <c>[draft-muks-dnsop-dnssec-sha3]</c>
 
         <c>TBD</c>
         <c>RSA/SHA3-384</c>
-        <c>RSASHA3384</c>
+        <c>RSASHA3-384</c>
         <c>Y</c>
         <c>*</c>
         <c>[draft-muks-dnsop-dnssec-sha3]</c>
 
         <c>TBD</c>
         <c>RSA/SHA3-512</c>
-        <c>RSASHA3512</c>
+        <c>RSASHA3-512</c>
         <c>Y</c>
         <c>*</c>
         <c>[draft-muks-dnsop-dnssec-sha3]</c>
