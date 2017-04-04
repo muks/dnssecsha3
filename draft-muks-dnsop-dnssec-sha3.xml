@@ -249,6 +249,27 @@
 
     </section>
 
+    <section title="DS Resource Records">
+      <t>The format of the DS RR can be found in <xref target="RFC4034"
+      />. <xref target="RFC3658" />, <xref target="RFC4509" />, and
+      <xref target="RFC6605" /> describe the use of SHA-1, SHA-256, and
+      SHA-384 for the DS digest type respectively.</t>
+
+      <section title="SHA3-256 digest type DS Resource Records">
+        <t>The implementation of SHA3-256 in DS RRs follows the
+        implementation of SHA-256 as specified in <xref target="RFC4509"
+        /> except that the underlying algorithm is SHA3-256, the digest
+        value is 32 bytes long, and the digest type code is [TBD].</t>
+      </section>
+
+      <section title="SHA3-384 digest type DS Resource Records">
+        <t>The implementation of SHA3-384 in DS RRs follows the
+        implementation of SHA-256 as specified in <xref target="RFC4509"
+        /> except that the underlying algorithm is SHA3-384, the digest
+        value is 48 bytes long, and the digest type code is [TBD].</t>
+      </section>
+    </section>
+
     <section title="Deployment Considerations">
       <section title="Key Sizes">
         <t>Apart from the restrictions in <xref target="dnskey-rrs" />,
@@ -487,14 +508,14 @@
     </section>
 
     <section title="IANA considerations">
-      <t>This document updates the IANA registry "DNS SECURITY ALGORITHM
-      NUMBERS -- per <xref target="RFC4035" />"
+      <t>This document updates the IANA registry "Domain Name System
+      Security (DNSSEC) Algorithm Numbers"
       (http://www.iana.org/protocols). The following entries are added
       to the registry:</t>
 
       <texttable>
 
-        <ttcol>Value</ttcol>
+        <ttcol>Number</ttcol>
         <ttcol>Description</ttcol>
         <ttcol>Mnemonic</ttcol>
         <ttcol>Zone Signing</ttcol>
@@ -523,6 +544,30 @@
         <c>[draft-muks-dnsop-dnssec-sha3]</c>
 
       </texttable>
+
+      <t>This document updates the IANA registry "Delegation Signer (DS)
+      Resource Record (RR) Type Digest Algorithms"
+      (http://www.iana.org/protocols). The following entries are added
+      to the registry:</t>
+
+      <texttable>
+
+        <ttcol>Value</ttcol>
+        <ttcol>Description</ttcol>
+        <ttcol>Status</ttcol>
+        <ttcol>References</ttcol>
+
+        <c>TBD</c>
+        <c>SHA3-256</c>
+        <c>OPTIONAL</c>
+        <c>[draft-muks-dnsop-dnssec-sha3]</c>
+
+        <c>TBD</c>
+        <c>SHA3-384</c>
+        <c>OPTIONAL</c>
+        <c>[draft-muks-dnsop-dnssec-sha3]</c>
+
+      </texttable>
     </section>
 
     <section title="Acknowledgements">
@@ -537,11 +582,14 @@
       <?rfc include="reference.RFC.2119.xml"?>
       <?rfc include="reference.RFC.3110.xml"?>
       <?rfc include="reference.RFC.3447.xml"?>
+      <?rfc include="reference.RFC.3658.xml"?>
       <?rfc include="reference.RFC.4033.xml"?>
       <?rfc include="reference.RFC.4034.xml"?>
       <?rfc include="reference.RFC.4035.xml"?>
+      <?rfc include="reference.RFC.4509.xml"?>
       <?rfc include="reference.RFC.5155.xml"?>
       <?rfc include="reference.RFC.5702.xml"?>
+      <?rfc include="reference.RFC.6605.xml"?>
 
       <reference anchor="FIPS.202.2015" target="http://dx.doi.org/10.6028/NIST.FIPS.202">
         <front>
