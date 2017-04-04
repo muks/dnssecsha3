@@ -327,7 +327,7 @@
 
     <section title="Examples">
       <section title="RSA/SHA3-256 Key and Signature">
-        <t>Given a private key with the following values (in Base64):</t>
+        <t>Given a 1024-bit private key with the following values (in Base64):</t>
 
         <figure>
           <artwork>
@@ -379,7 +379,7 @@
       </section>
 
       <section title="RSA/SHA3-384 Key and Signature">
-        <t>Given a private key with the following values (in Base64):</t>
+        <t>Given a 1024-bit private key with the following values (in Base64):</t>
 
         <figure>
           <artwork>
@@ -431,7 +431,7 @@
       </section>
 
       <section title="RSA/SHA3-512 Key and Signature">
-        <t>Given a private key with the following values (in Base64):</t>
+        <t>Given a 1024-bit private key with the following values (in Base64):</t>
 
         <figure>
           <artwork>
@@ -481,6 +481,42 @@
         </figure>
 
       </section>
+      <section title="SHA3-256 as DS Digest Type">
+	<t>Given a 1024-bit RSA/SHA-256 DNSKEY with the following contents:</t>
+
+        <figure>
+          <artwork>
+      example.org. IN DNSKEY 256 3 8 AwEAAbljrZZb1Qyq8ui+vnYL5exWSrQYFkCFD6VvJoJr5ADo7CxZiyxu sJM6oVHF7pA22rKJqjgIR9lksZ1+nT2WcwdXQuAFLrLFAI5L42mQKOHS hx1S3vHosO0iSIX47IyyR2O+J9qLhy7B+T4cJzAq2dOtSziqL1l5BCtw 5ZNYJX8N
+          </artwork>
+        </figure>
+
+        <t>The DS record for this key with digest type SHA3-256 would be:</t>
+
+        <figure>
+          <artwork>
+      example.org. IN DS 25803 8 252 AE03EA9388D4BA12725999B8E2C4ED14E06EAE8B78229B81154F61FE8EDBAA5F
+          </artwork>
+        </figure>
+      </section>
+
+      <section title="SHA3-384 as DS Digest Type">
+	<t>Given a 1024-bit RSA/SHA-256 DNSKEY with the following contents:</t>
+
+        <figure>
+          <artwork>
+      example.org. IN DNSKEY 256 3 8 AwEAAbljrZZb1Qyq8ui+vnYL5exWSrQYFkCFD6VvJoJr5ADo7CxZiyxu sJM6oVHF7pA22rKJqjgIR9lksZ1+nT2WcwdXQuAFLrLFAI5L42mQKOHS hx1S3vHosO0iSIX47IyyR2O+J9qLhy7B+T4cJzAq2dOtSziqL1l5BCtw 5ZNYJX8N
+          </artwork>
+        </figure>
+
+        <t>The DS record for this key with digest type SHA3-384 would be:</t>
+
+        <figure>
+          <artwork>
+      example.org. IN DS 25803 8 253 BA8A4350F844CCCB8308694B3ADD478FC7EFBAC936D82D482D88F792FAB0766567E1F58F3A1075708CCC0457C9435ECA
+          </artwork>
+        </figure>
+      </section>
+
     </section>
 
     <section title="Security considerations">
