@@ -147,115 +147,66 @@
       target="RFC5702" /> describe the use of RSA/SHA-1 and RSA/SHA-2
       for DNSSEC signatures respectively.</t>
 
-      <section title="RSA/SHA3-256 DNSKEY Resource Records">
-        <t>RSA public keys for use with RSA/SHA3-256 are stored in
-        DNSKEY resource records (RRs) with the algorithm number 249
-        [TBD].</t>
+      <t>RSA public keys for use with RSA/SHA-3 are stored in DNSKEY
+      resource records (RRs) with the algorithm numbers as specified in
+      <xref target="iana" />.</t>
 
-        <t>The key size of RSA/SHA3-256 keys MUST NOT be less than 1024
-        bits and MUST NOT be more than 4096 bits.</t>
-      </section>
+      <t>The key size of RSA/SHA3-256 keys MUST NOT be less than 1024
+      bits and MUST NOT be more than 4096 bits. This also satisfies a
+      requirement of the RSASSA-PSS signature scheme that for a hash
+      function that outputs a 256-bit value, the RSA modulus be at least
+      521 bits long.</t>
 
-      <section title="RSA/SHA3-384 DNSKEY Resource Records">
-        <t>RSA public keys for use with RSA/SHA3-384 are stored in
-        DNSKEY resource records (RRs) with the algorithm number 250
-        [TBD].</t>
+      <t>The key size of RSA/SHA3-384 keys MUST NOT be less than 1024
+      bits and MUST NOT be more than 4096 bits. This also satisfies a
+      requirement of the RSASSA-PSS signature scheme that for a hash
+      function that outputs a 384-bit value, the RSA modulus be at least
+      777 bits long.</t>
 
-        <t>The key size of RSA/SHA3-384 keys MUST NOT be less than 1024
-        bits and MUST NOT be more than 4096 bits.</t>
-      </section>
-
-      <section title="RSA/SHA3-512 DNSKEY Resource Records">
-        <t>RSA public keys for use with RSA/SHA3-512 are stored in
-        DNSKEY resource records (RRs) with the algorithm number 251
-        [TBD].</t>
-
-        <t>The key size of RSA/SHA3-512 keys MUST NOT be less than 1024
-        bits and MUST NOT be more than 4096 bits.</t>
-      </section>
+      <t>The key size of RSA/SHA3-512 keys MUST NOT be less than 1280
+      bits and MUST NOT be more than 4096 bits. This also satisfies a
+      requirement of the RSASSA-PSS signature scheme that for a hash
+      function that outputs a 512-bit value, the RSA modulus be at least
+      1033 bits long.</t>
     </section>
 
     <section title="RRSIG Resource Records">
-      <t>The value of the signature field in the RRSIG RR follows the
-      RSASSA-PKCS1-v1_5 signature scheme and is calculated as follows.
-      The values for the RDATA fields that precede the signature data
-      are specified in <xref target="RFC4034" />.</t>
+      <t>For signature calculation, this section uses the specifications
+      of RSASSA-PSS in PKCS #1 v2.2 (Section 8.1 of <xref
+      target="RFC8017" />) incorporating EMSA-PSS encoding (Section 9.1
+      of <xref target="RFC8017" />).</t>
 
-      <figure>
-        <artwork>
-      hash = SHA3-XXX(data)
-        </artwork>
-      </figure>
+      <t>The values for the RRSIG RDATA fields that precede the
+      signature data are specified in <xref target="RFC4034" />.  The
+      value of the signature field in the RRSIG RDATA follows the
+      RSASSA-PSS signature scheme and is calculated as described in
+      Section 8.1.1 of <xref target="RFC8017" />. The message M used in
+      signature calculation is the argument to the sign() function as
+      specified in Section 3.1.8.1 of <xref target="RFC4034" />.</t>
 
-      <t>Here XXX is either 256, 384, or 512, depending on the algorithm
-      used, as specified in <xref target="FIPS.202.2015" />; "data" is
-      the wire format data of the resource record set that is signed, as
-      specified in <xref target="RFC4034" />.</t>
+      <t>Within EMSA-PSS-ENCODE, the hash function "Hash" used is one
+      among SHA3-256, SHA3-384, and SHA3-512 for RSA/SHA3-256,
+      RSA/SHA3-384, RSA/SHA3-512 respectively.</t>
 
-      <figure>
-        <artwork>
-      signature = ( 00 | 01 | FF* | 00 | prefix | hash ) ** e (mod n)
-        </artwork>
-      </figure>
+      <t>The padding string "PS" will compute to length 0.</t>
 
-      <t>Here "|" is concatenation; "00", "01", "FF", and "00" are fixed
-      octets of corresponding hexadecimal value; "e" is the private
-      exponent of the signing RSA key; and "n" is the public modulus of
-      the signing key.  The FF octet MUST be repeated the exact number
-      of times so that the total length of the concatenated term in
-      parentheses equals the length of the modulus of the signer's
-      public key ("n").</t>
+      <t>The mask generation function is MGF1 (Section B.2.1. of <xref
+      target="RFC8017" />) and the hash function used within the mask
+      generation function is also "Hash" (SHA3-XXX). In the mask
+      generation function function MGF1, "counter" will loop from 0 to 1
+      (inclusive), so "Hash" is called twice within it.</t>
 
-      <t>The "prefix" is intended to make the use of standard
-      cryptographic libraries easier.  These specifications are taken
-      directly from the specifications of RSASSA-PKCS1-v1_5 in PKCS #1
-      v2.1 (Section 8.2 of <xref target="RFC3447" />), and
-      EMSA-PKCS1-v1_5 encoding in PKCS #1 v2.1 (Section 9.2 of <xref
-      target="RFC3447" />).  The prefixes for the different algorithms
-      are specified below.</t>
+      <t>The length of salt in octets MUST be equal to the length of the
+      output of the hash function "Hash" (SHA3-XXX) in octets. The value
+      of salt SHOULD be random per signature computation. A random salt
+      value enhances the security of the scheme by affording a "tighter"
+      security proof. However, the randomness is not critical to
+      security. See Section 8.1 of <xref target="RFC8017" /> for the
+      tradeoffs in security due to a non-random salt.</t>
 
-      <section title="RSA/SHA3-256 RRSIG Resource Records">
-        <t>RSA/SHA3-256 signatures are stored in the DNS using RRSIG
-        resource records (RRs) with algorithm number 249 [TBD].</t>
-
-        <t>The "prefix" is the ASN.1 DER SHA3-256 algorithm designator
-        prefix:</t>
-
-      <figure>
-        <artwork>
-      hex 30 31 30 0d 06 09 60 86 48 01 65 03 04 02 08 05 00 04 20
-        </artwork>
-      </figure>
-      </section>
-
-      <section title="RSA/SHA3-384 RRSIG Resource Records">
-        <t>RSA/SHA3-384 signatures are stored in the DNS using RRSIG
-        resource records (RRs) with algorithm number 250 [TBD].</t>
-
-        <t>The "prefix" is the ASN.1 DER SHA3-384 algorithm designator
-        prefix:</t>
-
-      <figure>
-        <artwork>
-      hex 30 41 30 0d 06 09 60 86 48 01 65 03 04 02 09 05 00 04 30
-        </artwork>
-      </figure>
-      </section>
-
-      <section title="RSA/SHA3-512 RRSIG Resource Records">
-        <t>RSA/SHA3-512 signatures are stored in the DNS using RRSIG
-        resource records (RRs) with algorithm number 251 [TBD].</t>
-
-        <t>The "prefix" is the ASN.1 DER SHA3-512 algorithm designator
-        prefix:</t>
-
-      <figure>
-        <artwork>
-      hex 30 51 30 0d 06 09 60 86 48 01 65 03 04 02 0a 05 00 04 40
-        </artwork>
-      </figure>
-      </section>
-
+      <t>RSA/SHA-3 signatures are stored in the DNS using RRSIG resource
+      records (RRs) with algorithm number as specified in <xref
+      target="iana" />.</t>
     </section>
 
     <section title="DS Resource Records">
@@ -268,14 +219,16 @@
         <t>The implementation of SHA3-256 in DS RRs follows the
         implementation of SHA-256 as specified in <xref target="RFC4509"
         /> except that the underlying algorithm is SHA3-256, the digest
-        value is 32 bytes long, and the digest type code is 252 [TBD].</t>
+        value is 32 bytes long, and the digest type code is specified in
+        <xref target="iana" />.</t>
       </section>
 
       <section title="SHA3-384 digest type DS Resource Records">
         <t>The implementation of SHA3-384 in DS RRs follows the
         implementation of SHA-256 as specified in <xref target="RFC4509"
         /> except that the underlying algorithm is SHA3-384, the digest
-        value is 48 bytes long, and the digest type code is 253 [TBD].</t>
+        value is 48 bytes long, and the digest type code is specified in
+        <xref target="iana" />.</t>
       </section>
     </section>
 
@@ -497,7 +450,7 @@
 
       </section>
       <section title="SHA3-256 as DS Digest Type">
-	<t>Given a 1024-bit RSA/SHA-256 DNSKEY with the following contents:</t>
+        <t>Given a 1024-bit RSA/SHA-256 DNSKEY with the following contents:</t>
 
         <figure>
           <artwork>
@@ -515,7 +468,7 @@
       </section>
 
       <section title="SHA3-384 as DS Digest Type">
-	<t>Given a 1024-bit RSA/SHA-256 DNSKEY with the following contents:</t>
+        <t>Given a 1024-bit RSA/SHA-256 DNSKEY with the following contents:</t>
 
         <figure>
           <artwork>
@@ -549,11 +502,6 @@
         <t>SHA-3 is considered sufficiently strong for the immediate
         future, but predictions about future development in cryptography
         and cryptanalysis are beyond the scope of this document.</t>
-
-        <t>The signature scheme RSASSA-PKCS1-v1_5 is chosen to match the
-        one used for RSA/SHA-1 signatures. This should ease
-        implementation of the new hashing algorithms in DNSSEC
-        software.</t>
       </section>
 
       <section title="Signature Type Downgrade Attacks">
@@ -567,7 +515,7 @@
       </section>
     </section>
 
-    <section title="IANA considerations">
+    <section title="IANA considerations" anchor="iana">
       <t>This document updates the IANA registry "Domain Name System
       Security (DNSSEC) Algorithm Numbers"
       (http://www.iana.org/protocols). The following entries are added
@@ -631,7 +579,8 @@
     </section>
 
     <section title="Acknowledgements">
-      <t>TBD.</t>
+      <t>Thanks to Francis Dupont and Paul Hoffman for review and
+      suggestions.</t>
     </section>
 
   </middle>
@@ -641,7 +590,6 @@
     <references title="Normative references">
       <?rfc include="reference.RFC.2119.xml"?>
       <?rfc include="reference.RFC.3110.xml"?>
-      <?rfc include="reference.RFC.3447.xml"?>
       <?rfc include="reference.RFC.3658.xml"?>
       <?rfc include="reference.RFC.4033.xml"?>
       <?rfc include="reference.RFC.4034.xml"?>
@@ -650,6 +598,7 @@
       <?rfc include="reference.RFC.5155.xml"?>
       <?rfc include="reference.RFC.5702.xml"?>
       <?rfc include="reference.RFC.6605.xml"?>
+      <?rfc include="reference.RFC.8017.xml"?>
 
       <reference anchor="FIPS.202.2015" target="http://dx.doi.org/10.6028/NIST.FIPS.202">
         <front>
