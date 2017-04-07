@@ -155,19 +155,19 @@
       bits and MUST NOT be more than 4096 bits. This also satisfies a
       requirement of the RSASSA-PSS signature scheme that for a hash
       function that outputs a 256-bit value, the RSA modulus be at least
-      521 bits long.</t>
+      522 bits long.</t>
 
       <t>The key size of RSA/SHA3-384 keys MUST NOT be less than 1024
       bits and MUST NOT be more than 4096 bits. This also satisfies a
       requirement of the RSASSA-PSS signature scheme that for a hash
       function that outputs a 384-bit value, the RSA modulus be at least
-      777 bits long.</t>
+      778 bits long.</t>
 
       <t>The key size of RSA/SHA3-512 keys MUST NOT be less than 1280
       bits and MUST NOT be more than 4096 bits. This also satisfies a
       requirement of the RSASSA-PSS signature scheme that for a hash
       function that outputs a 512-bit value, the RSA modulus be at least
-      1033 bits long.</t>
+      1034 bits long.</t>
     </section>
 
     <section title="RRSIG Resource Records">
