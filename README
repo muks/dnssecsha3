@@ -1,5 +1,5 @@
 This is a repository used by authors of a DNS draft on the use of SHA-3
-algorithms (Keccak) with RSA in DNSKEY and RRSIG Resource Records for
+algorithms (Keccak), and RSASSA-PSS signature scheme with RSA, in
 DNSSEC.
 
 Feel free to contact the authors to suggest modifications.

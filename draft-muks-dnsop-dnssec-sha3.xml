@@ -30,11 +30,11 @@
 <!-- end of list of popular I-D processing instructions -->
 <?rfc comments="no" ?>
 <?rfc inline="yes" ?>
-<rfc category="exp" docName="draft-muks-dnsop-dnssec-sha3-00" ipr="trust200902">
+<rfc category="exp" docName="draft-muks-dnsop-dnssec-sha3-01" ipr="trust200902">
 
   <front>
 
-    <title>Use of SHA-3 (Keccak) Algorithms in DNSSEC</title>
+    <title>Use of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC</title>
 
     <author fullname="Jelte Jansen" initials="J." surname="Jansen">
       <organization>SIDN</organization>
@@ -74,12 +74,9 @@
     <!-- <keyword>dns</keyword> -->
 
     <abstract>
-      <t>This document describes how to produce RSA/SHA3-256,
-      RSA/SHA3-384, and RSA/SHA3-512 DNSKEY and RRSIG resource records
-      for use in the Domain Name System Security Extensions (<xref
-      target="RFC4033" />, <xref target="RFC4034" />, and <xref
-      target="RFC4035" />). It also describes how to produce SHA3-256
-      and SHA3-384 DS digest types.</t>
+      <t>This document specifies the use of SHA-3 (Keccak) hash
+      functions in DNSSEC. It also specifies the use of the RSASSA-PSS
+      signature scheme for RSA keys.</t>
     </abstract>
 
   </front>
@@ -98,11 +95,42 @@
       <t><xref target="RFC4033" /> describes how to store DNSKEY and
       RRSIG resource records, and specified a list of cryptographic
       algorithms to use. It was further updated by <xref
-      target="RFC5702" /> to add the SHA-2 family of hash
-      algorithms. This document extends that list with the SHA-3
-      algorithms RSA/SHA3-256, RSA/SHA3-384, and RSA/SHA3-512, and
-      specifies how to store DNSKEY data and how to produce RRSIG
-      resource records with these hash algorithms.</t>
+      target="RFC5702" /> to add the SHA-2 family of hash algorithms
+      using the RSASSA-PKCS1-v1_5 signature scheme <xref
+      target="RFC3447" />.</t>
+
+      <t>RSA has introduced RSASSA-PSS which is a much better signature
+      scheme than RSASSA-PKCS1-v1_5. An advantage of RSASSA-PSS over
+      RSASSA-PKCS1-v1_5 is that analysis can relate its security to that
+      of the RSA problem (Section 8.1 of <xref target="RFC8017" />),
+      whereas the connection of RSASSA-PKCS1-v1_5 to the RSA problem has
+      not been proved. With RSASSA-PSS, an attacker also does not know
+      in advance what the encoded message EM will be due to the use of
+      random salt that makes fault analysis attacks more difficult to
+      mount. Although no attacks are known against RSASSA-PKCS1-v1_5, in
+      the interest of increased robustness, RSASSA-PSS is REQUIRED in
+      new applications (Section 8 of <xref target="RFC8017" />).</t>
+
+      <t>SHA-3 is a new family of hash functions based on the
+      cryptographic primitive family Keccak. <xref
+      target="FIPS.202.2015" /> states: "The four SHA-3 hash functions
+      in this Standard supplement the hash functions that are specified
+      in <xref target="FIPS.180-4.2015" />: SHA-1 and the SHA-2
+      family. Together, both Standards provide resilience against future
+      advances in hash function analysis, because they rely on
+      fundamentally different design principles." Now that SHA-1's
+      security is known to be weakened and the SHA-2 hash algorithms are
+      currently the last line of defence for use with RSA in DNSKEYs,
+      and in DS records, it is sensible to introduce the SHA-3 hash
+      family now to prepare for any eventuality. The SHA-3 hash function
+      family uses a sponge construction algorithm that is different from
+      the SHA-2 hash function family's construction, so the possiblity
+      that an attack on one family will affect the other is minimal.</t>
+      
+      <t>This document extends the list of DNSKEY algorithms with SHA-2
+      and SHA-3 family of algorithms using the RSASSA-PSS signature
+      scheme <xref target="RFC8017" />, and specifies how to store
+      DNSKEY data and how to produce RRSIG resource records.</t>
 
       <t><xref target="RFC3658" /> first described the use of DS
       resource records. It was further updated by <xref target="RFC4509"
@@ -110,20 +138,23 @@
       types respectively. This document extends that list with the SHA-3
       algorithms SHA3-256 and SHA3-384.</t>
 
-      <t>Familiarity with DNSSEC, RSA, and the SHA-3 <xref
-      target="FIPS.202.2015" /> family of algorithms is assumed in this
-      document.</t>
+      <t>Familiarity with DNSSEC, RSA, and the SHA-2 <xref
+      target="FIPS.180-4.2015" /> and SHA-3 <xref target="FIPS.202.2015"
+      /> families of algorithms is assumed in this document.</t>
 
-      <t>To refer to SHA3-256, SHA3-384, and SHA3-512, this document
-      will use the name SHA-3. This is done to improve readability. When
-      a part of text is specific for a particular SHA-3 hash function,
-      their specific names are used. The same goes for RSA/SHA3-256,
+      <t>To refer to SHA2-256 and SHA2-512, this document will use the
+      name SHA-2. Similarly, to refer to SHA3-256, SHA3-384, and
+      SHA3-512, this document will use the name SHA-3. This is done to
+      improve readability. When a part of text is specific for a
+      particular SHA-2 or SHA-3 hash function, their specific names are
+      used. The same goes for RSA/SHA3-256 and RSA/SHA3-512 which will
+      be grouped using the name RSA/SHA-2, and RSA/SHA3-256,
       RSA/SHA3-384, and RSA/SHA3-512, which will be grouped using the
       name RSA/SHA-3.</t>
 
-      <t>The SHA3-224 algorithm is not used in DNSKEYs and RRSIGs.
-      SHA3-224 and SHA3-512 algorithms are not used as DS digest
-      types.</t>
+      <t>SHA2-224, SHA2-384, and SHA3-224 algorithms are not used in
+      DNSKEYs and RRSIGs. SHA3-224 and SHA3-512 algorithms are not used
+      as DS digest types.</t>
 
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
       NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL"
@@ -144,18 +175,20 @@
     <section title="DNSKEY Resource Records" anchor="dnskey-rrs">
       <t>The format of the DNSKEY RR can be found in <xref
       target="RFC4034" />. <xref target="RFC3110" /> and <xref
-      target="RFC5702" /> describe the use of RSA/SHA-1 and RSA/SHA-2
-      for DNSSEC signatures respectively.</t>
+      target="RFC5702" /> describe the use of RSASSA-PKCS1-v1_5
+      signature scheme with SHA-1 and SHA-2 hash functions for DNSSEC
+      signatures respectively.</t>
 
-      <t>RSA public keys for use with RSA/SHA-3 are stored in DNSKEY
-      resource records (RRs) with the algorithm numbers as specified in
-      <xref target="iana" />.</t>
+      <t>RSA public keys for use with RSASSA-PSS signature scheme using
+      SHA-2 and SHA-3 hash functions are stored in DNSKEY resource
+      records (RRs) with the algorithm numbers as specified in <xref
+      target="iana" />.</t>
 
-      <t>The key size of RSA/SHA3-256 keys MUST NOT be less than 1024
-      bits and MUST NOT be more than 4096 bits. This also satisfies a
-      requirement of the RSASSA-PSS signature scheme that for a hash
-      function that outputs a 256-bit value, the RSA modulus be at least
-      522 bits long.</t>
+      <t>The key size of RSA/SHA2-256 and RSA/SHA3-256 keys MUST NOT be
+      less than 1024 bits and MUST NOT be more than 4096 bits. This also
+      satisfies a requirement of the RSASSA-PSS signature scheme that
+      for a hash function that outputs a 256-bit value, the RSA modulus
+      be at least 522 bits long.</t>
 
       <t>The key size of RSA/SHA3-384 keys MUST NOT be less than 1024
       bits and MUST NOT be more than 4096 bits. This also satisfies a
@@ -163,11 +196,11 @@
       function that outputs a 384-bit value, the RSA modulus be at least
       778 bits long.</t>
 
-      <t>The key size of RSA/SHA3-512 keys MUST NOT be less than 1280
-      bits and MUST NOT be more than 4096 bits. This also satisfies a
-      requirement of the RSASSA-PSS signature scheme that for a hash
-      function that outputs a 512-bit value, the RSA modulus be at least
-      1034 bits long.</t>
+      <t>The key size of RSA/SHA2-512 and RSA/SHA3-512 keys MUST NOT be
+      less than 1280 bits and MUST NOT be more than 4096 bits. This also
+      satisfies a requirement of the RSASSA-PSS signature scheme that
+      for a hash function that outputs a 512-bit value, the RSA modulus
+      be at least 1034 bits long.</t>
     </section>
 
     <section title="RRSIG Resource Records">
@@ -185,23 +218,24 @@
       specified in Section 3.1.8.1 of <xref target="RFC4034" />.</t>
 
       <t>Within EMSA-PSS-ENCODE, the hash function "Hash" used is one
-      among SHA3-256, SHA3-384, and SHA3-512 for RSA/SHA3-256,
-      RSA/SHA3-384, RSA/SHA3-512 respectively.</t>
+      among SHA2-256, SHA2-512, SHA3-256, SHA3-384, and SHA3-512 for
+      RSA/SHA2-256, RSA/SHA2-512, RSA/SHA3-256, RSA/SHA3-384, and
+      RSA/SHA3-512 respectively.</t>
 
       <t>The mask generation function is MGF1 (Section B.2.1. of <xref
       target="RFC8017" />) and the hash function used within the mask
-      generation function is also "Hash" (SHA3-XXX).</t>
+      generation function is also "Hash".</t>
 
       <t>The length of salt in octets MUST be equal to the length of the
-      output of the hash function "Hash" (SHA3-XXX) in octets. The value
-      of salt SHOULD be random per signature computation. A random salt
-      value enhances the security of the scheme by affording a "tighter"
+      output of the hash function "Hash" in octets. The value of salt
+      SHOULD be random per signature computation. A random salt value
+      enhances the security of the scheme by affording a "tighter"
       security proof. However, the randomness is not critical to
       security. See Section 8.1 of <xref target="RFC8017" /> for the
       tradeoffs in security due to a non-random salt.</t>
 
-      <t>RSA/SHA-3 signatures are stored in the DNS using RRSIG resource
-      records (RRs) with algorithm number as specified in <xref
+      <t>These RSASSA-PSS signatures are stored in the DNS using RRSIG
+      resource records (RRs) with algorithm number as specified in <xref
       target="iana" />.</t>
     </section>
 
@@ -241,10 +275,10 @@
         <t>In this family of signing algorithms, the size of signatures
         is related to the size of the key and not to the hashing
         algorithm used in the signing process. Therefore, RRSIG resource
-        records produced with RSA/SHA3-256, RSA/SHA3-384, or
-        RSA/SHA3-512 will have the same size as those produced with
-        RSA/SHA-1 and RSA/SHA-2 hash algorithms, if the keys have the
-        same length.</t>
+        records produced with RSA/SHA2-256, RSA/SHA2-512, RSA/SHA3-256,
+        RSA/SHA3-384, or RSA/SHA3-512 will have the same size as those
+        produced with RSA/SHA-1 and RSA/SHA-2 hash algorithms, if the
+        keys have the same length.</t>
       </section>
 
       <section title="DS Sigest Sizes">
@@ -260,8 +294,8 @@
     <section title="Implementation Considerations">
       <section title="Support for SHA-3 Signatures">
         <t>DNSSEC-aware implementations SHOULD be able to support RRSIG
-        and DNSKEY resource records created with the RSA/SHA-3
-        algorithms as defined in this document.</t>
+        and DNSKEY resource records created with the RSA/SHA-2 and
+        RSA/SHA-3 algorithms as defined in this document.</t>
       </section>
 
       <section title="Support for SHA-3 DS Digest Types">
@@ -280,12 +314,12 @@
         which they could not know. This document does not define such
         algorithm aliases.</t>
 
-        <t>A DNSSEC validator that implements RSA/SHA-3 MUST be able to
-        validate negative answers in the form of both NSEC and NSEC3
-        with hash algorithm 1, as defined in <xref target="RFC5155" />.
-        An authoritative server that does not implement NSEC3 MAY still
-        serve zones that use RSA/SHA-3 with NSEC denial of
-        existence.</t>
+        <t>A DNSSEC validator that implements RSA/SHA2 and/or RSA/SHA-3
+        MUST be able to validate negative answers in the form of both
+        NSEC and NSEC3 with hash algorithm 1, as defined in <xref
+        target="RFC5155" />.  An authoritative server that does not
+        implement NSEC3 MAY still serve zones that use RSA/SHA-2 or
+        RSA/SHA-3 with NSEC denial of existence.</t>
       </section>
     </section>
 
@@ -484,18 +518,20 @@
     </section>
 
     <section title="Security considerations">
-      <section title="SHA-1/SHA-2 versus SHA-3 Considerations for RRSIG Resource Records">
-        <t>DNSSEC implementations are encouraged to implement SHA-3 as
-        soon as possible now that SHA-1's security is known to be
-        degraded and the SHA-2 hash algorithms are currently the last
-        line of defence for use with RSA in DNSSEC.</t>
+      <section title="Considerations for RRSIG Resource Records">
+        <t>DNSSEC implementations are encouraged to implement the new
+        algorithms in this memo as soon as possible now that SHA-1's
+        security is known to be degraded and the SHA-2 hash algorithms
+        are currently the last line of defence for use with RSA in
+        DNSSEC.</t>
 
-        <t>Users of DNS software are encouraged to deploy SHA-3 with
-        DNSSEC when software implementations allow for it. Users are
-        encouraged to run DNSSEC validator implementations that support
-        SHA-3.</t>
+        <t>Users of DNS software are encouraged to deploy these new
+        algorithms with DNSSEC when software implementations allow for
+        it. Users are encouraged to run DNSSEC validator implementations
+        that support these new algorithms when they are available.</t>
 
-        <t>SHA-3 is considered sufficiently strong for the immediate
+        <t>The RSASSA-PSS signature scheme and the SHA-3 hash function
+        family are considered sufficiently strong for the immediate
         future, but predictions about future development in cryptography
         and cryptanalysis are beyond the scope of this document.</t>
       </section>
@@ -504,10 +540,10 @@
         <t>Since each RRSet MUST be signed with each algorithm present
         in the DNSKEY RRSet at the zone apex (see Section 2.2 of <xref
         target="RFC4035" />), a malicious party cannot filter out the
-        RSA/SHA-3 RRSIG and force the validator to use a RSA/SHA-1
+        RSASSA-PSS RRSIG and force the validator to use a RSA/SHA-1
         signature if both are present in the zone. This should provide
         resilience against algorithm downgrade attacks, if the validator
-        supports RSA/SHA-3.</t>
+        supports RSASSA-PSS.</t>
       </section>
     </section>
 
@@ -519,33 +555,47 @@
 
       <texttable>
 
-        <ttcol>Number</ttcol>
+        <ttcol>No.</ttcol>
         <ttcol>Description</ttcol>
         <ttcol>Mnemonic</ttcol>
         <ttcol>Zone Signing</ttcol>
         <ttcol>Trans. Sec.</ttcol>
-        <ttcol>References</ttcol>
+        <ttcol>Ref.</ttcol>
+
+        <c>247 [TBD]</c>
+        <c>RSA/SHA2-256 with RSASSA-PSS</c>
+        <c>RSASHA2-256</c>
+        <c>Y</c>
+        <c>*</c>
+        <c>[TBD]</c>
+
+        <c>248 [TBD]</c>
+        <c>RSA/SHA2-512 with RSASSA-PSS</c>
+        <c>RSASHA2-512</c>
+        <c>Y</c>
+        <c>*</c>
+        <c>[TBD]</c>
 
         <c>249 [TBD]</c>
-        <c>RSA/SHA3-256</c>
+        <c>RSA/SHA3-256 with RSASSA-PSS</c>
         <c>RSASHA3-256</c>
         <c>Y</c>
         <c>*</c>
-        <c>[draft-muks-dnsop-dnssec-sha3]</c>
+        <c>[TBD]</c>
 
         <c>250 [TBD]</c>
-        <c>RSA/SHA3-384</c>
+        <c>RSA/SHA3-384 with RSASSA-PSS</c>
         <c>RSASHA3-384</c>
         <c>Y</c>
         <c>*</c>
-        <c>[draft-muks-dnsop-dnssec-sha3]</c>
+        <c>[TBD]</c>
 
         <c>251 [TBD]</c>
-        <c>RSA/SHA3-512</c>
+        <c>RSA/SHA3-512 with RSASSA-PSS</c>
         <c>RSASHA3-512</c>
         <c>Y</c>
         <c>*</c>
-        <c>[draft-muks-dnsop-dnssec-sha3]</c>
+        <c>[TBD]</c>
 
       </texttable>
 
@@ -564,12 +614,12 @@
         <c>252 [TBD]</c>
         <c>SHA3-256</c>
         <c>OPTIONAL</c>
-        <c>[draft-muks-dnsop-dnssec-sha3]</c>
+        <c>[TBD]</c>
 
         <c>253 [TBD]</c>
         <c>SHA3-384</c>
         <c>OPTIONAL</c>
-        <c>[draft-muks-dnsop-dnssec-sha3]</c>
+        <c>[TBD]</c>
 
       </texttable>
     </section>
@@ -586,6 +636,7 @@
     <references title="Normative references">
       <?rfc include="reference.RFC.2119.xml"?>
       <?rfc include="reference.RFC.3110.xml"?>
+      <?rfc include="reference.RFC.3447.xml"?>
       <?rfc include="reference.RFC.3658.xml"?>
       <?rfc include="reference.RFC.4033.xml"?>
       <?rfc include="reference.RFC.4034.xml"?>
@@ -595,6 +646,17 @@
       <?rfc include="reference.RFC.5702.xml"?>
       <?rfc include="reference.RFC.6605.xml"?>
       <?rfc include="reference.RFC.8017.xml"?>
+
+      <reference anchor="FIPS.180-4.2015" target="http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf">
+	<front>
+	  <title>Secure Hash Standard</title>
+	  <author>
+	    <organization>National Institute of Standards and Technology</organization>
+	  </author>
+	  <date month="August" year="2015" />
+	</front>
+	<seriesInfo name="FIPS" value="PUB 180-4" />
+      </reference>
 
       <reference anchor="FIPS.202.2015" target="http://dx.doi.org/10.6028/NIST.FIPS.202">
         <front>
@@ -629,6 +691,14 @@
     <section title="Change history (Editor: to be removed before publication)">
       <t>
         <list style="symbols">
+
+          <t>
+          draft-muks-dnsop-dnssec-sha3-01
+          <vspace/>
+          Use RSASSA-PSS instead of RSASSA-PKCS1-v1_5. Specify DNSSEC
+          algorithms using RSASSA-PSS for SHA-2 hash functions
+          too. Other fixes.
+          </t>
 
           <t>
           draft-muks-dnsop-dnssec-sha3-00
