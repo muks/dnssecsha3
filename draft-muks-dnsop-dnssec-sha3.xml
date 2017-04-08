@@ -188,13 +188,9 @@
       among SHA3-256, SHA3-384, and SHA3-512 for RSA/SHA3-256,
       RSA/SHA3-384, RSA/SHA3-512 respectively.</t>
 
-      <t>The padding string "PS" will compute to length 0.</t>
-
       <t>The mask generation function is MGF1 (Section B.2.1. of <xref
       target="RFC8017" />) and the hash function used within the mask
-      generation function is also "Hash" (SHA3-XXX). In the mask
-      generation function function MGF1, "counter" will loop from 0 to 1
-      (inclusive), so "Hash" is called twice within it.</t>
+      generation function is also "Hash" (SHA3-XXX).</t>
 
       <t>The length of salt in octets MUST be equal to the length of the
       output of the hash function "Hash" (SHA3-XXX) in octets. The value
