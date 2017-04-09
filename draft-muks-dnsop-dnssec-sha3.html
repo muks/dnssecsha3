@@ -390,11 +390,15 @@
 <link href="#rfc.section.6.2" rel="Chapter" title="6.2 Support for SHA-3 DS Digest Types"/>
 <link href="#rfc.section.6.3" rel="Chapter" title="6.3 Support for NSEC3 Denial of Existence"/>
 <link href="#rfc.section.7" rel="Chapter" title="7 Examples"/>
-<link href="#rfc.section.7.1" rel="Chapter" title="7.1 RSA/SHA3-256 Key and Signature"/>
-<link href="#rfc.section.7.2" rel="Chapter" title="7.2 RSA/SHA3-384 Key and Signature"/>
-<link href="#rfc.section.7.3" rel="Chapter" title="7.3 RSA/SHA3-512 Key and Signature"/>
-<link href="#rfc.section.7.4" rel="Chapter" title="7.4 SHA3-256 as DS Digest Type"/>
-<link href="#rfc.section.7.5" rel="Chapter" title="7.5 SHA3-384 as DS Digest Type"/>
+<link href="#rfc.section.7.1" rel="Chapter" title="7.1 RSA/SHA2-256 (RSASSA-PSS) Key and Signature"/>
+<link href="#rfc.section.7.2" rel="Chapter" title="7.2 RSA/SHA2-512 (RSASSA-PSS) Key and Signature"/>
+<link href="#rfc.section.7.3" rel="Chapter" title="7.3 RSA/SHA3-256 (RSASSA-PSS) Key and Signature"/>
+<link href="#rfc.section.7.4" rel="Chapter" title="7.4 RSA/SHA3-384 (RSASSA-PSS) Key and Signature"/>
+<link href="#rfc.section.7.5" rel="Chapter" title="7.5 RSA/SHA3-512 (RSASSA-PSS) Key and Signature"/>
+<link href="#rfc.section.7.6" rel="Chapter" title="7.6 ECDSA Curve P-256 with SHA3-256 Key and Signature"/>
+<link href="#rfc.section.7.7" rel="Chapter" title="7.7 ECDSA Curve P-384 with SHA3-384 Key and Signature"/>
+<link href="#rfc.section.7.8" rel="Chapter" title="7.8 SHA3-256 as DS Digest Type"/>
+<link href="#rfc.section.7.9" rel="Chapter" title="7.9 SHA3-384 as DS Digest Type"/>
 <link href="#rfc.section.8" rel="Chapter" title="8 Security considerations"/>
 <link href="#rfc.section.8.1" rel="Chapter" title="8.1 Considerations for RRSIG Resource Records"/>
 <link href="#rfc.section.8.2" rel="Chapter" title="8.2 Signature Type Downgrade Attacks"/>
@@ -489,11 +493,15 @@
 <li>6.2.   <a href="#rfc.section.6.2">Support for SHA-3 DS Digest Types</a></li>
 <li>6.3.   <a href="#rfc.section.6.3">Support for NSEC3 Denial of Existence</a></li>
 </ul><li>7.   <a href="#rfc.section.7">Examples</a></li>
-<ul><li>7.1.   <a href="#rfc.section.7.1">RSA/SHA3-256 Key and Signature</a></li>
-<li>7.2.   <a href="#rfc.section.7.2">RSA/SHA3-384 Key and Signature</a></li>
-<li>7.3.   <a href="#rfc.section.7.3">RSA/SHA3-512 Key and Signature</a></li>
-<li>7.4.   <a href="#rfc.section.7.4">SHA3-256 as DS Digest Type</a></li>
-<li>7.5.   <a href="#rfc.section.7.5">SHA3-384 as DS Digest Type</a></li>
+<ul><li>7.1.   <a href="#rfc.section.7.1">RSA/SHA2-256 (RSASSA-PSS) Key and Signature</a></li>
+<li>7.2.   <a href="#rfc.section.7.2">RSA/SHA2-512 (RSASSA-PSS) Key and Signature</a></li>
+<li>7.3.   <a href="#rfc.section.7.3">RSA/SHA3-256 (RSASSA-PSS) Key and Signature</a></li>
+<li>7.4.   <a href="#rfc.section.7.4">RSA/SHA3-384 (RSASSA-PSS) Key and Signature</a></li>
+<li>7.5.   <a href="#rfc.section.7.5">RSA/SHA3-512 (RSASSA-PSS) Key and Signature</a></li>
+<li>7.6.   <a href="#rfc.section.7.6">ECDSA Curve P-256 with SHA3-256 Key and Signature</a></li>
+<li>7.7.   <a href="#rfc.section.7.7">ECDSA Curve P-384 with SHA3-384 Key and Signature</a></li>
+<li>7.8.   <a href="#rfc.section.7.8">SHA3-256 as DS Digest Type</a></li>
+<li>7.9.   <a href="#rfc.section.7.9">SHA3-384 as DS Digest Type</a></li>
 </ul><li>8.   <a href="#rfc.section.8">Security considerations</a></li>
 <ul><li>8.1.   <a href="#rfc.section.8.1">Considerations for RRSIG Resource Records</a></li>
 <li>8.2.   <a href="#rfc.section.8.2">Signature Type Downgrade Attacks</a></li>
@@ -557,117 +565,618 @@
 <p><a href="#RFC5155">[RFC5155]</a> defines new algorithm identifiers for existing signing algorithms, to indicate that zones signed with these algorithm identifiers can use NSEC3 as well as NSEC records to provide denial of existence. That mechanism was chosen to protect implementations predating <a href="#RFC5155">[RFC5155]</a> from encountering resource records about which they could not know. This document does not define such algorithm aliases.</p>
 <p id="rfc.section.6.3.p.2">A DNSSEC validator that implements RSA/SHA2 and/or RSA/SHA-3 MUST be able to validate negative answers in the form of both NSEC and NSEC3 with hash algorithm 1, as defined in <a href="#RFC5155">[RFC5155]</a>.  An authoritative server that does not implement NSEC3 MAY still serve zones that use RSA/SHA-2 or RSA/SHA-3 with NSEC denial of existence.</p>
 <h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> Examples</h1>
-<h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> RSA/SHA3-256 Key and Signature</h1>
+<h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> RSA/SHA2-256 (RSASSA-PSS) Key and Signature</h1>
 <p id="rfc.section.7.1.p.1">Given a 1024-bit private key with the following values (in Base64):</p>
 <pre>
-      Private-key-format: v1.2
-      Algorithm: 249 (RSASHA3-256)
-      Modulus: v/oS+J8ADp6D+aMAGuwCAgCvCn8SCoj2squtB0q3PMSdmHlr1yyWoCAPYfb8EwPlnNYjV1ztHkE8ske7saP7DlL9DDxTPn46Pg3RiM4ewlpKlfZm5eZrSODbxTMH9H4xXuwzHNv7W49Zi6rmtO3lVGM3U62cL8Snnh5v/iW/weU=
-      PublicExponent: AQAB
-      PrivateExponent: lJsVEmWqWqa0DIrz6uMkTr6OwPZKVeNd7ELeZtWccCrWv4/GPcNjOcJ3heL1kBalKDnPE7J4TsI7JNpIXaNNE5lFoCUPhtVqJBUl+M2EeLuKR9CGOOCSI94/F3AUXlcf3961EA8kphmuAarmzR+pbIn0xnOQuM+nEWYfGogEsMU=
-      Prime1: 9yGjgfQdbEuHP1zOyORVnO/Fn1l73TxFA19yBN8D/loauJElfcti6bzJykPNcoxgFsdhlnDK7aLIJB2U+PSwHw==
-      Prime2: xt29BEUpbpOEJqictutmTkCAQzNLT3o7XdyeWmGGk575zqxXrdqFt66suq5rabu/jbQc8PqTKEYX5paxa9B9ew==
-      Exponent1: ogunqEXGqUUZKP4VBXtbe+1o+yT06EtlwWFrZTBK8RRqIw3htIuRj0xgUMWGyI6tTyJrpfbNyWaMr8nJ7jib5w==
-      Exponent2: d1l0qy9m4joeQaVICG/WgngrgikytYxCPN6/GrcVMVtjySmdpXVUcxyeBZvQUzCekcja5bU8xBrtFTKzYGVMKQ==
-      Coefficient: B7Kj5lCvBk4i0HvhoaWdEF0Z9PO8RVHVRqQIJPIpXtN8lNEOUuAQg0a9pKUFD3w2oTh2dk4xie3GxyJDMGguPA==
+Private-key-format: v1.2
+Algorithm: 247 (RSASHA2-256)
+Modulus: 0xP+0iFPdhzUUmeYeZZZvddMG1lkpbvbcjSH/mLf/XksiFHq/legqzLQd5QajI3Tc7bIcRuuHPtib2nKm7k4R1SduNxzUyv5z/T9MDOqlQrUOsBveuC5Wf1b+36PLjWJNqnzFkZ9wuQIDF0uDZwGnebWZDJavq306j/XTA/iZtc=
+PublicExponent: AQAB
+PrivateExponent: uVnMoR7JFTG5rGb1+IbzZQYC+d0kyXhN+lpwtQyEHqPiXA57KT8vgkYL04WFTrlX3ju6hcBFw4Nn6+fdF6Os6zXGgexNh2PqDG+BSSO8P+dH7hNiuV2qSONgkKrJco0aX0q0sAyo7RzRHkAtUUFum//2qMQ7wGZRaVk3FPsFmQE=
+Prime1: 8BHCdC21Zfw8cs4IUKSDqg6JZh6GkdHIHyRpgtPQ7pSx99QtIbU9+VoTcJHw09TId7MOm3fZ4nrALYQHFow7gQ==
+Prime2: 4RW9O6uh52sNxjpYVqheZj+6Z2LvkIPsbgJQYsqhNLr/vf5apact+WXz5pWMlHOguiXu8qiZa86B1dxmHAkuVw==
+Exponent1: t1p5D86RSxE5Ad4GT8E2pj1wB0StNtXoaJCg3UD1xCJhQo0U4zfP25BGZKWyL7fGXFWvhGInUWi7Oogp+bilAQ==
+Exponent2: u5c+q2iT+ydBx6AA19hjNJyQYnIWbz9D4TuUe4GdcTEYy+Qc8EqxClZqPBcPnvnvTrUmvJ6/nxXxJ6gUgfE06Q==
+Coefficient: m9t6RWOcmP1MLC8YiaxLvsJ1MLe+JTiu+Tzx7plz7bVd9cw0SCbD/X+VXBiDheu2ZyaZ8tuprEX7FdjiTU1Hdg==
           </pre>
 <p id="rfc.section.7.1.p.2">The DNSKEY record for this key would be:</p>
 <pre>
-      example.org. IN DNSKEY 256 3 249 AwEAAb/6EvifAA6eg/mjABrsAgIArwp/EgqI9rKrrQdKtzzEnZh5a9cs lqAgD2H2/BMD5ZzWI1dc7R5BPLJHu7Gj+w5S/Qw8Uz5+Oj4N0YjOHsJa SpX2ZuXma0jg28UzB/R+MV7sMxzb+1uPWYuq5rTt5VRjN1OtnC/Ep54e b/4lv8Hl
+example.org. IN DNSKEY 256 3 247 AwEAAdMT/tIhT3Yc1FJnmHmWWb3XTBtZZKW723I0h/5i3/15LIhR6v5X oKsy0HeUGoyN03O2yHEbrhz7Ym9pypu5OEdUnbjcc1Mr+c/0/TAzqpUK 1DrAb3rguVn9W/t+jy41iTap8xZGfcLkCAxdLg2cBp3m1mQyWr6t9Oo/ 10wP4mbX
           </pre>
-<p id="rfc.section.7.1.p.3">With this key, sign the following RRSet, consisting of 1 A record:</p>
+<p id="rfc.section.7.1.p.3">With this key, sign the following zone consisting of 4 RRs:</p>
 <pre>
-      example.org. 3600  IN  A  192.0.2.91
+example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
+example.org. 3600 IN NS invalid.
+example.org. 3600 IN A 192.0.2.1
+example.org. 3600 IN AAAA 2:2001:db8::1
           </pre>
-<p id="rfc.section.7.1.p.4">If the inception date is set at 00:00 hours on January 1st, 2000, and the expiration date at 00:00 hours on January 1st, 2030, the following signature should be created:</p>
+<p id="rfc.section.7.1.p.4">Using RSASSA-PSS salt filled entirely with 0 valued octets, if the inception date is set at 00:00 hours on January 1st, 2000, and the expiration date at 00:00 hours on January 1st, 2030, the following signed zone (with DNSKEY) should be created:</p>
 <pre>
-      example.org.                      3600  IN  RRSIG   A 249 2 3600 (
-                                        20300101000000 20000101000000 53767 example.org.
-                                        EiYve+lvKloKpzFXR9pGpqkPD6ZLgpOiZ8Ua
-                                        m4LJkuNSD2pS95nlFESQT3SCp0RsK0JVEFIg
-                                        c2KRJsVFkdTGf6y/i74h4UBDaSGEOoUNvRXd
-                                        4j+P/ishkiC46c1KSu4MqxzFjz4DVqaOGt9d
-                                        Nlm8fHKcq8WfAAByORwilDpAH14= )
+example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
+                                        42         ; serial
+                                        43200      ; refresh (12 hours)
+                                        900        ; retry (15 minutes)
+                                        1814400    ; expire (3 weeks)
+                                        7200       ; minimum (2 hours)
+                                        )
+                        3600    RRSIG   SOA 247 2 3600 (
+                                        20300101000000 20000101000000 30005 example.org.
+                                        C9c2AuyA6rB3XL08i3PgDtMZC2+sNiY/B94+
+                                        flfdxYz1OVmm7+byEVVxmAqw7nEn3MfUGpwj
+                                        2E1Thin2pYZ4jF4ep2kz1kDxXWTFnKwwxgAl
+                                        nFGeZihBJUUpfXpzIWVOGwkIJIWL+aB3mS3M
+                                        Z1EJ2Iok1n37ZO9Uf6tLcZDYLck= )
+                        3600    NS      invalid.
+                        3600    RRSIG   NS 247 2 3600 (
+                                        20300101000000 20000101000000 30005 example.org.
+                                        y/qVMuKsW5dqkXBLQmTj+RJ1UCe8JUpLw7/x
+                                        yjlwH8qtUxJ3YxkfeDbx7Lah4+mZtYebib2Q
+                                        gSedJE/ZERTwsB7njLio/hoMTUIXD/BBGbd3
+                                        LyNHj7v6ujZO6HJ2ai46+qtYAXo2PHDV7i4I
+                                        AtOJQR1+Lz5Q/Bd6zJKuHiHft6E= )
+                        3600    A       192.0.2.1
+                        3600    RRSIG   A 247 2 3600 (
+                                        20300101000000 20000101000000 30005 example.org.
+                                        SjJvbsHI77EZFZnNFYGoFXhKPe8yJy7Jb4Td
+                                        mHFabTlpaqjByYlgQUyvB165KrvUBfSm/qMS
+                                        NqBJF7t8TmmsMkVpaL90GLYMvkKQexv4qI/X
+                                        PKZ++nynOa9HObcjUfgR0x3jLc5K+sRfnYwW
+                                        oJqjh+1z0Kb3hq3wawGVmRgZZwA= )
+                        3600    AAAA    2:2001:db8::1
+                        3600    RRSIG   AAAA 247 2 3600 (
+                                        20300101000000 20000101000000 30005 example.org.
+                                        Tkleo5JjLcMDz+JzfG1Pfan4YNVrsLn0z8jJ
+                                        RME2LEionhZqLLAScmHy4yBg3RQQI/Ak+516
+                                        nBLwr1F23Kh5dkO9ApefKryn1SZP6LndOcBu
+                                        tdlq6MzNkqwgpXwFYwTsQtxG0SJPZxA7x5du
+                                        0F4QoBe/bC9vK69gra0Zkc0IPos= )
+                        7200    NSEC    example.org. A NS SOA AAAA RRSIG NSEC DNSKEY
+                        7200    RRSIG   NSEC 247 2 7200 (
+                                        20300101000000 20000101000000 30005 example.org.
+                                        CNggBNHd8AmjG3TGV34Mb6oMycx1OXLU645d
+                                        aDvA/LGZ5qBF8Oz5W56rYzpbcUS11rZBBBAb
+                                        nscR73oqF89BaHEMzQCpsVkoA8ao/xRAkMl1
+                                        N49iKGB5vCR2XnVkhH5b9JVDSK2Td+cWzDN3
+                                        O/0Fjg9cviMI/rEt1w29YFkYZxU= )
+                        3600    DNSKEY  256 3 247 (
+                                        AwEAAdMT/tIhT3Yc1FJnmHmWWb3XTBtZZKW7
+                                        23I0h/5i3/15LIhR6v5XoKsy0HeUGoyN03O2
+                                        yHEbrhz7Ym9pypu5OEdUnbjcc1Mr+c/0/TAz
+                                        qpUK1DrAb3rguVn9W/t+jy41iTap8xZGfcLk
+                                        CAxdLg2cBp3m1mQyWr6t9Oo/10wP4mbX
+                                        ) ; ZSK; alg = RSASHA2-256 ; key id = 30005
+                        3600    RRSIG   DNSKEY 247 2 3600 (
+                                        20300101000000 20000101000000 30005 example.org.
+                                        RHImUBMtz6LOEkEZLeeUKY30z1LgknkyawpZ
+                                        GLRLiE84UkBAjF559Yk8O6Dm9qTPa7jpu0ja
+                                        HAl1WGAHQU45w7t17/onSLJfE+6C9kS6F3N+
+                                        qhWu+WWMz6/fvbaoe5EG5v/AkXA/iF3sEPIt
+                                        Y5bA3d1IR9bs36fyk3c5c0vb170= )
           </pre>
-<h1 id="rfc.section.7.2"><a href="#rfc.section.7.2">7.2.</a> RSA/SHA3-384 Key and Signature</h1>
-<p id="rfc.section.7.2.p.1">Given a 1024-bit private key with the following values (in Base64):</p>
+<h1 id="rfc.section.7.2"><a href="#rfc.section.7.2">7.2.</a> RSA/SHA2-512 (RSASSA-PSS) Key and Signature</h1>
+<p id="rfc.section.7.2.p.1">Given a 1280-bit private key with the following values (in Base64):</p>
 <pre>
-      Private-key-format: v1.2
-      Algorithm: 250 (RSASHA3-384)
-      Modulus: 1mTG6tg39IXsvEqqKtTenJdnawiQSNIQIgRy/BbZQP7Qu+j3l6DmFgpw5DfHApRox9fYjJR6shpDsmfGC11gMqJzaSaXRpgd4ER1pSMl3qX7FJ749WySSxC6iOmAQ3zjYSND3HxCVgJBojvm64yQGOaS0d/qMhmamMPY1KMT03E=
-      PublicExponent: AQAB
-      PrivateExponent: XDI0VJOs5GufVY2qRgcKwD5fy+h/28DyDR7qr7vHq6qo6tYRe1RG/d15lLrjyxk1QhNxXWsQpHyk9hioUwTRs8sLiaSGZLlrSTR8X2a0+Ux7SMPE4F13fewYjbUaW+lYspx5gbzLUvztmaIB7YV7RdtgTTM8Yzw9wRnMU4QVhME=
-      Prime1: 8ii1QhM8POBWqrrLdeg5l5Oqb7WPXMOpmaKyf3feSYZUb2xy6qTFQzo7YcIOB+Nd2HqEwN5nxiADgtaNAB6laQ==
-      Prime2: 4qXNygKERta5ko7JjYSRjxfzPrMK6jY+GHdQ3zDoVSOyZJPt4E4h3JvGheO5CQXmdYucZafgcqBQD1rLq6HUyQ==
-      Exponent1: ZXX+9A9hJtSMG36mbuF89/Br8eAtkB1++xs7FMNhhIbe68yRnZSp/g/w/3WyMUXndSNoafMFofKZ5gEFFO7COQ==
-      Exponent2: ruhlt8/ZZRGwhHnM8XmtG1DQV0K02aqioR7zOkr0AUBbG2NN4Bxr5WQSAKGM2nnDMFNdjtXPUKaHIlJfe0SYgQ==
-      Coefficient: JCIHcbynHteOdmwqYAPEN0taYxb1tNvJKb9sYu9u8v3GQAia0DxGm+XIZxxExpwUDqqB3L12QYli65bsLIrkPg==
+Private-key-format: v1.2
+Algorithm: 248 (RSASHA2-512)
+Modulus: v4LMvpU2sPxQHPOos4PFROf1U02gmzkOdeBjWiY1iEsyDgaGEJ/3x1D4oIVHI9pMVS47JoQvvhnnOnJv5/tslA5ivWsTp0i6rFzY3+F+zDUCA1AcD/rcECgfizC/VZSHvH3aThpjqiwCN6HtC9ofPNqxAikdwMeJP3oUSl3Pg/Y3S8pX2ykHNoq2+tROcypY4VUmbFqJa6SAxBT8EeWgTw==
+PublicExponent: AQAB
+PrivateExponent: uIbklwIZN4F2A992/rmJ23IRPNoAVXAtkcDKmjNUw2WI7mC0ztIEIgXP+oNQ36fYgv7PubYGdopo9TUMxJ7KqQIPe+nvfvEiBTBVO6r/zOveAJXvq3RuNJ0DCBnhvMhWMha7rRcqp3FixJ9J7cBEwRmJQn+KjrrOZJ9zCFJZ+CQZ5yTTFAdrkjDtpFrg8XUSuDqo85/RFtFUQiMHNzLZsQ==
+Prime1: 8ji5lppCo7FCVENMf+a9u5EpXNwH8P+VFHaw99NAKqEV+pWBS24Op8yoRxt6f7mmRe4FTNyTfkkdSpMo5aN6oa1h/vFo14ifFTMU46Vm8ec=
+Prime2: ymed+9gYJ/z4ulOPOBrJV6BSVIZgE1hxSkyR68h8fzGvc6iPCf7+JsM7XrIK3Z5dxFQ8WBg7YgbKn05mD1dqU3sJJpIstvKdhvUmaJyVYVk=
+Exponent1: J/A+eZyZ3E+/9hDarkQniKPYxBzrmksqE6O2bkaA0AabjyPTm9JbzEMsg/z9581+ow0qBpBgKXR4xfEZzzNzZvEltVmsxc0bHe28RgThwoU=
+Exponent2: jWsESRhdGGN57cXARXUBxIWxwHj628lprn39Xn5/7ebrLaZR+qv9K1wxOSKw0NN7tFceqnaT1xPjspb2XDW5hoZqiFaNg23Ufpz+rwzomlE=
+Coefficient: 2hX/dV/0jj0IUyAbx5N1I2kIsjf9FJmQHQjktr63YG0CMMBMRNUWF2Y4B3Z3RJHHdeBRvD4r3q7JlkhXvuOWn1EyLFx8ZGOZVboKIcePgUU=
           </pre>
 <p id="rfc.section.7.2.p.2">The DNSKEY record for this key would be:</p>
 <pre>
-      example.org. IN DNSKEY 256 3 250 AwEAAdZkxurYN/SF7LxKqirU3pyXZ2sIkEjSECIEcvwW2UD+0Lvo95eg 5hYKcOQ3xwKUaMfX2IyUerIaQ7JnxgtdYDKic2kml0aYHeBEdaUjJd6l +xSe+PVskksQuojpgEN842EjQ9x8QlYCQaI75uuMkBjmktHf6jIZmpjD 2NSjE9Nx
+example.org. IN DNSKEY 256 3 248 AwEAAb+CzL6VNrD8UBzzqLODxUTn9VNNoJs5DnXgY1omNYhLMg4GhhCf 98dQ+KCFRyPaTFUuOyaEL74Z5zpyb+f7bJQOYr1rE6dIuqxc2N/hfsw1 AgNQHA/63BAoH4swv1WUh7x92k4aY6osAjeh7QvaHzzasQIpHcDHiT96 FEpdz4P2N0vKV9spBzaKtvrUTnMqWOFVJmxaiWukgMQU/BHloE8=
           </pre>
-<p id="rfc.section.7.2.p.3">With this key, sign the following RRSet, consisting of 1 A record:</p>
+<p id="rfc.section.7.2.p.3">With this key, sign the following zone consisting of 4 RRs:</p>
 <pre>
-      example.org. 3600  IN  A  192.0.2.91
+example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
+example.org. 3600 IN NS invalid.
+example.org. 3600 IN A 192.0.2.1
+example.org. 3600 IN AAAA 2:2001:db8::1
           </pre>
-<p id="rfc.section.7.2.p.4">If the inception date is set at 00:00 hours on January 1st, 2000, and the expiration date at 00:00 hours on January 1st, 2030, the following signature should be created:</p>
+<p id="rfc.section.7.2.p.4">Using RSASSA-PSS salt filled entirely with 0 valued octets, if the inception date is set at 00:00 hours on January 1st, 2000, and the expiration date at 00:00 hours on January 1st, 2030, the following signed zone (with DNSKEY) should be created:</p>
 <pre>
-      example.org.                      3600  IN  RRSIG   A 250 2 3600 (
-                                        20300101000000 20000101000000 58391 example.org.
-                                        O6/yCttmjt0KMyPMNIuM4Hl76Eq0fAfBVhpx
-                                        GLU/ozJBlLbuvBmnExOMyIKpx8zOwNe8GSnm
-                                        8wF0chAFHCkdAA2KiJSwFlAstw6HGC5X+/Ou
-                                        eqhw6GVXMdP+9CdS3HfnjBR0N7zE/5mWgQp2
-                                        SxmjcNe1Z+Tfx14cZDV7Fm3tpEU= )
+example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
+                                        43         ; serial
+                                        43200      ; refresh (12 hours)
+                                        900        ; retry (15 minutes)
+                                        1814400    ; expire (3 weeks)
+                                        7200       ; minimum (2 hours)
+                                        )
+                        3600    RRSIG   SOA 248 2 3600 (
+                                        20300101000000 20000101000000 50019 example.org.
+                                        LIqNhZMZthJKDab51kfzn9TtMyWSZ+Z+yOZU
+                                        Ukg9j6gAzcezPNiPer9A0FtgDsXFU2ICRDOx
+                                        kGeWjhgEN1JGOxA7robpGjOTLWAAYbzSihBE
+                                        ehqkpDTJHsmTv3lnjioAFaalFKwisClR1GH9
+                                        t7T9sZMEc1G25a4izULX6PiKAjBBegbJ6sGK
+                                        6OgCbuxE3yTwJTiPb3/W5IfPbv/bRnETWA== )
+                        3600    NS      invalid.
+                        3600    RRSIG   NS 248 2 3600 (
+                                        20300101000000 20000101000000 50019 example.org.
+                                        Sj3JxLM0kH9UDcyO09Zhrupw+0iafH8Yk20I
+                                        a2m1S8jnjWrwCQplg/RRcM+9B5rz9AoNZJg7
+                                        iHWEwmP9jLK5umbQXP/zCt/5UffdiPSNpGb7
+                                        epJ5aNVVfvS00QeqL/yOhwkZcpVd9YszYq+V
+                                        Sx6hMHJ9SSqx/CBZZzwjJopOPP4zabha41RY
+                                        J/3PG3ohQh7hAigUcNgO4AwxAoV+D/3yQQ== )
+                        3600    A       192.0.2.1
+                        3600    RRSIG   A 248 2 3600 (
+                                        20300101000000 20000101000000 50019 example.org.
+                                        GZY8uKkZ2pKhtL9Dh6NKq8GES4WUn9AFOtNc
+                                        PHvXVANuMadMh8LwgmtKe7H6HujPW8Ghj0wJ
+                                        XRkGJ8kinCRp51eSF0gsr6vIsLiYCx/2XJW5
+                                        4dCufvxbbZe3e1yHOOSExLDICT6SQ775CavX
+                                        cjnFsI4NAzPO5S+55nq2EvUug7stYeS89mUQ
+                                        Wq24FZOnONIY1dbRfpzCkBSs09wXSBtqPQ== )
+                        3600    AAAA    2:2001:db8::1
+                        3600    RRSIG   AAAA 248 2 3600 (
+                                        20300101000000 20000101000000 50019 example.org.
+                                        MY2ha2+UIdeHSEeBLqlb6Ls9gTCO7yUQkz3c
+                                        yM3A3Als78y/nz9GsEUjpQ6JGmt3c0Gs64mx
+                                        WFl15oo/LWrum/HLwvoXciwZOueCSzIpwjQY
+                                        zlqUNNbtKLYLChzMdq07x1Cak/kjF8ROsSpz
+                                        rQ5MbQDnLN25IOLy3JodvcZFnzsoxmx2LAJ1
+                                        g80Ps4+p5QbTEoASNGGPUR84LPrZ7j4Nrw== )
+                        7200    NSEC    example.org. A NS SOA AAAA RRSIG NSEC DNSKEY
+                        7200    RRSIG   NSEC 248 2 7200 (
+                                        20300101000000 20000101000000 50019 example.org.
+                                        l2RkbZqizyfnWMThvlt/F2zltQ/DVOmSCQve
+                                        JsIe++bJgbyloiLhDnia9ZqwT/apob6VHAgg
+                                        KXEII+R6WGuPCBHe3Px2xVFWgh1EU3GnoTWv
+                                        JCS1cQ98PpzBiLxIwMAQCp0ItUFj2M2LmZc9
+                                        JzvSFW2UCtUK64BCS5aj0qWPPfWuWjM1bJ1d
+                                        weyYT+oCKY/GurJbRcjOs4r4Jmsq1PctDA== )
+                        3600    DNSKEY  256 3 248 (
+                                        AwEAAb+CzL6VNrD8UBzzqLODxUTn9VNNoJs5
+                                        DnXgY1omNYhLMg4GhhCf98dQ+KCFRyPaTFUu
+                                        OyaEL74Z5zpyb+f7bJQOYr1rE6dIuqxc2N/h
+                                        fsw1AgNQHA/63BAoH4swv1WUh7x92k4aY6os
+                                        Ajeh7QvaHzzasQIpHcDHiT96FEpdz4P2N0vK
+                                        V9spBzaKtvrUTnMqWOFVJmxaiWukgMQU/BHl
+                                        oE8=
+                                        ) ; ZSK; alg = RSASHA2-512 ; key id = 50019
+                        3600    RRSIG   DNSKEY 248 2 3600 (
+                                        20300101000000 20000101000000 50019 example.org.
+                                        gGFb305M15oFs/+Mc4r9II2nmqARCt52Rj2y
+                                        7aQNKIk7PXqxfdsnRpswmvRL/J0zUsoP/Ecj
+                                        E+yLZQpJz0Chycs5UszXCeHxGqx1GandpQaw
+                                        LOu02AFI2rdpamD242i3RUSfxjKUpo2MFuS7
+                                        c92xUOOkjwn1MAZruUKWPbVzCm3pvqIHTytL
+                                        JyGDHI8LqCbhbnf3hP2G45BCzh1cp41EYA== )
           </pre>
-<h1 id="rfc.section.7.3"><a href="#rfc.section.7.3">7.3.</a> RSA/SHA3-512 Key and Signature</h1>
+<h1 id="rfc.section.7.3"><a href="#rfc.section.7.3">7.3.</a> RSA/SHA3-256 (RSASSA-PSS) Key and Signature</h1>
 <p id="rfc.section.7.3.p.1">Given a 1024-bit private key with the following values (in Base64):</p>
 <pre>
-      Private-key-format: v1.2
-      Algorithm: 251 (RSASHA3-512)
-      Modulus: 1xcZnBvTsdnF3QW2VlGZOMw5Lo/Av8cv4ogyFmngVsSZkqT3TwJNZ3bSCG70Aer5tQkyf+cx8INu4ZGC/CpTuaaxnEFpH0G2fPSadRwELcqf7LQKjLU9kjrdS8bFTElw0ugukXF/TJ1/KOywFsOHfFQ14Gqk5RB7EL8lXf1ZESs=
-      PublicExponent: AQAB
-      PrivateExponent: I4b8Qu3RvLm01fogkQdvYJNTCp7R/ptfDHLkmxEn7g0RNMis1M8Ti/hzXtM82KhAUKfRQJEmjYyYHwgS86XmKCGPslN1rZR9K1vXadHH2PKu4CL1ZLArWLz7Y9lpuVRVvlqrMM3IAVm7pTpd8Bx2jtD7Xt/9yXKW4TjIp/ctN4E=
-      Prime1: 80uohrGN+E1OWMwxLRK0Jl32BwfJ7XnP3HiAdhhGnwi/zPbp/Ngpj985avjmabVNN8JzRIOnqjAjIMP0u6RG6w==
-      Prime2: 4lJlpIjD6kz48ukFNjSY6qowVf5k54AyRJDnS+irwDuZKZtSxPghqgPyrOUIbAPRC+RmnP9dOOECS7rzuaxOwQ==
-      Exponent1: KNm/Rj5x1AtG6GoAp8zIKtkEAlIweYtGd4JUL4AL+5AAhG3BBA9Xiyyz+14ncgBbIs2nhQ2GDXFftJSydv8yWQ==
-      Exponent2: oUOpHWY+g3M5aIzVo9wyofOG4Z+VcseMCgNebF5sE1vkNRtyDNvp0OVjRAMmzyChEmI7I99qI59hLWkXRdQbgQ==
-      Coefficient: JpZ110OE8oR9yBPGrnoTxRht6SXFPOUmj8wCgvqgqROBc8uN2s87FPJqTSsN3qQTNg987OQii7+EYobCs93Z7g==
+Private-key-format: v1.2
+Algorithm: 249 (RSASHA3-256)
+Modulus: uI99tnWEAZ5j8hnh29acjTWKUncLZpGWYCWjmz7KB7q8NCiGdA7dgkIBpGrsry0jF8PVGP8jm2omdMaPDX2N0UcEVKrUSKczNQb3Kdiihl1J8/IC9KZuHqQJHr8E4Gu/S4P1EbpaM00F1YPCkldl7yTyXEA6waP2Qs6lfRETffU=
+PublicExponent: AQAB
+PrivateExponent: ceGgqZBzxufsNfxAgH05lmx+EIqCT2TwTB2NiYLB+OkBrpF+/WgayIBgMQsFRsZsTAK7oDP2zbQ/THkk1ict9PHByDAAedOo+sjYqja7/NMqHZV2y5nfOV2gr/Qkx8Ns/JhcZ6bD0TtS+mTTGZPKxHZYoZKp/EYaRpY/FH/tgBU=
+Prime1: 8a4Tyux12glzCP4cLndnDi2MT9M4WRR0B+8SjU1zoZVgOiF7WnCD6go3LAGl8SbiMzX491cJFKuK7/0qY4wTcw==
+Prime2: w37/PBybwbTCtWJeGQo5sZUmAfcB4G9KPb0Xx7attTlVcvS3BsNxQ6u5CJS6PkxrRLJhObY0co97esbRlfXe9w==
+Exponent1: X5pyH/LcR+03AVasRUFclgI0oBs5DhwGLmFHYHhEBqZ1k2lNR6B8vmdeHd1lDHlKP+HY49cdM30MkBUA4LI3uw==
+Exponent2: P7FYptULSgkChuYNkkrqkRju0SUQz3Zy0bqRzNePsMOFO3bPSrzSYiHInysVosZzDGaxloPugoSMzmuITTtV8Q==
+Coefficient: NdPPfYznkez2NNKsVydeZleq+jOBaQ3O98YZteXreOrH8L+pqKxkymKIvqjiTzWdA+fDV7KfFrbv0ZFwGymsNQ==
           </pre>
 <p id="rfc.section.7.3.p.2">The DNSKEY record for this key would be:</p>
 <pre>
-      example.org. IN DNSKEY 256 3 251 AwEAAdcXGZwb07HZxd0FtlZRmTjMOS6PwL/HL+KIMhZp4FbEmZKk908C TWd20ghu9AHq+bUJMn/nMfCDbuGRgvwqU7mmsZxBaR9Btnz0mnUcBC3K n+y0Coy1PZI63UvGxUxJcNLoLpFxf0ydfyjssBbDh3xUNeBqpOUQexC/ JV39WREr
+example.org. IN DNSKEY 256 3 249 AwEAAbiPfbZ1hAGeY/IZ4dvWnI01ilJ3C2aRlmAlo5s+yge6vDQohnQO 3YJCAaRq7K8tIxfD1Rj/I5tqJnTGjw19jdFHBFSq1EinMzUG9ynYooZd SfPyAvSmbh6kCR6/BOBrv0uD9RG6WjNNBdWDwpJXZe8k8lxAOsGj9kLO pX0RE331
           </pre>
-<p id="rfc.section.7.3.p.3">With this key, sign the following RRSet, consisting of 1 A record:</p>
+<p id="rfc.section.7.3.p.3">With this key, sign the following zone consisting of 4 RRs:</p>
 <pre>
-      example.org. 3600  IN  A  192.0.2.91
+example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
+example.org. 3600 IN NS invalid.
+example.org. 3600 IN A 192.0.2.1
+example.org. 3600 IN AAAA 2:2001:db8::1
           </pre>
-<p id="rfc.section.7.3.p.4">If the inception date is set at 00:00 hours on January 1st, 2000, and the expiration date at 00:00 hours on January 1st, 2030, the following signature should be created:</p>
+<p id="rfc.section.7.3.p.4">Using RSASSA-PSS salt filled entirely with 0 valued octets, if the inception date is set at 00:00 hours on January 1st, 2000, and the expiration date at 00:00 hours on January 1st, 2030, the following signed zone (with DNSKEY) should be created:</p>
 <pre>
-      example.org.                      3600  IN  RRSIG   A 251 2 3600 (
-                                        20300101000000 20000101000000 7458 example.org.
-                                        PqdYQGN2Ml9ttU6ZqcL8iNKbhkw5nHuxnUFK
-                                        luR7aMMKNtPaVC7P4SjIGXmbhEA9/EQ4UhAg
-                                        +ekqwANViVuhEwbg//mJ+ffOq18qWRxWUKxX
-                                        HPbtBvJDSuvo04D2BTZIx9qMMjvrMWuowlol
-                                        mrz3bvDRtQkoD5kZQPLAD6+r6Ps= )
+example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
+                                        44         ; serial
+                                        43200      ; refresh (12 hours)
+                                        900        ; retry (15 minutes)
+                                        1814400    ; expire (3 weeks)
+                                        7200       ; minimum (2 hours)
+                                        )
+                        3600    RRSIG   SOA 249 2 3600 (
+                                        20300101000000 20000101000000 23809 example.org.
+                                        Uwq4O7WnX3WgD4gqrE931DqCByyWgf6+YfZe
+                                        vRCTzMe+/q/36pWhYhej6wI3Fo2JRImMeL85
+                                        IEdQNEUOcZ4SyfbnC/x44Tj3xlF1imf40dWy
+                                        /HDLAdAlCfL1bZVxd6KNPBoGsZmWqqdePguC
+                                        Kvv6KpZB5bmQhlPJHmcevUajG80= )
+                        3600    NS      invalid.
+                        3600    RRSIG   NS 249 2 3600 (
+                                        20300101000000 20000101000000 23809 example.org.
+                                        WXtpjYg9ZGDYBn01HBZwrHiJ8pccXicaLt6e
+                                        ck1lYFER1/Gw3oroFvHeI7l8WuyGyjm7QnXP
+                                        /avYGX7tAmObgKRh08gk2tDj8Ku6aKYRunVh
+                                        jobJi2WEsKBMCScwhjK64WJV90pOrWiU7/j6
+                                        D8fwTySTSmQJXn7mG/0ynIiwruw= )
+                        3600    A       192.0.2.1
+                        3600    RRSIG   A 249 2 3600 (
+                                        20300101000000 20000101000000 23809 example.org.
+                                        K718CGTXBAKJ3ug5YsHGtr4tPvHrrPFw0YCN
+                                        v97mU25mhBerDNLyNISCsMQPw0NVnXyV7BR0
+                                        8dpwnmZqGIhId4ojaSKCZtQkUkNiqrF77sZe
+                                        2jryHi8VvuT9JqFa+JI3vUHLavnGabc40qEC
+                                        zTtP8g1I3CEopnp6QDkLxyjwVhQ= )
+                        3600    AAAA    2:2001:db8::1
+                        3600    RRSIG   AAAA 249 2 3600 (
+                                        20300101000000 20000101000000 23809 example.org.
+                                        e8EgXwu/7VvU83ZW8gEiS+51HUfgkowoichs
+                                        9L7U5eX1axrynM7c3r7WvFy1hNGLxrzZOU7e
+                                        r8R+0QG989x1lwPSHeETryQ/5sUApOeoaFYj
+                                        3D+IZEzI0gGfHIXP+zZ2kRW3tQx0Bn1JHPWx
+                                        1+JOwFdfJB4jczG6YwydRVaWd3M= )
+                        7200    NSEC    example.org. A NS SOA AAAA RRSIG NSEC DNSKEY
+                        7200    RRSIG   NSEC 249 2 7200 (
+                                        20300101000000 20000101000000 23809 example.org.
+                                        rfCOWKNWnlLoXuLPqE5fhq7yN10BZbZ0cCj7
+                                        8c4DROMIXistBFRoNhYngTDratXojbJGCO4F
+                                        nbA3kSOh91RaSevASHDF9SvAysKUqWIYw4Mx
+                                        hLROhu9TjE7i3VgYt6rEHoQIMroOry3dao48
+                                        12mcadWl4MgoDyJAxTbUGZyTeFY= )
+                        3600    DNSKEY  256 3 249 (
+                                        AwEAAbiPfbZ1hAGeY/IZ4dvWnI01ilJ3C2aR
+                                        lmAlo5s+yge6vDQohnQO3YJCAaRq7K8tIxfD
+                                        1Rj/I5tqJnTGjw19jdFHBFSq1EinMzUG9ynY
+                                        ooZdSfPyAvSmbh6kCR6/BOBrv0uD9RG6WjNN
+                                        BdWDwpJXZe8k8lxAOsGj9kLOpX0RE331
+                                        ) ; ZSK; alg = RSASHA3-256 ; key id = 23809
+                        3600    RRSIG   DNSKEY 249 2 3600 (
+                                        20300101000000 20000101000000 23809 example.org.
+                                        hgKUSu/6JOKBEA9LavThiPFsDk0JOK4fsCiJ
+                                        cR8Y/uAKyTlZ77m7olSWnbhSmAkzM2dST4eb
+                                        KfCKgz+v6B0H+TGuuVZ9nriFggRsUu0uddsD
+                                        sgOVuWB2XC0e0lJMxpYht/DQd6ZLc++XhWyK
+                                        a9a0Iw9/bcIFaKY+bhn0zWp3y9k= )
           </pre>
-<h1 id="rfc.section.7.4"><a href="#rfc.section.7.4">7.4.</a> SHA3-256 as DS Digest Type</h1>
-<p id="rfc.section.7.4.p.1">Given a 1024-bit RSA/SHA-256 DNSKEY with the following contents:</p>
+<h1 id="rfc.section.7.4"><a href="#rfc.section.7.4">7.4.</a> RSA/SHA3-384 (RSASSA-PSS) Key and Signature</h1>
+<p id="rfc.section.7.4.p.1">Given a 1024-bit private key with the following values (in Base64):</p>
+<pre>
+Private-key-format: v1.2
+Algorithm: 250 (RSASHA3-384)
+Modulus: xHuxiHax4XcfW9yCIdCVdrqs+L1lfTZKdOK7C+J8yDptcyS7DC8Su0X4hqJxA3M0gZFfpwSpuc1/XSwm0pDCqByy1qehIZgJMQ9dm6whqokGgqcpOxEbLhKDHoUl6dq6MVZAoys2wYgpEwK9E0GPx1OT80EeO/8txqyIx1b3X1s=
+PublicExponent: AQAB
+PrivateExponent: vFr/xBxVRhkWPM/VCGmW/uzR6NpXsoMbOZYpTalfietJBTrO/U0bHeBj8V1EDdShHxynn8r+khoH4N/0j6MqlqEnKmL7lTDeGV5ezKLu3uLFa6RISolasqpQBqptImJ+hbXtozDKPhfjI/+d9FZBB6J1g2RlwujGX6VJMbSefvE=
+Prime1: /fmeKF6OHGM9aWJq4j2/tNgbdTdy9tP2pi7VG4w7MZcXtt5jRuwDt9RfBb0i01+KOROWyIklTeHC3OIdU6otLw==
+Prime2: xgy6/HX5aChVos1eunk1ZezvweGNfBuZr4TcpcTShzLs8ftGs/fAZ6Ea44p7EZizB1yaEspfcvTMHFnC709dlQ==
+Exponent1: 3UV/P9ixo5XqyUgPqzD1NxAZTBSVOusNN1gSH0AbymbDKHW0tPOngZ+rcgqIrvPML1IbyneCYspQxbTSrDPVzQ==
+Exponent2: BOFlbjk+ByoPSi7Dadb40OUw11dGlEtd0yxz/4XFJl3D5wapLGArlqIqtnbAJ6ParZDDnzjrdzq/GOfBXQJYrQ==
+Coefficient: NPxHl0td8V/7Sk7dnGfF6Fbde3Kwt8PUUsVulh3rsr1wjmWeW6JFBxd8R104k+HicCXrLj+YthGmLS3jCwnidQ==
+          </pre>
+<p id="rfc.section.7.4.p.2">The DNSKEY record for this key would be:</p>
+<pre>
+example.org. IN DNSKEY 256 3 250 AwEAAcR7sYh2seF3H1vcgiHQlXa6rPi9ZX02SnTiuwvifMg6bXMkuwwv ErtF+IaicQNzNIGRX6cEqbnNf10sJtKQwqgcstanoSGYCTEPXZusIaqJ BoKnKTsRGy4Sgx6FJenaujFWQKMrNsGIKRMCvRNBj8dTk/NBHjv/Lcas iMdW919b
+          </pre>
+<p id="rfc.section.7.4.p.3">With this key, sign the following zone consisting of 4 RRs:</p>
+<pre>
+example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
+example.org. 3600 IN NS invalid.
+example.org. 3600 IN A 192.0.2.1
+example.org. 3600 IN AAAA 2:2001:db8::1
+          </pre>
+<p id="rfc.section.7.4.p.4">Using RSASSA-PSS salt filled entirely with 0 valued octets, if the inception date is set at 00:00 hours on January 1st, 2000, and the expiration date at 00:00 hours on January 1st, 2030, the following signed zone (with DNSKEY) should be created:</p>
+<pre>
+example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
+                                        45         ; serial
+                                        43200      ; refresh (12 hours)
+                                        900        ; retry (15 minutes)
+                                        1814400    ; expire (3 weeks)
+                                        7200       ; minimum (2 hours)
+                                        )
+                        3600    RRSIG   SOA 250 2 3600 (
+                                        20300101000000 20000101000000 54407 example.org.
+                                        i7x4t2CwGks6qLxRxbdp+pakfK27TzN91vug
+                                        UPyU+TmOzPYqQoS2MOjJn8TVuje9vZ4EnuzZ
+                                        cTZCkO44r9XIgqth4tY5aJfK8otr30DYYwYd
+                                        GOv719RBypf11JOk9FW4+rcgsSfTu3z3+a78
+                                        PuGh5oR7fUGlg/d0//WraW+Zg+E= )
+                        3600    NS      invalid.
+                        3600    RRSIG   NS 250 2 3600 (
+                                        20300101000000 20000101000000 54407 example.org.
+                                        c1o2/g51y3eo3E3+28Ot1k4vg4sE8MEIHdel
+                                        rD35/XAOzDZ8PH0HmrBzYEGUTk7Dxv8ts0Yj
+                                        M9xtoF9HIxlmOF19yjKrT7LNpXmbcbxA/NNH
+                                        kNOqX3EzsLZFD1t7btDqKtj+CaslkxMe6JnH
+                                        m03CtRj6b2YF4TROa8swzElwMSc= )
+                        3600    A       192.0.2.1
+                        3600    RRSIG   A 250 2 3600 (
+                                        20300101000000 20000101000000 54407 example.org.
+                                        UXoGfLBwSu4b0bMrUvf6QC4Yn/WspMpv5ARf
+                                        Z2aZPZABB5ZTdmSLXuvRP4XG9OZNiQhBKCVs
+                                        4gLi2MutsVD8AB6N3inJcvNefty8l7+wdnUk
+                                        HKuLk8O+/GCB0394nIJTKnazGPhUJtlZucZV
+                                        jSNlo+OVLqCqcKtUjG+YB63J5V0= )
+                        3600    AAAA    2:2001:db8::1
+                        3600    RRSIG   AAAA 250 2 3600 (
+                                        20300101000000 20000101000000 54407 example.org.
+                                        hMN/J/JZEyMhC9RqJpowhidhSRQCOeiTWyhX
+                                        i7+prwrtJ0CccOmakac2QjuKBOEkeXOzUpLL
+                                        nXY83uObZCvWg3HouhZX+y9CgLueqRjfK2Sr
+                                        KrBLM1zXceqg2zjjxr7UjYn9ty6sJeOJbQLk
+                                        LDEOW7fPPSLPELa0S8kS6Z5X/6E= )
+                        7200    NSEC    example.org. A NS SOA AAAA RRSIG NSEC DNSKEY
+                        7200    RRSIG   NSEC 250 2 7200 (
+                                        20300101000000 20000101000000 54407 example.org.
+                                        ZTSVWOyH0HY6OYKDhjAqDlhdPjgzSx6ihA5/
+                                        Nu1tOJgtxXR+/55PGdplIfS3Q4vujqbbwjD1
+                                        EcSGUgVP9lnL4wqq2YwSALj3e5K216wRhBKz
+                                        G5YwFrduYZAP57nGdykzeNQZRB1bEpLUEzrP
+                                        /u+TQCTrLDSTMv4s61gN9d02gl0= )
+                        3600    DNSKEY  256 3 250 (
+                                        AwEAAcR7sYh2seF3H1vcgiHQlXa6rPi9ZX02
+                                        SnTiuwvifMg6bXMkuwwvErtF+IaicQNzNIGR
+                                        X6cEqbnNf10sJtKQwqgcstanoSGYCTEPXZus
+                                        IaqJBoKnKTsRGy4Sgx6FJenaujFWQKMrNsGI
+                                        KRMCvRNBj8dTk/NBHjv/LcasiMdW919b
+                                        ) ; ZSK; alg = RSASHA3-384 ; key id = 54407
+                        3600    RRSIG   DNSKEY 250 2 3600 (
+                                        20300101000000 20000101000000 54407 example.org.
+                                        iFy/6jk0In+egxxxOGzvknZ2gufOFAlrvZ4Q
+                                        2Ufa2hLKvJOhsQrpcEfHtB5vGivZJ9WwShjw
+                                        5n5YlBE/VKyy/IpycgJwybrBBPimNViwfn8y
+                                        BunXT7x/OJ0tSeDxr1ab/CwPBl+0uq3RsDqs
+                                        5qJTL5pmN5JD6kR2tRVvy3MicTM= )
+          </pre>
+<h1 id="rfc.section.7.5"><a href="#rfc.section.7.5">7.5.</a> RSA/SHA3-512 (RSASSA-PSS) Key and Signature</h1>
+<p id="rfc.section.7.5.p.1">Given a 1280-bit private key with the following values (in Base64):</p>
+<pre>
+Private-key-format: v1.2
+Algorithm: 251 (RSASHA3-512)
+Modulus: o+YkFXrbuWtwzgjWTMxKWL/mxKmZiIEwZQocnh0XN8ON6AIFc+aECjkxwO5pWG171NCXt2acYWnKakpCmpiSHh9ggj8hL5O67Zs409xo0vqRpXzxY27IvBtKNurtD48RiPknLh3fEhuRnHEj8X2fpuOUx0yN5wOZx3PRjNxMeLnTglxHfRqah/tApQnCTvBAWX5vSYmPP1u/4I/UR1Zpyw==
+PublicExponent: AQAB
+PrivateExponent: TJqZTOzSW7SK0dGxj82ABkETM+HtH676Fo+GVqRUIL0my0R+lfAs0LZwubL0y97IHOytrIuqFaGjeNBilu0uhiO2MMoe0aTjnoCJLAR9ffXdqZb1FGMn8kWkmmtZJbm3LzFYHMs4B0exGq4vI2DfX5UF0LZV1YN4WIk2jgMPgRdJRZOOr0ZyJs8dz4VwhuVZx6SRa4ADB22QIRUdCCEESQ==
+Prime1: 0fpRrO03qcRgQpwNiiw0sjBguAClUVMY9H+ZLwUrAsiP65/ikHOOXTve7aAW/OMnAmKdmpaA0jeMiYdwidMcdwVJbZM0qHsqkxrVZmtgFy8=
+Prime2: x9Jgn/DLIVzcPl8VazyWcn51hbM2xd8J5fZYp/ZPVJBDlfvlICT6YbpYg8CyPjUpoDM4JnAH9v0sICO7GgrvQIY5XEYnLmUttdBj8+D58CU=
+Exponent1: lXLZcQABrzYS4TXauS5Pb0fZfv0OrPw89cBfkcTW4QtIzAanJfLpL9iuCWj5E5LFMABqdh2KoJRi1XvtkFsOlnPP2Ep+ny/SlJLzsgrYgIc=
+Exponent2: fsVfe9keZhotuHxGcHRN1nGYSax7MWnhM73oXRcNGU81MbBPmuca2mmIwn28F29O603Tb79frjjMh89jYpBRXZRKS9pN/Uc/iruczhqLNuk=
+Coefficient: JF5wby8oSnh2Hqff02l7tA80wNf99YWUPSn3yHfuoQKgn274V2N/QE4XgcpJd+ioSkKNX+GV6RpG+b8gUiR1hCxHBPpmeb/QcA9ivnrW0L0=
+          </pre>
+<p id="rfc.section.7.5.p.2">The DNSKEY record for this key would be:</p>
+<pre>
+example.org. IN DNSKEY 256 3 251 AwEAAaPmJBV627lrcM4I1kzMSli/5sSpmYiBMGUKHJ4dFzfDjegCBXPm hAo5McDuaVhte9TQl7dmnGFpympKQpqYkh4fYII/IS+Tuu2bONPcaNL6 kaV88WNuyLwbSjbq7Q+PEYj5Jy4d3xIbkZxxI/F9n6bjlMdMjecDmcdz 0YzcTHi504JcR30amof7QKUJwk7wQFl+b0mJjz9bv+CP1EdWacs=
+          </pre>
+<p id="rfc.section.7.5.p.3">With this key, sign the following zone consisting of 4 RRs:</p>
+<pre>
+example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
+example.org. 3600 IN NS invalid.
+example.org. 3600 IN A 192.0.2.1
+example.org. 3600 IN AAAA 2:2001:db8::1
+          </pre>
+<p id="rfc.section.7.5.p.4">Using RSASSA-PSS salt filled entirely with 0 valued octets, if the inception date is set at 00:00 hours on January 1st, 2000, and the expiration date at 00:00 hours on January 1st, 2030, the following signed zone (with DNSKEY) should be created:</p>
+<pre>
+example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
+                                        46         ; serial
+                                        43200      ; refresh (12 hours)
+                                        900        ; retry (15 minutes)
+                                        1814400    ; expire (3 weeks)
+                                        7200       ; minimum (2 hours)
+                                        )
+                        3600    RRSIG   SOA 251 2 3600 (
+                                        20300101000000 20000101000000 23118 example.org.
+                                        OLszLePpxC9kXYEHP+xnQ/5VVGUuIECXHzEG
+                                        ksSPKttAmztjP3GVZpNCqYsahV7yKKkkd6TX
+                                        h45w9pho8ZWDabPdCjzCiwl5aL+OvzUWXeGJ
+                                        chObfU1AFsW3I03V5/8KUzH6o1CCTDbYbLeP
+                                        saI/HH+G4k6mbLU1vNBCKjT8U2wY2T3mtCry
+                                        a9heSY0UbORoQpilzljhtmyU86LfItD7tg== )
+                        3600    NS      invalid.
+                        3600    RRSIG   NS 251 2 3600 (
+                                        20300101000000 20000101000000 23118 example.org.
+                                        LtjteiIhqrJWOJDvVHB2YBdpOPtc62N40uGe
+                                        GoSj9S9pU8UEte8K4T+TQGefc89SQQMBKMl+
+                                        LtdKY4G9pTLBSVzpUw1ht4hZvwU5mKURWDJ7
+                                        +ZR14ic4Sh91R79U4BZCxe7DbQa+3JWhBLVo
+                                        KFsmsFwlStpWSe97xoQNiyC33Y0TRl2S/7TF
+                                        p3ewL2owYRraSZZqj+UAM3oLXPyYJoD71A== )
+                        3600    A       192.0.2.1
+                        3600    RRSIG   A 251 2 3600 (
+                                        20300101000000 20000101000000 23118 example.org.
+                                        HcOfonaxmSgcjmoRCkrf0mm3K/6zbQQyseI5
+                                        u/dmqN04jGjO8OfinRX6wWe2uaQUCTSITyD+
+                                        BONJa9BotX36uDJgtm+UYqz+xFSrF/Wolb9X
+                                        GrKBzRJXwKGL8z/gcIJMn1VchSwcFIhh+w4K
+                                        QAxWmpm2mNdbL83D1Ep+dRgLgsawubhwc2t0
+                                        UM6kLJgsx8qYEDDVk6f0UKFWBobseyP5pQ== )
+                        3600    AAAA    2:2001:db8::1
+                        3600    RRSIG   AAAA 251 2 3600 (
+                                        20300101000000 20000101000000 23118 example.org.
+                                        AvBYmq6oMCOAQi4DpSpo5+cRUX+vZQgvaNH8
+                                        JnT68vibTlyxlUOa5BlxQv7IrrjrM7af73Ny
+                                        6tdZfUoQouSpThCs22cPC4T5RPZvSvWzejGc
+                                        Fc8ElNOFmftx4d3ag6cIn9Wj74gEAgmqmp+j
+                                        uB7/hYK12A2/shgDr0S1UEax2YehBNXdViHZ
+                                        aSwSQoLrW25zN4ENgnVkMKUQ/2OIOhyKrg== )
+                        7200    NSEC    example.org. A NS SOA AAAA RRSIG NSEC DNSKEY
+                        7200    RRSIG   NSEC 251 2 7200 (
+                                        20300101000000 20000101000000 23118 example.org.
+                                        MeDqwUq8KuJiSLZBefoJqgvuQ6Nlm+IPDFMA
+                                        jZUkov419KPqItr29YIG+7lL8Ow/PRVbb0mM
+                                        VfVUTIKWC1bfAhO2FBAQJTIzAeFELnUSsTaa
+                                        jcNdRSen8VosEh3822rwjqcQD5hhm52v7ZCT
+                                        QgrRrgoZBuCHU9dDHNfauUie0mrnCqiuFRjR
+                                        DafCZeqYzzIpZVDIjyFDwu2LRzkyKduHug== )
+                        3600    DNSKEY  256 3 251 (
+                                        AwEAAaPmJBV627lrcM4I1kzMSli/5sSpmYiB
+                                        MGUKHJ4dFzfDjegCBXPmhAo5McDuaVhte9TQ
+                                        l7dmnGFpympKQpqYkh4fYII/IS+Tuu2bONPc
+                                        aNL6kaV88WNuyLwbSjbq7Q+PEYj5Jy4d3xIb
+                                        kZxxI/F9n6bjlMdMjecDmcdz0YzcTHi504Jc
+                                        R30amof7QKUJwk7wQFl+b0mJjz9bv+CP1EdW
+                                        acs=
+                                        ) ; ZSK; alg = RSASHA3-512 ; key id = 23118
+                        3600    RRSIG   DNSKEY 251 2 3600 (
+                                        20300101000000 20000101000000 23118 example.org.
+                                        SUr4RUGNadiJ7pJe8X2bnnUuHbNY3yq1S+/W
+                                        NRpfXT5RReL8Ag5QuBQAnKwkqbV0UFeM3D0S
+                                        xX46BY/75LerOIqy8FHaXbk9qiLBaX9E7/cV
+                                        vUhkf9Dbp26Irc59AQCAB0OQ/e55onU3NRsY
+                                        TWrujs0cyOo2B8eSHPcd8M2Yvwyh/ZEQNfUj
+                                        YXKwAO6a+DZeId9BwU0KiEcrLs/KP2gzEQ== )
+          </pre>
+<h1 id="rfc.section.7.6"><a href="#rfc.section.7.6">7.6.</a> ECDSA Curve P-256 with SHA3-256 Key and Signature</h1>
+<p id="rfc.section.7.6.p.1">Given a private key with the following values (in Base64):</p>
+<pre>
+Private-key-format: v1.2
+Algorithm: 245 (ECDSAP256SHA3-256)
+PrivateKey: FHj8A/R6a/L9gP0cEyi/2ILg8d7ooxrS332FZNuED2c=
+          </pre>
+<p id="rfc.section.7.6.p.2">The DNSKEY record for this key would be:</p>
+<pre>
+example.org. IN DNSKEY 256 3 245 5DuYfUIL3CQAibLVRZkHNX8RsmMgXYMVwSWsWvSFqhULW6UhzF0NV4wT Vw6eFTWrJMH421Uk+SI1YFxSL5a77g==
+          </pre>
+<p id="rfc.section.7.6.p.3">With this key, sign the following zone consisting of 4 RRs:</p>
+<pre>
+example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
+example.org. 3600 IN NS invalid.
+example.org. 3600 IN A 192.0.2.1
+example.org. 3600 IN AAAA 2:2001:db8::1
+          </pre>
+<p id="rfc.section.7.6.p.4">If the inception date is set at 00:00 hours on January 1st, 2000, and the expiration date at 00:00 hours on January 1st, 2030, the following signed zone (with DNSKEY) should be created:</p>
+<pre>
+example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
+                                        40         ; serial
+                                        43200      ; refresh (12 hours)
+                                        900        ; retry (15 minutes)
+                                        1814400    ; expire (3 weeks)
+                                        7200       ; minimum (2 hours)
+                                        )
+                        3600    RRSIG   SOA 245 2 3600 (
+                                        20300101000000 20000101000000 43839 example.org.
+                                        Lwigfv/bGllB3Oy8VwxiocNv9Gzcmkm3I90x
+                                        dRR2EE8m7mAB6STKrCAWb/W6FS0idcQPiSgL
+                                        8uCb0yepcmbtFw== )
+                        3600    NS      invalid.
+                        3600    RRSIG   NS 245 2 3600 (
+                                        20300101000000 20000101000000 43839 example.org.
+                                        I/z7I5Q7L6Gec/NynbXGg5gtbVh9DBMFuvX2
+                                        6eD6OOeORC7As6/oQmb1kXaHPpLj4amg+f/n
+                                        HnJHUfYweLuq+Q== )
+                        3600    A       192.0.2.1
+                        3600    RRSIG   A 245 2 3600 (
+                                        20300101000000 20000101000000 43839 example.org.
+                                        PuehYLyx2uSSTe1lsmCmu0fe9Lty4IMB7BMY
+                                        q106Q95EmDU9NE93aNn/N3jY3aXSrr2Omumg
+                                        UDixTS/b3WTI7A== )
+                        3600    AAAA    2:2001:db8::1
+                        3600    RRSIG   AAAA 245 2 3600 (
+                                        20300101000000 20000101000000 43839 example.org.
+                                        jmQwgJCvCC1JLGLpOTUYq8p4w3x3RQ4U1Qaj
+                                        Wg1w/PZUX2L931+UScQCgxEeUMEsPBQfDRD2
+                                        ngjaSy3EPacAmg== )
+                        7200    NSEC    example.org. A NS SOA AAAA RRSIG NSEC DNSKEY
+                        7200    RRSIG   NSEC 245 2 7200 (
+                                        20300101000000 20000101000000 43839 example.org.
+                                        7TtsB8CoVLjTGx3yDVDwOcGsG3+1FdC4S9zl
+                                        jSOPIYfRD3KnlBPE+9fyl/5YIz9JDLu+AiJI
+                                        49gk+PHBru63EA== )
+                        3600    DNSKEY  256 3 245 (
+                                        5DuYfUIL3CQAibLVRZkHNX8RsmMgXYMVwSWs
+                                        WvSFqhULW6UhzF0NV4wTVw6eFTWrJMH421Uk
+                                        +SI1YFxSL5a77g==
+                                        ) ; ZSK; alg = ECDSAP256SHA3-256 ; key id = 43839
+                        3600    RRSIG   DNSKEY 245 2 3600 (
+                                        20300101000000 20000101000000 43839 example.org.
+                                        oRrJQrqVwC+fAtXzUQELelLopUXZEcOLkGiP
+                                        kyOtu5/K9/PlTPibU9szJeVJwS1L8FBHetsq
+                                        NWw6YKBpRzZQGw== )
+          </pre>
+<h1 id="rfc.section.7.7"><a href="#rfc.section.7.7">7.7.</a> ECDSA Curve P-384 with SHA3-384 Key and Signature</h1>
+<p id="rfc.section.7.7.p.1">Given a private key with the following values (in Base64):</p>
+<pre>
+Private-key-format: v1.2
+Algorithm: 246 (ECDSAP384SHA3-384)
+PrivateKey: FaHBWT7qWcJF2J4ExUPgBZ1poxJ/Cwvzv6+BF5rGT3KuIs83ABt51ITt4hVwaGfc
+          </pre>
+<p id="rfc.section.7.7.p.2">The DNSKEY record for this key would be:</p>
+<pre>
+example.org. IN DNSKEY 256 3 246 KQdbXXFXMQBV7lAOrRwFYRitDHNxZEXbVYz7FxAkwlGNYdkEePKE7Wfz AgatdexHHeKTG61+3bkW5tf+pSanH8pV6y9fhZQt6gf6v2XD8jPI3rMa 9ucGNf8PThBzVAVT
+          </pre>
+<p id="rfc.section.7.7.p.3">With this key, sign the following zone consisting of 4 RRs:</p>
+<pre>
+example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
+example.org. 3600 IN NS invalid.
+example.org. 3600 IN A 192.0.2.1
+example.org. 3600 IN AAAA 2:2001:db8::1
+          </pre>
+<p id="rfc.section.7.7.p.4">If the inception date is set at 00:00 hours on January 1st, 2000, and the expiration date at 00:00 hours on January 1st, 2030, the following signed zone (with DNSKEY) should be created:</p>
+<pre>
+example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
+                                        41         ; serial
+                                        43200      ; refresh (12 hours)
+                                        900        ; retry (15 minutes)
+                                        1814400    ; expire (3 weeks)
+                                        7200       ; minimum (2 hours)
+                                        )
+                        3600    RRSIG   SOA 246 2 3600 (
+                                        20300101000000 20000101000000 34779 example.org.
+                                        ZPWX28z79mJc3UbHfubZOdEKPg1BiKy9vdLV
+                                        GiGIDU6QDFSci3NmGdjFKfuS31EEjmehVu1M
+                                        CaJRFmbl/q1HhoFzuRVnGLkdHr+krBCon9Uo
+                                        3l5EEyorRFCOg5Ro5i/z )
+                        3600    NS      invalid.
+                        3600    RRSIG   NS 246 2 3600 (
+                                        20300101000000 20000101000000 34779 example.org.
+                                        nAwt7QstHenYC2h9eX7J0p33QRE3S+C7+Wz/
+                                        LTOEWqtm0AfU10hnFmnw6OGmxkp2ll2d2qh1
+                                        JjrkEPDwg0jlM12SFDTQmwW5TnRQV89N16R2
+                                        0KKnoxrdnMSO8WhhnaYG )
+                        3600    A       192.0.2.1
+                        3600    RRSIG   A 246 2 3600 (
+                                        20300101000000 20000101000000 34779 example.org.
+                                        ATgXx7BFVUQYFBXx/xiTq2T1CWUAuFmNpqF/
+                                        JYVXi0elgImh3a+q6ZCUATUmSvlmDMW6KEhY
+                                        ggr2MdJnT4nm0Qo3ellq8mUAvY2X9/yON9Eh
+                                        D+Ist8SZ7WDe7UX8Pe9H )
+                        3600    AAAA    2:2001:db8::1
+                        3600    RRSIG   AAAA 246 2 3600 (
+                                        20300101000000 20000101000000 34779 example.org.
+                                        T7DAgHgxAFNXp5I/alyc5Vp4jsE/L/C9v6NY
+                                        6j+I3RyiCCGY0PY8JY4R4iEd2QB9GPl0zByF
+                                        bGVz3MfxiyF/r/BB1zdzgqCcsZ7O932sOuRj
+                                        PQFHV7TuKabl0INvnjAs )
+                        7200    NSEC    example.org. A NS SOA AAAA RRSIG NSEC DNSKEY
+                        7200    RRSIG   NSEC 246 2 7200 (
+                                        20300101000000 20000101000000 34779 example.org.
+                                        Tc7HYK4o1ZYYdkSbykdG1aR3dgK/Ah8evaKp
+                                        4hfBm9R9GiWlusEhD6OWPGKjw2Y8zC/yb9h0
+                                        S4lj5TvbzRFY8xfvoys6w9x4KSo89bAAIIkQ
+                                        ojBivLF8GlXOhDApeqr3 )
+                        3600    DNSKEY  256 3 246 (
+                                        KQdbXXFXMQBV7lAOrRwFYRitDHNxZEXbVYz7
+                                        FxAkwlGNYdkEePKE7WfzAgatdexHHeKTG61+
+                                        3bkW5tf+pSanH8pV6y9fhZQt6gf6v2XD8jPI
+                                        3rMa9ucGNf8PThBzVAVT
+                                        ) ; ZSK; alg = ECDSAP384SHA3-384 ; key id = 34779
+                        3600    RRSIG   DNSKEY 246 2 3600 (
+                                        20300101000000 20000101000000 34779 example.org.
+                                        WpuLvqdHWbmggF7tTgXkFuoHFgPgY7Tl35zg
+                                        jLEEgZJJUXDEDOC2pFpYVJljVPGptUW4EWOM
+                                        CoCu70UTPpTJUnXWQgYH/2lW2SjWk7KM36rH
+                                        nWkRklSxtL8y00IV1/Nt )
+          </pre>
+<h1 id="rfc.section.7.8"><a href="#rfc.section.7.8">7.8.</a> SHA3-256 as DS Digest Type</h1>
+<p id="rfc.section.7.8.p.1">Given a 1024-bit RSA/SHA-256 DNSKEY with the following contents:</p>
 <pre>
       example.org. IN DNSKEY 256 3 8 AwEAAbljrZZb1Qyq8ui+vnYL5exWSrQYFkCFD6VvJoJr5ADo7CxZiyxu sJM6oVHF7pA22rKJqjgIR9lksZ1+nT2WcwdXQuAFLrLFAI5L42mQKOHS hx1S3vHosO0iSIX47IyyR2O+J9qLhy7B+T4cJzAq2dOtSziqL1l5BCtw 5ZNYJX8N
           </pre>
-<p id="rfc.section.7.4.p.2">The DS record for this key with digest type SHA3-256 would be:</p>
+<p id="rfc.section.7.8.p.2">The DS record for this key with digest type SHA3-256 would be:</p>
 <pre>
       example.org. IN DS 25803 8 252 AE03EA9388D4BA12725999B8E2C4ED14E06EAE8B78229B81154F61FE8EDBAA5F
           </pre>
-<h1 id="rfc.section.7.5"><a href="#rfc.section.7.5">7.5.</a> SHA3-384 as DS Digest Type</h1>
-<p id="rfc.section.7.5.p.1">Given a 1024-bit RSA/SHA-256 DNSKEY with the following contents:</p>
+<h1 id="rfc.section.7.9"><a href="#rfc.section.7.9">7.9.</a> SHA3-384 as DS Digest Type</h1>
+<p id="rfc.section.7.9.p.1">Given a 1024-bit RSA/SHA-256 DNSKEY with the following contents:</p>
 <pre>
       example.org. IN DNSKEY 256 3 8 AwEAAbljrZZb1Qyq8ui+vnYL5exWSrQYFkCFD6VvJoJr5ADo7CxZiyxu sJM6oVHF7pA22rKJqjgIR9lksZ1+nT2WcwdXQuAFLrLFAI5L42mQKOHS hx1S3vHosO0iSIX47IyyR2O+J9qLhy7B+T4cJzAq2dOtSziqL1l5BCtw 5ZNYJX8N
           </pre>
-<p id="rfc.section.7.5.p.2">The DS record for this key with digest type SHA3-384 would be:</p>
+<p id="rfc.section.7.9.p.2">The DS record for this key with digest type SHA3-384 would be:</p>
 <pre>
       example.org. IN DS 25803 8 253 BA8A4350F844CCCB8308694B3ADD478FC7EFBAC936D82D482D88F792FAB0766567E1F58F3A1075708CCC0457C9435ECA
           </pre>
@@ -882,7 +1391,7 @@
 <p/>
 
 <ul>
-  <li>draft-muks-dnsop-dnssec-sha3-01 <br/> Use RSASSA-PSS instead of RSASSA-PKCS1-v1_5. Specify DNSSEC algorithms using RSASSA-PSS for SHA-2 hash functions too. Specify algorithms for ECDSA with SHA-3. Other fixes.  </li>
+  <li>draft-muks-dnsop-dnssec-sha3-01 <br/> Use RSASSA-PSS instead of RSASSA-PKCS1-v1_5. Specify DNSSEC algorithms using RSASSA-PSS for SHA-2 hash functions too. Specify algorithms for ECDSA with SHA-3. Update all examples. Other fixes.  </li>
   <li>draft-muks-dnsop-dnssec-sha3-00 <br/> Initial draft.  </li>
 </ul>
 
