@@ -562,6 +562,20 @@
         <ttcol>Trans. Sec.</ttcol>
         <ttcol>Ref.</ttcol>
 
+        <c>245 [TBD]</c>
+        <c>ECDSA Curve P-256 with SHA3-256</c>
+        <c>ECDSAP256SHA3-256</c>
+        <c>Y</c>
+        <c>*</c>
+        <c>[TBD]</c>
+
+        <c>256 [TBD]</c>
+        <c>ECDSA Curve P-384 with SHA3-384</c>
+        <c>ECDSAP256SHA3-384</c>
+        <c>Y</c>
+        <c>*</c>
+        <c>[TBD]</c>
+
         <c>247 [TBD]</c>
         <c>RSA/SHA2-256 with RSASSA-PSS</c>
         <c>RSASHA2-256</c>
