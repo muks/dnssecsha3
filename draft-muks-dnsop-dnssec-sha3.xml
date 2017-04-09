@@ -92,12 +92,11 @@
       target="RFC4035" /> describe these DNS Security Extensions, called
       DNSSEC.</t>
 
-      <t><xref target="RFC4033" /> describes how to store DNSKEY and
+      <t><xref target="RFC4033" /> described how to store DNSKEY and
       RRSIG resource records, and specified a list of cryptographic
-      algorithms to use. It was further updated by <xref
-      target="RFC5702" /> to add the SHA-2 family of hash algorithms
-      using the RSASSA-PKCS1-v1_5 signature scheme <xref
-      target="RFC3447" />.</t>
+      algorithms to use. It was updated by <xref target="RFC5702" /> to
+      add the SHA-2 family of hash algorithms using the
+      RSASSA-PKCS1-v1_5 signature scheme <xref target="RFC3447" />.</t>
 
       <t>RSA has introduced RSASSA-PSS which is a much better signature
       scheme than RSASSA-PKCS1-v1_5. The main advantage of RSASSA-PSS
@@ -112,32 +111,32 @@
       RSASSA-PSS is REQUIRED in new applications (Section 8 of <xref
       target="RFC8017" />).</t>
 
-      <t>SHA-3 is a new family of hash functions based on the
-      cryptographic primitive family Keccak. <xref
-      target="FIPS.202.2015" /> states: "The four SHA-3 hash functions
-      in this Standard supplement the hash functions that are specified
-      in <xref target="FIPS.180-4.2015" />: SHA-1 and the SHA-2
-      family. Together, both Standards provide resilience against future
-      advances in hash function analysis, because they rely on
-      fundamentally different design principles." Now that SHA-1's
-      security is known to be weakened and the SHA-2 hash algorithms are
-      currently the last line of defence for use with RSA in DNSKEYs,
-      and in DS records, it is sensible to introduce the SHA-3 hash
-      family now to prepare for any eventuality. The SHA-3 hash function
-      family uses a sponge construction algorithm that is different from
-      the SHA-2 hash function family which uses a Merkle-Damgaerd
+      <t>SHA-3 is a family of hash functions based on the cryptographic
+      primitive family Keccak. <xref target="FIPS.202.2015" /> states:
+      "The four SHA-3 hash functions in this Standard supplement the
+      hash functions that are specified in <xref
+      target="FIPS.180-4.2015" />: SHA-1 and the SHA-2 family. Together,
+      both Standards provide resilience against future advances in hash
+      function analysis, because they rely on fundamentally different
+      design principles." Now that SHA-1's security is known to be
+      weakened and the SHA-2 hash algorithms are currently the last line
+      of defence for use with RSA in DNSKEYs, and in DS records, it is
+      sensible to introduce the SHA-3 hash function family to DNSSEC now
+      to prepare for any eventuality. The SHA-3 hash function family
+      uses a sponge construction algorithm that is different from the
+      SHA-2 hash function family which uses a Merkle-Damgaerd
       construction, so the possibility that an attack on SHA-2 will
       affect SHA-3 or vice versa is unlikely.</t>
 
-      <t>This document extends the list of DNSKEY algorithms with SHA-2
-      and SHA-3 family of algorithms using the RSASSA-PSS signature
-      scheme <xref target="RFC8017" />, and specifies how to store
-      DNSKEY data and how to produce RRSIG resource records.</t>
+      <t>This document extends the list of DNSKEY algorithms with the
+      RSASSA-PSS signature scheme <xref target="RFC8017" /> using the
+      SHA-2 and SHA-3 family of hash functions. It also adds DNSKEY
+      algorithms for ECDSA using the SHA-3 family of hash functions.</t>
 
       <t><xref target="RFC3658" /> first described the use of DS
-      resource records. It was further updated by <xref target="RFC4509"
-      /> and <xref target="RFC6605" /> to add SHA-256 and SHA-384 digest
-      types respectively. This document extends that list with the SHA-3
+      resource records. It was updated by <xref target="RFC4509" /> and
+      <xref target="RFC6605" /> to add SHA-256 and SHA-384 digest types
+      respectively. This document extends that list with the SHA-3
       algorithms SHA3-256 and SHA3-384.</t>
 
       <t>Familiarity with DNSSEC, RSA, and the SHA-2 <xref
@@ -154,9 +153,10 @@
       RSA/SHA3-384, and RSA/SHA3-512, which will be grouped using the
       name RSA/SHA-3.</t>
 
-      <t>SHA2-224, SHA2-384, and SHA3-224 algorithms are not used in
-      DNSKEYs and RRSIGs. SHA3-224 and SHA3-512 algorithms are not used
-      as DS digest types.</t>
+      <t>The SHA2-224, SHA2-384, and SHA3-224 algorithms are not used in
+      RSASSA-PSS DNSKEYs and RRSIGs. The SHA3-512 algorithm is not used
+      in ECDSA with SHA-3. The SHA3-224 and SHA3-512 algorithms are not
+      used as DS digest types.</t>
 
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
       NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL"
@@ -179,66 +179,86 @@
       target="RFC4034" />. <xref target="RFC3110" /> and <xref
       target="RFC5702" /> describe the use of RSASSA-PKCS1-v1_5
       signature scheme with SHA-1 and SHA-2 hash functions for DNSSEC
-      signatures respectively.</t>
+      signatures respectively. <xref target="RFC6605" /> describes the
+      use of ECDSA with SHA-2 in DNSSEC.</t>
 
-      <t>RSA public keys for use with RSASSA-PSS signature scheme using
-      SHA-2 and SHA-3 hash functions are stored in DNSKEY resource
-      records (RRs) with the algorithm numbers as specified in <xref
-      target="iana" />.</t>
+      <section title="RSASSA-PSS/SHA-2 and RSASSA-PSS/SHA-3 signing keys">
+        <t>RSA public keys for use with RSASSA-PSS signature scheme using
+        SHA-2 and SHA-3 hash functions are stored in DNSKEY resource
+        records (RRs) with the algorithm numbers as specified in <xref
+        target="iana" />.</t>
 
-      <t>The key size of RSA/SHA2-256 and RSA/SHA3-256 keys MUST NOT be
-      less than 1024 bits and MUST NOT be more than 4096 bits. This also
-      satisfies a requirement of the RSASSA-PSS signature scheme that
-      for a hash function that outputs a 256-bit value, the RSA modulus
-      be at least 522 bits long.</t>
+        <t>The key size of RSA/SHA2-256 and RSA/SHA3-256 keys MUST NOT be
+        less than 1024 bits and MUST NOT be more than 4096 bits. This also
+        satisfies a requirement of the RSASSA-PSS signature scheme that
+        for a hash function that outputs a 256-bit value, the RSA modulus
+        be at least 522 bits long.</t>
 
-      <t>The key size of RSA/SHA3-384 keys MUST NOT be less than 1024
-      bits and MUST NOT be more than 4096 bits. This also satisfies a
-      requirement of the RSASSA-PSS signature scheme that for a hash
-      function that outputs a 384-bit value, the RSA modulus be at least
-      778 bits long.</t>
+        <t>The key size of RSA/SHA3-384 keys MUST NOT be less than 1024
+        bits and MUST NOT be more than 4096 bits. This also satisfies a
+        requirement of the RSASSA-PSS signature scheme that for a hash
+        function that outputs a 384-bit value, the RSA modulus be at least
+        778 bits long.</t>
 
-      <t>The key size of RSA/SHA2-512 and RSA/SHA3-512 keys MUST NOT be
-      less than 1280 bits and MUST NOT be more than 4096 bits. This also
-      satisfies a requirement of the RSASSA-PSS signature scheme that
-      for a hash function that outputs a 512-bit value, the RSA modulus
-      be at least 1034 bits long.</t>
+        <t>The key size of RSA/SHA2-512 and RSA/SHA3-512 keys MUST NOT be
+        less than 1280 bits and MUST NOT be more than 4096 bits. This also
+        satisfies a requirement of the RSASSA-PSS signature scheme that
+        for a hash function that outputs a 512-bit value, the RSA modulus
+        be at least 1034 bits long.</t>
+      </section>
+      <section title="ECDSA/SHA-3 signing keys">
+        <t>P-256 and P-384 ECDSA public keys for use with SHA3-256 and
+        SHA3-384 hash functions are stored in DNSKEY resource records
+        (RRs) with the algorithm numbers as specified in <xref
+        target="iana" />.</t>
+
+        <t>The generation of P-256 and P-384 ECDSA keys follows the same
+        method as for <xref target="RFC6605" />.</t>
+      </section>
     </section>
 
     <section title="RRSIG Resource Records">
-      <t>For signature calculation, this section uses the specifications
-      of RSASSA-PSS in PKCS #1 v2.2 (Section 8.1 of <xref
-      target="RFC8017" />) incorporating EMSA-PSS encoding (Section 9.1
-      of <xref target="RFC8017" />).</t>
+      <section title="RSASSA-PSS/SHA-2 and RSASSA-PSS/SHA-3 signatures">
+        <t>For signature calculation, this section uses the specifications
+        of RSASSA-PSS in PKCS #1 v2.2 (Section 8.1 of <xref
+        target="RFC8017" />) incorporating EMSA-PSS encoding (Section 9.1
+        of <xref target="RFC8017" />).</t>
 
-      <t>The values for the RRSIG RDATA fields that precede the
-      signature data are specified in <xref target="RFC4034" />.  The
-      value of the signature field in the RRSIG RDATA follows the
-      RSASSA-PSS signature scheme and is calculated as described in
-      Section 8.1.1 of <xref target="RFC8017" />. The message M used in
-      signature calculation is the argument to the sign() function as
-      specified in Section 3.1.8.1 of <xref target="RFC4034" />.</t>
+        <t>The values for the RRSIG RDATA fields that precede the
+        signature data are specified in <xref target="RFC4034" />.  The
+        value of the signature field in the RRSIG RDATA follows the
+        RSASSA-PSS signature scheme and is calculated as described in
+        Section 8.1.1 of <xref target="RFC8017" />. The message M used in
+        signature calculation is the argument to the sign() function as
+        specified in Section 3.1.8.1 of <xref target="RFC4034" />.</t>
 
-      <t>Within EMSA-PSS-ENCODE, the hash function "Hash" used is one
-      among SHA2-256, SHA2-512, SHA3-256, SHA3-384, and SHA3-512 for
-      RSA/SHA2-256, RSA/SHA2-512, RSA/SHA3-256, RSA/SHA3-384, and
-      RSA/SHA3-512 respectively.</t>
+        <t>Within EMSA-PSS-ENCODE, the hash function "Hash" used is one
+        among SHA2-256, SHA2-512, SHA3-256, SHA3-384, and SHA3-512 for
+        RSA/SHA2-256, RSA/SHA2-512, RSA/SHA3-256, RSA/SHA3-384, and
+        RSA/SHA3-512 respectively.</t>
 
-      <t>The mask generation function is MGF1 (Section B.2.1. of <xref
-      target="RFC8017" />) and the hash function used within the mask
-      generation function is also "Hash".</t>
+        <t>The mask generation function is MGF1 (Section B.2.1. of <xref
+        target="RFC8017" />) and the hash function used within the mask
+        generation function is also "Hash".</t>
 
-      <t>The length of salt in octets MUST be equal to the length of the
-      output of the hash function "Hash" in octets. The value of salt
-      SHOULD be random per signature computation. A random salt value
-      enhances the security of the scheme by affording a "tighter"
-      security proof. However, the randomness is not critical to
-      security. See Section 8.1 of <xref target="RFC8017" /> for the
-      tradeoffs in security due to a non-random salt.</t>
+        <t>The length of salt in octets MUST be equal to the length of the
+        output of the hash function "Hash" in octets. The value of salt
+        SHOULD be random per signature computation. A random salt value
+        enhances the security of the scheme by affording a "tighter"
+        security proof. However, the randomness is not critical to
+        security. See Section 8.1 of <xref target="RFC8017" /> for the
+        tradeoffs in security due to a non-random salt.</t>
 
-      <t>These RSASSA-PSS signatures are stored in the DNS using RRSIG
-      resource records (RRs) with algorithm number as specified in <xref
-      target="iana" />.</t>
+        <t>These RSASSA-PSS signatures are stored in the DNS using RRSIG
+        resource records (RRs) with algorithm number as specified in <xref
+        target="iana" />.</t>
+      </section>
+      <section title="ECDSA/SHA-3 signatures">
+        <t>P-256 and P-384 ECDSA signatures using SHA3-256 and SHA3-384
+        hash functions are stored in the DNS using RRSIG resource
+        records (RRs) with algorithm number as specified in <xref
+        target="iana" />.</t>
+      </section>
     </section>
 
     <section title="DS Resource Records">
@@ -296,14 +316,15 @@
     <section title="Implementation Considerations">
       <section title="Support for SHA-3 Signatures">
         <t>DNSSEC-aware implementations SHOULD be able to support RRSIG
-        and DNSKEY resource records created with the RSA/SHA-2 and
-        RSA/SHA-3 algorithms as defined in this document.</t>
+        and DNSKEY resource records created with the RSA/SHA-2,
+        RSA/SHA-3, and ECDSA/SHA-3 algorithms defined in this
+        document.</t>
       </section>
 
       <section title="Support for SHA-3 DS Digest Types">
         <t>DNSSEC-aware implementations SHOULD be able to support DS
         resource records created with the SHA3-256 and SHA3-384
-        algorithms as defined in this document.</t>
+        algorithms defined in this document.</t>
       </section>
 
       <section title="Support for NSEC3 Denial of Existence">

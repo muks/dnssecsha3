@@ -60,51 +60,51 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.1.  BIND implementation (Editor: to be removed before
            publication)  . . . . . . . . . . . . . . . . . . . . . .   4
    2.  DNSKEY Resource Records . . . . . . . . . . . . . . . . . . .   4
+     2.1.  RSASSA-PSS/SHA-2 and RSASSA-PSS/SHA-3 signing keys  . . .   4
+     2.2.  ECDSA/SHA-3 signing keys  . . . . . . . . . . . . . . . .   5
    3.  RRSIG Resource Records  . . . . . . . . . . . . . . . . . . .   5
-   4.  DS Resource Records . . . . . . . . . . . . . . . . . . . . .   5
-     4.1.  SHA3-256 digest type DS Resource Records  . . . . . . . .   5
+     3.1.  RSASSA-PSS/SHA-2 and RSASSA-PSS/SHA-3 signatures  . . . .   5
+     3.2.  ECDSA/SHA-3 signatures  . . . . . . . . . . . . . . . . .   6
+   4.  DS Resource Records . . . . . . . . . . . . . . . . . . . . .   6
+     4.1.  SHA3-256 digest type DS Resource Records  . . . . . . . .   6
      4.2.  SHA3-384 digest type DS Resource Records  . . . . . . . .   6
    5.  Deployment Considerations . . . . . . . . . . . . . . . . . .   6
      5.1.  Key Sizes . . . . . . . . . . . . . . . . . . . . . . . .   6
-     5.2.  Signature Sizes . . . . . . . . . . . . . . . . . . . . .   6
-     5.3.  DS Sigest Sizes . . . . . . . . . . . . . . . . . . . . .   6
-   6.  Implementation Considerations . . . . . . . . . . . . . . . .   6
-     6.1.  Support for SHA-3 Signatures  . . . . . . . . . . . . . .   6
+     5.2.  Signature Sizes . . . . . . . . . . . . . . . . . . . . .   7
+     5.3.  DS Sigest Sizes . . . . . . . . . . . . . . . . . . . . .   7
+   6.  Implementation Considerations . . . . . . . . . . . . . . . .   7
+     6.1.  Support for SHA-3 Signatures  . . . . . . . . . . . . . .   7
      6.2.  Support for SHA-3 DS Digest Types . . . . . . . . . . . .   7
      6.3.  Support for NSEC3 Denial of Existence . . . . . . . . . .   7
-   7.  Examples  . . . . . . . . . . . . . . . . . . . . . . . . . .   7
-     7.1.  RSA/SHA2-256 (RSASSA-PSS) Key and Signature . . . . . . .   7
-     7.2.  RSA/SHA2-512 (RSASSA-PSS) Key and Signature . . . . . . .   9
-     7.3.  RSA/SHA3-256 (RSASSA-PSS) Key and Signature . . . . . . .  11
-     7.4.  RSA/SHA3-384 (RSASSA-PSS) Key and Signature . . . . . . .  13
-     7.5.  RSA/SHA3-512 (RSASSA-PSS) Key and Signature . . . . . . .  15
-     7.6.  ECDSA Curve P-256 with SHA3-256 Key and Signature . . . .  17
-     7.7.  ECDSA Curve P-384 with SHA3-384 Key and Signature . . . .  19
-     7.8.  SHA3-256 as DS Digest Type  . . . . . . . . . . . . . . .  20
-     7.9.  SHA3-384 as DS Digest Type  . . . . . . . . . . . . . . .  20
-   8.  Security considerations . . . . . . . . . . . . . . . . . . .  21
-     8.1.  Considerations for RRSIG Resource Records . . . . . . . .  21
-     8.2.  Signature Type Downgrade Attacks  . . . . . . . . . . . .  21
-   9.  IANA considerations . . . . . . . . . . . . . . . . . . . . .  21
-   10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  22
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  22
-     11.1.  Normative references . . . . . . . . . . . . . . . . . .  22
-     11.2.  Informative references . . . . . . . . . . . . . . . . .  24
+   7.  Examples  . . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     7.1.  RSA/SHA2-256 (RSASSA-PSS) Key and Signature . . . . . . .   8
+     7.2.  RSA/SHA2-512 (RSASSA-PSS) Key and Signature . . . . . . .  10
+     7.3.  RSA/SHA3-256 (RSASSA-PSS) Key and Signature . . . . . . .  12
+     7.4.  RSA/SHA3-384 (RSASSA-PSS) Key and Signature . . . . . . .  14
+     7.5.  RSA/SHA3-512 (RSASSA-PSS) Key and Signature . . . . . . .  16
+     7.6.  ECDSA Curve P-256 with SHA3-256 Key and Signature . . . .  18
+     7.7.  ECDSA Curve P-384 with SHA3-384 Key and Signature . . . .  20
+     7.8.  SHA3-256 as DS Digest Type  . . . . . . . . . . . . . . .  21
+     7.9.  SHA3-384 as DS Digest Type  . . . . . . . . . . . . . . .  21
+   8.  Security considerations . . . . . . . . . . . . . . . . . . .  22
+     8.1.  Considerations for RRSIG Resource Records . . . . . . . .  22
+     8.2.  Signature Type Downgrade Attacks  . . . . . . . . . . . .  22
+   9.  IANA considerations . . . . . . . . . . . . . . . . . . . . .  22
+   10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  23
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  23
+     11.1.  Normative references . . . . . . . . . . . . . . . . . .  23
+     11.2.  Informative references . . . . . . . . . . . . . . . . .  25
    Appendix A.  Change history (Editor: to be removed before
-                publication) . . . . . . . . . . . . . . . . . . . .  24
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  24
+                publication) . . . . . . . . . . . . . . . . . . . .  25
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  25
 
-1.  Introduction
 
-   The Domain Name System (DNS) is the global, hierarchical distributed
-   database for Internet Naming.  The DNS has been extended to use
-   cryptographic keys and digital signatures for the verification of the
-   authenticity and integrity of its data.  [RFC4033], [RFC4034], and
-   [RFC4035] describe these DNS Security Extensions, called DNSSEC.
+
+
 
 
 
@@ -114,10 +114,18 @@ Jansen & Sivaraman      Expires October 11, 2017                [Page 2]
 Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
 
-   [RFC4033] describes how to store DNSKEY and RRSIG resource records,
+1.  Introduction
+
+   The Domain Name System (DNS) is the global, hierarchical distributed
+   database for Internet Naming.  The DNS has been extended to use
+   cryptographic keys and digital signatures for the verification of the
+   authenticity and integrity of its data.  [RFC4033], [RFC4034], and
+   [RFC4035] describe these DNS Security Extensions, called DNSSEC.
+
+   [RFC4033] described how to store DNSKEY and RRSIG resource records,
    and specified a list of cryptographic algorithms to use.  It was
-   further updated by [RFC5702] to add the SHA-2 family of hash
-   algorithms using the RSASSA-PKCS1-v1_5 signature scheme [RFC3447].
+   updated by [RFC5702] to add the SHA-2 family of hash algorithms using
+   the RSASSA-PKCS1-v1_5 signature scheme [RFC3447].
 
    RSA has introduced RSASSA-PSS which is a much better signature scheme
    than RSASSA-PKCS1-v1_5.  The main advantage of RSASSA-PSS over
@@ -131,7 +139,7 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
    robustness, RSASSA-PSS is REQUIRED in new applications (Section 8 of
    [RFC8017]).
 
-   SHA-3 is a new family of hash functions based on the cryptographic
+   SHA-3 is a family of hash functions based on the cryptographic
    primitive family Keccak.  [FIPS.202.2015] states: "The four SHA-3
    hash functions in this Standard supplement the hash functions that
    are specified in [FIPS.180-4.2015]: SHA-1 and the SHA-2 family.
@@ -140,28 +148,20 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
    different design principles."  Now that SHA-1's security is known to
    be weakened and the SHA-2 hash algorithms are currently the last line
    of defence for use with RSA in DNSKEYs, and in DS records, it is
-   sensible to introduce the SHA-3 hash family now to prepare for any
-   eventuality.  The SHA-3 hash function family uses a sponge
-   construction algorithm that is different from the SHA-2 hash function
-   family which uses a Merkle-Damgaerd construction, so the possibility
-   that an attack on SHA-2 will affect SHA-3 or vice versa is unlikely.
+   sensible to introduce the SHA-3 hash function family to DNSSEC now to
+   prepare for any eventuality.  The SHA-3 hash function family uses a
+   sponge construction algorithm that is different from the SHA-2 hash
+   function family which uses a Merkle-Damgaerd construction, so the
+   possibility that an attack on SHA-2 will affect SHA-3 or vice versa
+   is unlikely.
 
-   This document extends the list of DNSKEY algorithms with SHA-2 and
-   SHA-3 family of algorithms using the RSASSA-PSS signature scheme
-   [RFC8017], and specifies how to store DNSKEY data and how to produce
-   RRSIG resource records.
+   This document extends the list of DNSKEY algorithms with the RSASSA-
+   PSS signature scheme [RFC8017] using the SHA-2 and SHA-3 family of
+   hash functions.  It also adds DNSKEY algorithms for ECDSA using the
+   SHA-3 family of hash functions.
 
    [RFC3658] first described the use of DS resource records.  It was
-   further updated by [RFC4509] and [RFC6605] to add SHA-256 and SHA-384
-   digest types respectively.  This document extends that list with the
-   SHA-3 algorithms SHA3-256 and SHA3-384.
-
-   Familiarity with DNSSEC, RSA, and the SHA-2 [FIPS.180-4.2015] and
-   SHA-3 [FIPS.202.2015] families of algorithms is assumed in this
-   document.
-
-   To refer to SHA2-256 and SHA2-512, this document will use the name
-   SHA-2.  Similarly, to refer to SHA3-256, SHA3-384, and SHA3-512, this
+   updated by [RFC4509] and [RFC6605] to add SHA-256 and SHA-384 digest
 
 
 
@@ -170,6 +170,15 @@ Jansen & Sivaraman      Expires October 11, 2017                [Page 3]
 Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
 
+   types respectively.  This document extends that list with the SHA-3
+   algorithms SHA3-256 and SHA3-384.
+
+   Familiarity with DNSSEC, RSA, and the SHA-2 [FIPS.180-4.2015] and
+   SHA-3 [FIPS.202.2015] families of algorithms is assumed in this
+   document.
+
+   To refer to SHA2-256 and SHA2-512, this document will use the name
+   SHA-2.  Similarly, to refer to SHA3-256, SHA3-384, and SHA3-512, this
    document will use the name SHA-3.  This is done to improve
    readability.  When a part of text is specific for a particular SHA-2
    or SHA-3 hash function, their specific names are used.  The same goes
@@ -177,9 +186,10 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
    name RSA/SHA-2, and RSA/SHA3-256, RSA/SHA3-384, and RSA/SHA3-512,
    which will be grouped using the name RSA/SHA-3.
 
-   SHA2-224, SHA2-384, and SHA3-224 algorithms are not used in DNSKEYs
-   and RRSIGs.  SHA3-224 and SHA3-512 algorithms are not used as DS
-   digest types.
+   The SHA2-224, SHA2-384, and SHA3-224 algorithms are not used in
+   RSASSA-PSS DNSKEYs and RRSIGs.  The SHA3-512 algorithm is not used in
+   ECDSA with SHA-3.  The SHA3-224 and SHA3-512 algorithms are not used
+   as DS digest types.
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
@@ -198,6 +208,9 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
    The format of the DNSKEY RR can be found in [RFC4034].  [RFC3110] and
    [RFC5702] describe the use of RSASSA-PKCS1-v1_5 signature scheme with
    SHA-1 and SHA-2 hash functions for DNSSEC signatures respectively.
+   [RFC6605] describes the use of ECDSA with SHA-2 in DNSSEC.
+
+2.1.  RSASSA-PSS/SHA-2 and RSASSA-PSS/SHA-3 signing keys
 
    RSA public keys for use with RSASSA-PSS signature scheme using SHA-2
    and SHA-3 hash functions are stored in DNSKEY resource records (RRs)
@@ -205,6 +218,14 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
    The key size of RSA/SHA2-256 and RSA/SHA3-256 keys MUST NOT be less
    than 1024 bits and MUST NOT be more than 4096 bits.  This also
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017                [Page 4]
+
+Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
+
+
    satisfies a requirement of the RSASSA-PSS signature scheme that for a
    hash function that outputs a 256-bit value, the RSA modulus be at
    least 522 bits long.
@@ -217,19 +238,21 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
    The key size of RSA/SHA2-512 and RSA/SHA3-512 keys MUST NOT be less
    than 1280 bits and MUST NOT be more than 4096 bits.  This also
    satisfies a requirement of the RSASSA-PSS signature scheme that for a
-
-
-
-
-Jansen & Sivaraman      Expires October 11, 2017                [Page 4]
-
-Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
-
-
    hash function that outputs a 512-bit value, the RSA modulus be at
    least 1034 bits long.
 
+2.2.  ECDSA/SHA-3 signing keys
+
+   P-256 and P-384 ECDSA public keys for use with SHA3-256 and SHA3-384
+   hash functions are stored in DNSKEY resource records (RRs) with the
+   algorithm numbers as specified in Section 9.
+
+   The generation of P-256 and P-384 ECDSA keys follows the same method
+   as for [RFC6605].
+
 3.  RRSIG Resource Records
+
+3.1.  RSASSA-PSS/SHA-2 and RSASSA-PSS/SHA-3 signatures
 
    For signature calculation, this section uses the specifications of
    RSASSA-PSS in PKCS #1 v2.2 (Section 8.1 of [RFC8017]) incorporating
@@ -251,6 +274,14 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
    and the hash function used within the mask generation function is
    also "Hash".
 
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017                [Page 5]
+
+Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
+
+
    The length of salt in octets MUST be equal to the length of the
    output of the hash function "Hash" in octets.  The value of salt
    SHOULD be random per signature computation.  A random salt value
@@ -263,6 +294,12 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
    resource records (RRs) with algorithm number as specified in
    Section 9.
 
+3.2.  ECDSA/SHA-3 signatures
+
+   P-256 and P-384 ECDSA signatures using SHA3-256 and SHA3-384 hash
+   functions are stored in the DNS using RRSIG resource records (RRs)
+   with algorithm number as specified in Section 9.
+
 4.  DS Resource Records
 
    The format of the DS RR can be found in [RFC4034].  [RFC3658],
@@ -273,15 +310,6 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
    The implementation of SHA3-256 in DS RRs follows the implementation
    of SHA-256 as specified in [RFC4509] except that the underlying
-
-
-
-
-Jansen & Sivaraman      Expires October 11, 2017                [Page 5]
-
-Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
-
-
    algorithm is SHA3-256, the digest value is 32 bytes long, and the
    digest type code is specified in Section 9.
 
@@ -300,6 +328,15 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
    specify what size of keys to use.  That is an operational issue and
    depends largely on the environment and intended use.  A good starting
    point for more information would be [NIST800-57].
+
+
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017                [Page 6]
+
+Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
+
 
 5.2.  Signature Sizes
 
@@ -324,25 +361,14 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 6.1.  Support for SHA-3 Signatures
 
    DNSSEC-aware implementations SHOULD be able to support RRSIG and
-   DNSKEY resource records created with the RSA/SHA-2 and RSA/SHA-3
-   algorithms as defined in this document.
-
-
-
-
-
-
-
-Jansen & Sivaraman      Expires October 11, 2017                [Page 6]
-
-Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
-
+   DNSKEY resource records created with the RSA/SHA-2, RSA/SHA-3, and
+   ECDSA/SHA-3 algorithms defined in this document.
 
 6.2.  Support for SHA-3 DS Digest Types
 
    DNSSEC-aware implementations SHOULD be able to support DS resource
-   records created with the SHA3-256 and SHA3-384 algorithms as defined
-   in this document.
+   records created with the SHA3-256 and SHA3-384 algorithms defined in
+   this document.
 
 6.3.  Support for NSEC3 Denial of Existence
 
@@ -359,6 +385,14 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
    with hash algorithm 1, as defined in [RFC5155].  An authoritative
    server that does not implement NSEC3 MAY still serve zones that use
    RSA/SHA-2 or RSA/SHA-3 with NSEC denial of existence.
+
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017                [Page 7]
+
+Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
+
 
 7.  Examples
 
@@ -382,17 +416,6 @@ Coefficient: m9t6RWOcmP1MLC8YiaxLvsJ1MLe+JTiu+Tzx7plz7bVd9cw0SCbD/X+VXBiDheu2Zya
 example.org. IN DNSKEY 256 3 247 AwEAAdMT/tIhT3Yc1FJnmHmWWb3XTBtZZKW723I0h/5i3/15LIhR6v5X oKsy0HeUGoyN03O2yHEbrhz7Ym9pypu5OEdUnbjcc1Mr+c/0/TAzqpUK 1DrAb3rguVn9W/t+jy41iTap8xZGfcLkCAxdLg2cBp3m1mQyWr6t9Oo/ 10wP4mbX
 
    With this key, sign the following zone consisting of 4 RRs:
-
-
-
-
-
-
-
-Jansen & Sivaraman      Expires October 11, 2017                [Page 7]
-
-Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
-
 
 example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
 example.org. 3600 IN NS invalid.
@@ -419,6 +442,14 @@ example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
                                         nFGeZihBJUUpfXpzIWVOGwkIJIWL+aB3mS3M
                                         Z1EJ2Iok1n37ZO9Uf6tLcZDYLck= )
                         3600    NS      invalid.
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017                [Page 8]
+
+Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
+
+
                         3600    RRSIG   NS 247 2 3600 (
                                         20300101000000 20000101000000 30005 example.org.
                                         y/qVMuKsW5dqkXBLQmTj+RJ1UCe8JUpLw7/x
@@ -442,14 +473,6 @@ example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
                                         nBLwr1F23Kh5dkO9ApefKryn1SZP6LndOcBu
                                         tdlq6MzNkqwgpXwFYwTsQtxG0SJPZxA7x5du
                                         0F4QoBe/bC9vK69gra0Zkc0IPos= )
-
-
-
-Jansen & Sivaraman      Expires October 11, 2017                [Page 8]
-
-Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
-
-
                         7200    NSEC    example.org. A NS SOA AAAA RRSIG NSEC DNSKEY
                         7200    RRSIG   NSEC 247 2 7200 (
                                         20300101000000 20000101000000 30005 example.org.
@@ -472,6 +495,16 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
                                         HAl1WGAHQU45w7t17/onSLJfE+6C9kS6F3N+
                                         qhWu+WWMz6/fvbaoe5EG5v/AkXA/iF3sEPIt
                                         Y5bA3d1IR9bs36fyk3c5c0vb170= )
+
+
+
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017                [Page 9]
+
+Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
+
 
 7.2.  RSA/SHA2-512 (RSASSA-PSS) Key and Signature
 
@@ -499,13 +532,6 @@ example.org. 3600 IN NS invalid.
 example.org. 3600 IN A 192.0.2.1
 example.org. 3600 IN AAAA 2:2001:db8::1
 
-
-
-Jansen & Sivaraman      Expires October 11, 2017                [Page 9]
-
-Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
-
-
    Using RSASSA-PSS salt filled entirely with 0 valued octets, if the
    inception date is set at 00:00 hours on January 1st, 2000, and the
    expiration date at 00:00 hours on January 1st, 2030, the following
@@ -528,6 +554,14 @@ example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
                                         6OgCbuxE3yTwJTiPb3/W5IfPbv/bRnETWA== )
                         3600    NS      invalid.
                         3600    RRSIG   NS 248 2 3600 (
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017               [Page 10]
+
+Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
+
+
                                         20300101000000 20000101000000 50019 example.org.
                                         Sj3JxLM0kH9UDcyO09Zhrupw+0iafH8Yk20I
                                         a2m1S8jnjWrwCQplg/RRcM+9B5rz9AoNZJg7
@@ -554,14 +588,6 @@ example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
                                         rQ5MbQDnLN25IOLy3JodvcZFnzsoxmx2LAJ1
                                         g80Ps4+p5QbTEoASNGGPUR84LPrZ7j4Nrw== )
                         7200    NSEC    example.org. A NS SOA AAAA RRSIG NSEC DNSKEY
-
-
-
-Jansen & Sivaraman      Expires October 11, 2017               [Page 10]
-
-Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
-
-
                         7200    RRSIG   NSEC 248 2 7200 (
                                         20300101000000 20000101000000 50019 example.org.
                                         l2RkbZqizyfnWMThvlt/F2zltQ/DVOmSCQve
@@ -584,6 +610,14 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
                                         gGFb305M15oFs/+Mc4r9II2nmqARCt52Rj2y
                                         7aQNKIk7PXqxfdsnRpswmvRL/J0zUsoP/Ecj
                                         E+yLZQpJz0Chycs5UszXCeHxGqx1GandpQaw
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017               [Page 11]
+
+Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
+
+
                                         LOu02AFI2rdpamD242i3RUSfxjKUpo2MFuS7
                                         c92xUOOkjwn1MAZruUKWPbVzCm3pvqIHTytL
                                         JyGDHI8LqCbhbnf3hP2G45BCzh1cp41EYA== )
@@ -609,15 +643,6 @@ example.org. IN DNSKEY 256 3 249 AwEAAbiPfbZ1hAGeY/IZ4dvWnI01ilJ3C2aRlmAlo5s+yge
 
    With this key, sign the following zone consisting of 4 RRs:
 
-
-
-
-
-Jansen & Sivaraman      Expires October 11, 2017               [Page 11]
-
-Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
-
-
 example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
 example.org. 3600 IN NS invalid.
 example.org. 3600 IN A 192.0.2.1
@@ -641,6 +666,14 @@ example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
                                         vRCTzMe+/q/36pWhYhej6wI3Fo2JRImMeL85
                                         IEdQNEUOcZ4SyfbnC/x44Tj3xlF1imf40dWy
                                         /HDLAdAlCfL1bZVxd6KNPBoGsZmWqqdePguC
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017               [Page 12]
+
+Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
+
+
                                         Kvv6KpZB5bmQhlPJHmcevUajG80= )
                         3600    NS      invalid.
                         3600    RRSIG   NS 249 2 3600 (
@@ -666,14 +699,6 @@ example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
                                         r8R+0QG989x1lwPSHeETryQ/5sUApOeoaFYj
                                         3D+IZEzI0gGfHIXP+zZ2kRW3tQx0Bn1JHPWx
                                         1+JOwFdfJB4jczG6YwydRVaWd3M= )
-
-
-
-Jansen & Sivaraman      Expires October 11, 2017               [Page 12]
-
-Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
-
-
                         7200    NSEC    example.org. A NS SOA AAAA RRSIG NSEC DNSKEY
                         7200    RRSIG   NSEC 249 2 7200 (
                                         20300101000000 20000101000000 23809 example.org.
@@ -696,6 +721,14 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
                                         KfCKgz+v6B0H+TGuuVZ9nriFggRsUu0uddsD
                                         sgOVuWB2XC0e0lJMxpYht/DQd6ZLc++XhWyK
                                         a9a0Iw9/bcIFaKY+bhn0zWp3y9k= )
+
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017               [Page 13]
+
+Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
+
 
 7.4.  RSA/SHA3-384 (RSASSA-PSS) Key and Signature
 
@@ -723,13 +756,6 @@ example.org. 3600 IN NS invalid.
 example.org. 3600 IN A 192.0.2.1
 example.org. 3600 IN AAAA 2:2001:db8::1
 
-
-
-Jansen & Sivaraman      Expires October 11, 2017               [Page 13]
-
-Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
-
-
    Using RSASSA-PSS salt filled entirely with 0 valued octets, if the
    inception date is set at 00:00 hours on January 1st, 2000, and the
    expiration date at 00:00 hours on January 1st, 2030, the following
@@ -752,6 +778,14 @@ example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
                         3600    NS      invalid.
                         3600    RRSIG   NS 250 2 3600 (
                                         20300101000000 20000101000000 54407 example.org.
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017               [Page 14]
+
+Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
+
+
                                         c1o2/g51y3eo3E3+28Ot1k4vg4sE8MEIHdel
                                         rD35/XAOzDZ8PH0HmrBzYEGUTk7Dxv8ts0Yj
                                         M9xtoF9HIxlmOF19yjKrT7LNpXmbcbxA/NNH
@@ -778,14 +812,6 @@ example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
                                         20300101000000 20000101000000 54407 example.org.
                                         ZTSVWOyH0HY6OYKDhjAqDlhdPjgzSx6ihA5/
                                         Nu1tOJgtxXR+/55PGdplIfS3Q4vujqbbwjD1
-
-
-
-Jansen & Sivaraman      Expires October 11, 2017               [Page 14]
-
-Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
-
-
                                         EcSGUgVP9lnL4wqq2YwSALj3e5K216wRhBKz
                                         G5YwFrduYZAP57nGdykzeNQZRB1bEpLUEzrP
                                         /u+TQCTrLDSTMv4s61gN9d02gl0= )
@@ -803,6 +829,18 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
                                         5n5YlBE/VKyy/IpycgJwybrBBPimNViwfn8y
                                         BunXT7x/OJ0tSeDxr1ab/CwPBl+0uq3RsDqs
                                         5qJTL5pmN5JD6kR2tRVvy3MicTM= )
+
+
+
+
+
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017               [Page 15]
+
+Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
+
 
 7.5.  RSA/SHA3-512 (RSASSA-PSS) Key and Signature
 
@@ -835,13 +873,6 @@ example.org. 3600 IN AAAA 2:2001:db8::1
    expiration date at 00:00 hours on January 1st, 2030, the following
    signed zone (with DNSKEY) should be created:
 
-
-
-Jansen & Sivaraman      Expires October 11, 2017               [Page 15]
-
-Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
-
-
 example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
                                         46         ; serial
                                         43200      ; refresh (12 hours)
@@ -859,6 +890,14 @@ example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
                                         a9heSY0UbORoQpilzljhtmyU86LfItD7tg== )
                         3600    NS      invalid.
                         3600    RRSIG   NS 251 2 3600 (
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017               [Page 16]
+
+Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
+
+
                                         20300101000000 20000101000000 23118 example.org.
                                         LtjteiIhqrJWOJDvVHB2YBdpOPtc62N40uGe
                                         GoSj9S9pU8UEte8K4T+TQGefc89SQQMBKMl+
@@ -890,14 +929,6 @@ example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
                                         MeDqwUq8KuJiSLZBefoJqgvuQ6Nlm+IPDFMA
                                         jZUkov419KPqItr29YIG+7lL8Ow/PRVbb0mM
                                         VfVUTIKWC1bfAhO2FBAQJTIzAeFELnUSsTaa
-
-
-
-Jansen & Sivaraman      Expires October 11, 2017               [Page 16]
-
-Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
-
-
                                         jcNdRSen8VosEh3822rwjqcQD5hhm52v7ZCT
                                         QgrRrgoZBuCHU9dDHNfauUie0mrnCqiuFRjR
                                         DafCZeqYzzIpZVDIjyFDwu2LRzkyKduHug== )
@@ -915,6 +946,14 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
                                         SUr4RUGNadiJ7pJe8X2bnnUuHbNY3yq1S+/W
                                         NRpfXT5RReL8Ag5QuBQAnKwkqbV0UFeM3D0S
                                         xX46BY/75LerOIqy8FHaXbk9qiLBaX9E7/cV
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017               [Page 17]
+
+Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
+
+
                                         vUhkf9Dbp26Irc59AQCAB0OQ/e55onU3NRsY
                                         TWrujs0cyOo2B8eSHPcd8M2Yvwyh/ZEQNfUj
                                         YXKwAO6a+DZeId9BwU0KiEcrLs/KP2gzEQ== )
@@ -949,7 +988,24 @@ example.org. 3600 IN AAAA 2:2001:db8::1
 
 
 
-Jansen & Sivaraman      Expires October 11, 2017               [Page 17]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jansen & Sivaraman      Expires October 11, 2017               [Page 18]
 
 Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
@@ -1005,7 +1061,7 @@ example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
 
 
 
-Jansen & Sivaraman      Expires October 11, 2017               [Page 18]
+Jansen & Sivaraman      Expires October 11, 2017               [Page 19]
 
 Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
@@ -1061,7 +1117,7 @@ example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
 
 
 
-Jansen & Sivaraman      Expires October 11, 2017               [Page 19]
+Jansen & Sivaraman      Expires October 11, 2017               [Page 20]
 
 Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
@@ -1117,7 +1173,7 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
 
 
-Jansen & Sivaraman      Expires October 11, 2017               [Page 20]
+Jansen & Sivaraman      Expires October 11, 2017               [Page 21]
 
 Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
@@ -1173,7 +1229,7 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
 
 
-Jansen & Sivaraman      Expires October 11, 2017               [Page 21]
+Jansen & Sivaraman      Expires October 11, 2017               [Page 22]
 
 Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
@@ -1229,7 +1285,7 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
 
 
-Jansen & Sivaraman      Expires October 11, 2017               [Page 22]
+Jansen & Sivaraman      Expires October 11, 2017               [Page 23]
 
 Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
@@ -1285,7 +1341,7 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
 
 
-Jansen & Sivaraman      Expires October 11, 2017               [Page 23]
+Jansen & Sivaraman      Expires October 11, 2017               [Page 24]
 
 Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
@@ -1341,7 +1397,7 @@ Authors' Addresses
 
 
 
-Jansen & Sivaraman      Expires October 11, 2017               [Page 24]
+Jansen & Sivaraman      Expires October 11, 2017               [Page 25]
 
 Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
@@ -1397,4 +1453,4 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
 
 
-Jansen & Sivaraman      Expires October 11, 2017               [Page 25]
+Jansen & Sivaraman      Expires October 11, 2017               [Page 26]
