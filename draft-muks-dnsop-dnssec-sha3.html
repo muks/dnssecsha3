@@ -415,7 +415,7 @@
 <link href="#rfc.authors" rel="Chapter"/>
 
 
-  <meta name="generator" content="xml2rfc version 2.5.1 - http://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.4.8 - http://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Jansen, J. and M. Sivaraman" />
@@ -482,26 +482,26 @@
   <ul class="toc">
 
   	<li>1.   <a href="#rfc.section.1">Introduction</a></li>
-<ul><li>1.1.   <a href="#rfc.section.1.1">BIND implementation (Editor: to be removed before publication)</a></li>
-</ul><li>2.   <a href="#rfc.section.2">DNSKEY Resource Records</a></li>
-<ul><li>2.1.   <a href="#rfc.section.2.1">RSASSA-PSS/SHA-2 and RSASSA-PSS/SHA-3 signing keys</a></li>
+<li>1.1.   <a href="#rfc.section.1.1">BIND implementation (Editor: to be removed before publication)</a></li>
+<li>2.   <a href="#rfc.section.2">DNSKEY Resource Records</a></li>
+<li>2.1.   <a href="#rfc.section.2.1">RSASSA-PSS/SHA-2 and RSASSA-PSS/SHA-3 signing keys</a></li>
 <li>2.2.   <a href="#rfc.section.2.2">ECDSA/SHA-3 signing keys</a></li>
-</ul><li>3.   <a href="#rfc.section.3">RRSIG Resource Records</a></li>
-<ul><li>3.1.   <a href="#rfc.section.3.1">RSASSA-PSS/SHA-2 and RSASSA-PSS/SHA-3 signatures</a></li>
+<li>3.   <a href="#rfc.section.3">RRSIG Resource Records</a></li>
+<li>3.1.   <a href="#rfc.section.3.1">RSASSA-PSS/SHA-2 and RSASSA-PSS/SHA-3 signatures</a></li>
 <li>3.2.   <a href="#rfc.section.3.2">ECDSA/SHA-3 signatures</a></li>
-</ul><li>4.   <a href="#rfc.section.4">DS Resource Records</a></li>
-<ul><li>4.1.   <a href="#rfc.section.4.1">SHA3-256 digest type DS Resource Records</a></li>
+<li>4.   <a href="#rfc.section.4">DS Resource Records</a></li>
+<li>4.1.   <a href="#rfc.section.4.1">SHA3-256 digest type DS Resource Records</a></li>
 <li>4.2.   <a href="#rfc.section.4.2">SHA3-384 digest type DS Resource Records</a></li>
-</ul><li>5.   <a href="#rfc.section.5">Deployment Considerations</a></li>
-<ul><li>5.1.   <a href="#rfc.section.5.1">Key Sizes</a></li>
+<li>5.   <a href="#rfc.section.5">Deployment Considerations</a></li>
+<li>5.1.   <a href="#rfc.section.5.1">Key Sizes</a></li>
 <li>5.2.   <a href="#rfc.section.5.2">Signature Sizes</a></li>
 <li>5.3.   <a href="#rfc.section.5.3">DS Sigest Sizes</a></li>
-</ul><li>6.   <a href="#rfc.section.6">Implementation Considerations</a></li>
-<ul><li>6.1.   <a href="#rfc.section.6.1">Support for SHA-3 Signatures</a></li>
+<li>6.   <a href="#rfc.section.6">Implementation Considerations</a></li>
+<li>6.1.   <a href="#rfc.section.6.1">Support for SHA-3 Signatures</a></li>
 <li>6.2.   <a href="#rfc.section.6.2">Support for SHA-3 DS Digest Types</a></li>
 <li>6.3.   <a href="#rfc.section.6.3">Support for NSEC3 Denial of Existence</a></li>
-</ul><li>7.   <a href="#rfc.section.7">Examples</a></li>
-<ul><li>7.1.   <a href="#rfc.section.7.1">RSA/SHA2-256 (RSASSA-PSS) Key and Signature</a></li>
+<li>7.   <a href="#rfc.section.7">Examples</a></li>
+<li>7.1.   <a href="#rfc.section.7.1">RSA/SHA2-256 (RSASSA-PSS) Key and Signature</a></li>
 <li>7.2.   <a href="#rfc.section.7.2">RSA/SHA2-512 (RSASSA-PSS) Key and Signature</a></li>
 <li>7.3.   <a href="#rfc.section.7.3">RSA/SHA3-256 (RSASSA-PSS) Key and Signature</a></li>
 <li>7.4.   <a href="#rfc.section.7.4">RSA/SHA3-384 (RSASSA-PSS) Key and Signature</a></li>
@@ -510,15 +510,15 @@
 <li>7.7.   <a href="#rfc.section.7.7">ECDSA Curve P-384 with SHA3-384 Key and Signature</a></li>
 <li>7.8.   <a href="#rfc.section.7.8">SHA3-256 as DS Digest Type</a></li>
 <li>7.9.   <a href="#rfc.section.7.9">SHA3-384 as DS Digest Type</a></li>
-</ul><li>8.   <a href="#rfc.section.8">Security considerations</a></li>
-<ul><li>8.1.   <a href="#rfc.section.8.1">Considerations for RRSIG Resource Records</a></li>
+<li>8.   <a href="#rfc.section.8">Security considerations</a></li>
+<li>8.1.   <a href="#rfc.section.8.1">Considerations for RRSIG Resource Records</a></li>
 <li>8.2.   <a href="#rfc.section.8.2">Signature Type Downgrade Attacks</a></li>
-</ul><li>9.   <a href="#rfc.section.9">IANA considerations</a></li>
+<li>9.   <a href="#rfc.section.9">IANA considerations</a></li>
 <li>10.   <a href="#rfc.section.10">Acknowledgements</a></li>
 <li>11.   <a href="#rfc.references">References</a></li>
-<ul><li>11.1.   <a href="#rfc.references.1">Normative references</a></li>
+<li>11.1.   <a href="#rfc.references.1">Normative references</a></li>
 <li>11.2.   <a href="#rfc.references.2">Informative references</a></li>
-</ul><li>Appendix A.   <a href="#rfc.appendix.A">Change history (Editor: to be removed before publication)</a></li>
+<li>Appendix A.   <a href="#rfc.appendix.A">Change history (Editor: to be removed before publication)</a></li>
 <li><a href="#rfc.authors">Authors' Addresses</a></li>
 
 

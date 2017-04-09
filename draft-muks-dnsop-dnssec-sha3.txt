@@ -1297,8 +1297,8 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
               <http://dx.doi.org/10.6028/NIST.FIPS.202>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
+              Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
+              RFC2119, March 1997,
               <http://www.rfc-editor.org/info/rfc2119>.
 
    [RFC3110]  Eastlake 3rd, D., "RSA/SHA-1 SIGs and RSA KEYs in the
@@ -1315,8 +1315,8 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
               <http://www.rfc-editor.org/info/rfc3658>.
 
    [RFC4033]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
-              Rose, "DNS Security Introduction and Requirements",
-              RFC 4033, DOI 10.17487/RFC4033, March 2005,
+              Rose, "DNS Security Introduction and Requirements", RFC
+              4033, DOI 10.17487/RFC4033, March 2005,
               <http://www.rfc-editor.org/info/rfc4033>.
 
    [RFC4034]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
@@ -1330,8 +1330,8 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
               <http://www.rfc-editor.org/info/rfc4035>.
 
    [RFC4509]  Hardaker, W., "Use of SHA-256 in DNSSEC Delegation Signer
-              (DS) Resource Records (RRs)", RFC 4509,
-              DOI 10.17487/RFC4509, May 2006,
+              (DS) Resource Records (RRs)", RFC 4509, DOI 10.17487/
+              RFC4509, May 2006,
               <http://www.rfc-editor.org/info/rfc4509>.
 
    [RFC5155]  Laurie, B., Sisson, G., Arends, R., and D. Blacka, "DNS
@@ -1347,13 +1347,13 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
 
    [RFC5702]  Jansen, J., "Use of SHA-2 Algorithms with RSA in DNSKEY
-              and RRSIG Resource Records for DNSSEC", RFC 5702,
-              DOI 10.17487/RFC5702, October 2009,
+              and RRSIG Resource Records for DNSSEC", RFC 5702, DOI
+              10.17487/RFC5702, October 2009,
               <http://www.rfc-editor.org/info/rfc5702>.
 
    [RFC6605]  Hoffman, P. and W. Wijngaards, "Elliptic Curve Digital
-              Signature Algorithm (DSA) for DNSSEC", RFC 6605,
-              DOI 10.17487/RFC6605, April 2012,
+              Signature Algorithm (DSA) for DNSSEC", RFC 6605, DOI
+              10.17487/RFC6605, April 2012,
               <http://www.rfc-editor.org/info/rfc6605>.
 
    [RFC8017]  Moriarty, K., Ed., Kaliski, B., Jonsson, J., and A. Rusch,

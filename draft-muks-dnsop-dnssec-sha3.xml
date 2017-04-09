@@ -377,7 +377,7 @@ example.org. IN DNSKEY 256 3 247 AwEAAdMT/tIhT3Yc1FJnmHmWWb3XTBtZZKW723I0h/5i3/1
 
         <figure>
           <artwork>
-example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
+example.org. 3600 IN SOA invalid. hostmaster.example.org. (42 43200 900 1814400 7200)
 example.org. 3600 IN NS invalid.
 example.org. 3600 IN A 192.0.2.1
 example.org. 3600 IN AAAA 2:2001:db8::1
@@ -486,7 +486,7 @@ example.org. IN DNSKEY 256 3 248 AwEAAb+CzL6VNrD8UBzzqLODxUTn9VNNoJs5DnXgY1omNYh
 
         <figure>
           <artwork>
-example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
+example.org. 3600 IN SOA invalid. hostmaster.example.org. (43 43200 900 1814400 7200)
 example.org. 3600 IN NS invalid.
 example.org. 3600 IN A 192.0.2.1
 example.org. 3600 IN AAAA 2:2001:db8::1
@@ -603,7 +603,7 @@ example.org. IN DNSKEY 256 3 249 AwEAAbiPfbZ1hAGeY/IZ4dvWnI01ilJ3C2aRlmAlo5s+yge
 
         <figure>
           <artwork>
-example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
+example.org. 3600 IN SOA invalid. hostmaster.example.org. (44 43200 900 1814400 7200)
 example.org. 3600 IN NS invalid.
 example.org. 3600 IN A 192.0.2.1
 example.org. 3600 IN AAAA 2:2001:db8::1
@@ -712,7 +712,7 @@ example.org. IN DNSKEY 256 3 250 AwEAAcR7sYh2seF3H1vcgiHQlXa6rPi9ZX02SnTiuwvifMg
 
         <figure>
           <artwork>
-example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
+example.org. 3600 IN SOA invalid. hostmaster.example.org. (45 43200 900 1814400 7200)
 example.org. 3600 IN NS invalid.
 example.org. 3600 IN A 192.0.2.1
 example.org. 3600 IN AAAA 2:2001:db8::1
@@ -821,7 +821,7 @@ example.org. IN DNSKEY 256 3 251 AwEAAaPmJBV627lrcM4I1kzMSli/5sSpmYiBMGUKHJ4dFzf
 
         <figure>
           <artwork>
-example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
+example.org. 3600 IN SOA invalid. hostmaster.example.org. (46 43200 900 1814400 7200)
 example.org. 3600 IN NS invalid.
 example.org. 3600 IN A 192.0.2.1
 example.org. 3600 IN AAAA 2:2001:db8::1
@@ -931,7 +931,7 @@ example.org. IN DNSKEY 256 3 245 5DuYfUIL3CQAibLVRZkHNX8RsmMgXYMVwSWsWvSFqhULW6U
 
         <figure>
           <artwork>
-example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
+example.org. 3600 IN SOA invalid. hostmaster.example.org. (40 43200 900 1814400 7200)
 example.org. 3600 IN NS invalid.
 example.org. 3600 IN A 192.0.2.1
 example.org. 3600 IN AAAA 2:2001:db8::1
@@ -1018,7 +1018,7 @@ example.org. IN DNSKEY 256 3 246 KQdbXXFXMQBV7lAOrRwFYRitDHNxZEXbVYz7FxAkwlGNYdk
 
         <figure>
           <artwork>
-example.org. 3600 IN SOA invalid. hostmaster.example.org. (36 43200 900 1814400 7200)
+example.org. 3600 IN SOA invalid. hostmaster.example.org. (41 43200 900 1814400 7200)
 example.org. 3600 IN NS invalid.
 example.org. 3600 IN A 192.0.2.1
 example.org. 3600 IN AAAA 2:2001:db8::1
