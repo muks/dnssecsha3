@@ -138,8 +138,8 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
    sensible to introduce the SHA-3 hash family now to prepare for any
    eventuality.  The SHA-3 hash function family uses a sponge
    construction algorithm that is different from the SHA-2 hash function
-   family which uses a Merkle-Damgaerd construction, so the probability
-   that an attack on SHA-2 will affect SHA-3 or vice versa is minimal.
+   family which uses a Merkle-Damgaerd construction, so the possibility
+   that an attack on SHA-2 will affect SHA-3 or vice versa is unlikely.
 
    This document extends the list of DNSKEY algorithms with SHA-2 and
    SHA-3 family of algorithms using the RSASSA-PSS signature scheme
