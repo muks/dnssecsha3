@@ -700,8 +700,8 @@ Appendix A.  Change history (Editor: to be removed before publication)
 
    o  draft-muks-dnsop-dnssec-sha3-01
       Use RSASSA-PSS instead of RSASSA-PKCS1-v1_5.  Specify DNSSEC
-      algorithms using RSASSA-PSS for SHA-2 hash functions too.  Other
-      fixes.
+      algorithms using RSASSA-PSS for SHA-2 hash functions too.  Specify
+      algorithms for ECDSA with SHA-3.  Other fixes.
 
    o  draft-muks-dnsop-dnssec-sha3-00
       Initial draft.
