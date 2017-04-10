@@ -258,6 +258,12 @@
         hash functions are stored in the DNS using RRSIG resource
         records (RRs) with algorithm number as specified in <xref
         target="iana" />.</t>
+
+        <t>The generation of P-256 and P-384 ECDSA/SHA-3 signatures
+        follows the same method as for <xref target="RFC6605" />, except
+        the collision-resistant hash function "H" (see Section 10.4 of
+        <xref target="RFC6090" />) for P-256 and P-384 ECDSA/SHA-3
+        signatures are SHA3-256 and SHA3-384 respectively..</t>
       </section>
     </section>
 
@@ -1268,6 +1274,7 @@ example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
       <?rfc include="reference.RFC.4509.xml"?>
       <?rfc include="reference.RFC.5155.xml"?>
       <?rfc include="reference.RFC.5702.xml"?>
+      <?rfc include="reference.RFC.6090.xml"?>
       <?rfc include="reference.RFC.6605.xml"?>
       <?rfc include="reference.RFC.8017.xml"?>
 
