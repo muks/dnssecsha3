@@ -303,7 +303,7 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
    The generation of P-256 and P-384 ECDSA/SHA-3 signatures follows the
    same method as for [RFC6605], except the collision-resistant hash
    function "H" (see Section 10.4 of [RFC6090]) for P-256 and P-384
-   ECDSA/SHA-3 signatures are SHA3-256 and SHA3-384 respectively..
+   ECDSA/SHA-3 signatures are SHA3-256 and SHA3-384 respectively.
 
 4.  DS Resource Records
 

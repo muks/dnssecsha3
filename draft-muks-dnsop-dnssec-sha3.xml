@@ -263,7 +263,7 @@
         follows the same method as for <xref target="RFC6605" />, except
         the collision-resistant hash function "H" (see Section 10.4 of
         <xref target="RFC6090" />) for P-256 and P-384 ECDSA/SHA-3
-        signatures are SHA3-256 and SHA3-384 respectively..</t>
+        signatures are SHA3-256 and SHA3-384 respectively.</t>
       </section>
     </section>
 
