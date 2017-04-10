@@ -141,7 +141,7 @@
 
       <t>Familiarity with DNSSEC, RSA, ECDSA, and the SHA-2 <xref
       target="FIPS.180-4.2015" /> and SHA-3 <xref target="FIPS.202.2015"
-      /> families of algorithms is assumed in this document.</t>
+      /> hash function families is assumed in this document.</t>
 
       <t>To refer to SHA2-256 and SHA2-512, this document will use the
       name SHA-2. Similarly, to refer to SHA3-256, SHA3-384, and
