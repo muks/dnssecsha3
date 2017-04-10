@@ -169,7 +169,11 @@
         found in the "sha3" branch in the git repository at:
         https://github.com/muks/bind9</t>
 
-        <t>It can be used to check for interoperability by other DNSSEC
+        <t>There is also an experimental implementation based on the
+        ldns library, which can be found in the "sha3_and_pss" branch
+        in the git repository at https://github.com/tjeb/ldns.</t>
+
+        <t>These can be used to check for interoperability by other DNSSEC
         implementations.</t>
       </section>
 
