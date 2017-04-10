@@ -41,7 +41,8 @@
       <address>
         <postal>
           <street>Meander 501</street>
-          <city>Arnhem 6825 MD</city>
+          <city>Arnhem</city>
+          <code>6825 MD</code>
           <country>The Netherlands</country>
         </postal>
         <email>jelte.jansen@sidn.nl</email>
@@ -343,7 +344,7 @@
         which they could not know. This document does not define such
         algorithm aliases.</t>
 
-        <t>A DNSSEC validator that implements RSA/SHA2 and/or RSA/SHA-3
+        <t>A DNSSEC validator that implements RSA/SHA-2 and/or RSA/SHA-3
         MUST be able to validate negative answers in the form of both
         NSEC and NSEC3 with hash algorithm 1, as defined in <xref
         target="RFC5155" />.  An authoritative server that does not

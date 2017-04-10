@@ -394,7 +394,7 @@ Jansen & Sivaraman      Expires October 12, 2017                [Page 7]
 Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
 
 
-   A DNSSEC validator that implements RSA/SHA2 and/or RSA/SHA-3 MUST be
+   A DNSSEC validator that implements RSA/SHA-2 and/or RSA/SHA-3 MUST be
    able to validate negative answers in the form of both NSEC and NSEC3
    with hash algorithm 1, as defined in [RFC5155].  An authoritative
    server that does not implement NSEC3 MAY still serve zones that use
@@ -1389,7 +1389,7 @@ Authors' Addresses
    Jelte Jansen
    SIDN
    Meander 501
-   Arnhem 6825 MD
+   Arnhem  6825 MD
    The Netherlands
 
    Email: jelte.jansen@sidn.nl

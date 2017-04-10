@@ -579,7 +579,7 @@
 <p id="rfc.section.6.2.p.1">DNSSEC-aware implementations SHOULD be able to support DS resource records created with the SHA3-256 and SHA3-384 algorithms defined in this document.</p>
 <h1 id="rfc.section.6.3"><a href="#rfc.section.6.3">6.3.</a> Support for NSEC3 Denial of Existence</h1>
 <p><a href="#RFC5155">[RFC5155]</a> defines new algorithm identifiers for existing signing algorithms, to indicate that zones signed with these algorithm identifiers can use NSEC3 as well as NSEC records to provide denial of existence. That mechanism was chosen to protect implementations predating <a href="#RFC5155">[RFC5155]</a> from encountering resource records about which they could not know. This document does not define such algorithm aliases.</p>
-<p id="rfc.section.6.3.p.2">A DNSSEC validator that implements RSA/SHA2 and/or RSA/SHA-3 MUST be able to validate negative answers in the form of both NSEC and NSEC3 with hash algorithm 1, as defined in <a href="#RFC5155">[RFC5155]</a>.  An authoritative server that does not implement NSEC3 MAY still serve zones that use RSA/SHA-2 or RSA/SHA-3 with NSEC denial of existence.</p>
+<p id="rfc.section.6.3.p.2">A DNSSEC validator that implements RSA/SHA-2 and/or RSA/SHA-3 MUST be able to validate negative answers in the form of both NSEC and NSEC3 with hash algorithm 1, as defined in <a href="#RFC5155">[RFC5155]</a>.  An authoritative server that does not implement NSEC3 MAY still serve zones that use RSA/SHA-2 or RSA/SHA-3 with NSEC denial of existence.</p>
 <h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> Examples</h1>
 <h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> RSA/SHA2-256 (RSASSA-PSS) Key and Signature</h1>
 <p id="rfc.section.7.1.p.1">Given a 1024-bit private key with the following values (in Base64):</p>
@@ -1434,9 +1434,9 @@ example.org.            3600    IN SOA  invalid. hostmaster.example.org. (
 	  <span class="vcardline">Meander 501</span>
 
 	  <span class="vcardline">
-		<span class="locality">Arnhem 6825 MD</span>,  
+		<span class="locality">Arnhem</span>,  
 		<span class="region"></span>
-		<span class="code"></span>
+		<span class="code">6825 MD</span>
 	  </span>
 	  <span class="country-name vcardline">The Netherlands</span>
 	</span>
