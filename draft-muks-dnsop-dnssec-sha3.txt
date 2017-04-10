@@ -173,8 +173,8 @@ Internet-DrafUse of SHA-3 (Keccak) and RSASSA-PSS in DNSSEC   April 2017
    types respectively.  This document extends that list with the SHA-3
    algorithms SHA3-256 and SHA3-384.
 
-   Familiarity with DNSSEC, RSA, and the SHA-2 [FIPS.180-4.2015] and
-   SHA-3 [FIPS.202.2015] families of algorithms is assumed in this
+   Familiarity with DNSSEC, RSA, ECDSA, and the SHA-2 [FIPS.180-4.2015]
+   and SHA-3 [FIPS.202.2015] families of algorithms is assumed in this
    document.
 
    To refer to SHA2-256 and SHA2-512, this document will use the name

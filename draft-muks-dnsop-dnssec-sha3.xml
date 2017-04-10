@@ -139,7 +139,7 @@
       respectively. This document extends that list with the SHA-3
       algorithms SHA3-256 and SHA3-384.</t>
 
-      <t>Familiarity with DNSSEC, RSA, and the SHA-2 <xref
+      <t>Familiarity with DNSSEC, RSA, ECDSA, and the SHA-2 <xref
       target="FIPS.180-4.2015" /> and SHA-3 <xref target="FIPS.202.2015"
       /> families of algorithms is assumed in this document.</t>
 
